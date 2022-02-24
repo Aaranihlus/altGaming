@@ -1,0 +1,28 @@
+body {
+  font-family: nunito;
+  background: #1d1800;
+  color: #ffdd14;
+}
+
+/*a {
+  color: #ffdd14;
+  text-decoration: none;
+}
+
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav-item {
+  margin-right: 10px;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+
+.nav-item:hover {
+  color: black;
+  background: white;
+}*/

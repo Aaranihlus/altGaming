@@ -1,0 +1,52 @@
+<nav class="navbar bg-alt-yellow navbar-expand-lg navbar-dark" style="display: flex; justify-content: space-between;">
+
+  <div>
+    <a href="/" style="display: flex;">
+      <img src="/images/logo.png" class="img-fluid ps-4 animate__animated animate__bounce" style="display: inline-block;" alt="Owlie Logo" width="80" height="65">
+    </a>
+  </div>
+
+  <div id="navigation" class="d-none d-lg-block">
+    <ul class="nav" style="align-items: center;">
+
+      <li class="anim nav-item me-4"><a href="/">Home</a></li>
+      <li class="anim nav-item me-4"><a href="/altlan">altLAN</a></li>
+      <li class="anim nav-item me-4"><a href="/blog">Blog</a></li>
+      <li class="anim nav-item me-4"><a href="/podcast">Podcast</a></li>
+      <li class="anim nav-item me-4"><a href="/events">Events</a></li>
+      <li class="anim nav-item me-4"><a href="/shop/all">Shop</a></li>
+
+      @auth
+        <li class="anim nav-item me-4"><a href="/cart"><i class="fas fa-shopping-cart"></i> {{ session()->get('cart_item_qty') }}</a></li>
+        <li class="nav-item dropdown me-4">
+
+          <span class="dropdown-toggle" id="user-actions" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ auth()->user()->username }}
+          </span>
+
+          <ul class="dropdown-menu bg-alt-yellow p-2 me-4" aria-labelledby="user-actions">
+            <li><a href="{{ url('/profile/' . auth()->user()->slug) }}" class="text-md uppercase mt-8">Profile</a></li>
+            <li><a href="/account" class="text-md uppercase mt-8">Account</a></li>
+
+            @if(auth()->user()->roles->contains('name', 'Admin'))
+              <li><a href="/admin" class="text-md uppercase mt-8">Admin</a></li>
+            @endif
+
+            <li><a href="/logout" class="text-md uppercase mt-8">Logout</a></li>
+          </ul>
+
+        </li>
+      @else
+        <li class="anim nav-item me-4"><a href="/login" class="text-md font-bold uppercase mr-4">Log in</a></li>
+        <li class="anim nav-item me-4"><a href="/register" class="text-md font-bold uppercase mr-4">Register</a></li>
+      @endauth
+
+    </ul>
+
+  </div>
+
+  <div class="d-lg-none mx-4" id="open-mobile-nav-button">
+    <p class="py-0 g-0" style="margin-bottom: 0px !important; font-size: x-large;"><i class="fas fa-bars"></i></p>
+  </div>
+
+</nav>
