@@ -27,7 +27,7 @@
 
   @include('layouts.mobile-nav')
 
-  <div class="container-fluid g-0 mt-4 bg-alt-yellow flex-y" id="footer" style="min-height: 5vh; text-align: center; justify-content: center;">
+  <div class="container-fluid g-0 mt-4 bg-alt-yellow flex-y" id="footer" style="min-height: 5vh; text-align: center; justify-content: center; position: fixed; bottom: 0; left: 0;">
     <p class="g-0 mb-0">©2022 altGaming Ltd</p>
   </div>
 
