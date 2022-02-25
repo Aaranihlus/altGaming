@@ -16,13 +16,13 @@ use App\Models\ItemImage;
 Route::get('/admin', [AdminController::class, 'show'])->middleware('admin');
 
 Route::get('/admin/users', [AdminController::class, 'users'])->middleware('admin');
-Route::get('/admin/posts', [AdminController::class, 'posts'])->middleware('admin');
+Route::get('/admin/posts', [AdminController::class, 'posts'])->middleware('content_creator');
 Route::get('/admin/podcasts', [AdminController::class, 'podcasts'])->middleware('admin');
 Route::get('/admin/roles', [AdminController::class, 'roles'])->middleware('admin');
 Route::get('/admin/orders', [AdminController::class, 'orders'])->middleware('admin');
 Route::get('/admin/items', [AdminController::class, 'items'])->middleware('admin');
 Route::get('/admin/altlan', [AdminController::class, 'altlan'])->middleware('admin');
-Route::get('/admin/events', [AdminController::class, 'events'])->middleware('admin');
+Route::get('/admin/events', [AdminController::class, 'events'])->middleware('organiser');
 Route::get('/admin/badges', [AdminController::class, 'badges'])->middleware('admin');
 Route::get('/admin/titles', [AdminController::class, 'titles'])->middleware('admin');
 Route::get('/admin/titles_badges', [AdminController::class, 'titles_badges'])->middleware('admin');
