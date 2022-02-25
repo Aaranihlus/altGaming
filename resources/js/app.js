@@ -2,13 +2,6 @@ import "bootstrap";
 import "./stripe";
 import { ClassicEditor } from "./ckeditor";
 
-
-
-
-
-
-
-
 window.$ = require('./jquery')
 window._ = require('lodash');
 window.axios = require('axios');
@@ -63,6 +56,35 @@ if ( $('#paypal-container').length > 0 ) {
     });
 
 }
+
+
+
+
+$('.load-more-posts-button').on('click', function(){
+
+  var offset = $(this).data('offset');
+  $(this).hide();
+
+  var newOffset = offset + 6;
+  $(this).data('offset', newOffset);
+
+  axios.post('/loadposts', {
+    offset: offset
+  })
+  .then(function (response) {
+      $('#post-container').append(response.data.html);
+  })
+  .catch(function (error) {
+      console.log(response);
+  }).then(function () {
+    $('.load-more-posts-button').show();
+  });
+});
+
+
+
+
+
 
 
 

@@ -25,6 +25,10 @@
     @endforeach
   </div>
 
+  <div class="flex-x" style="justify-content: center">
+    <button type="button" class="btn btn-warning load-more-posts-button" data-offset="{{ count($posts) }}">Load More</button>
+  </div>
+
 </div>
 
 @endsection

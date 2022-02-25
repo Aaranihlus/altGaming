@@ -16,7 +16,7 @@
 
         <div>
           <h1 class="clip-text-2" style="color: white; text-shadow: 3px 3px #1d1800;">{{ $title }}</h1>
-          <div style="display: flex; flex-direction: row; align-content: center; justify-content: flex-start; align-items: flex-start;">
+          <div class="flex-x" style="align-content: center; justify-content: flex-start; align-items: flex-start;">
             <div class="badge bg-warning"><a href="/{{ $type }}">{{ ucfirst($type) }}</a></div>
             <h6 style="margin-left: 8px;">{{ \Carbon\Carbon::parse( $created )->diffForHumans() }}</h6>
           </div>

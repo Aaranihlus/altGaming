@@ -21,13 +21,13 @@ require __DIR__.'/admin.php';
 //General pages
 Route::get('/', function () {
   return view('home', [
-    'posts' => Post::latest()->get()
+    'posts' => Post::latest()->limit(9)->get()
   ]);
 });
 
 Route::get('/blog', function () {
   return view('posts', [
-    'posts' => Post::where('type', 'blog')->latest()->get()
+    'posts' => Post::where('type', 'blog')->latest()->limit(9)->get()
   ]);
 });
 
@@ -39,7 +39,7 @@ Route::get('blog/{post:slug}', function (Post $post) {
 
 Route::get('/podcast', function () {
   return view('posts', [
-    'posts' => Post::where('type', 'podcast')->latest()->get()
+    'posts' => Post::where('type', 'podcast')->latest()->limit(9)->get()
   ]);
 });
 
@@ -48,6 +48,26 @@ Route::get('podcast/{post:slug}', function (Post $post) {
     'post' => $post
   ]);
 });
+
+Route::post('/loadposts', function (Request $request) {
+
+  $offset = $request->offset;
+
+  $posts = Post::with('user')->latest()->offset($offset)->limit(6)->get();
+
+  if ( !empty($posts) ) {
+    $postHtml = "";
+    foreach ( $posts as $post ) {
+      $postHtml .= View::make("components.content-template-ajax")->with("post", $post)->render();
+    }
+  }
+
+  return response()->json([ 'success' => true, 'html' => $postHtml ]);
+
+});
+
+
+
 
 
 Route::post('/cart/add', [CartController::class, 'add'])->middleware('auth');

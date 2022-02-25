@@ -4,12 +4,12 @@
 
   <div class="container mb-4">
 
-    <div class="row">
+    <div class="row" id="post-container">
       @foreach($posts as $post)
         @if ( $post->published == 1 )
           <x-content-template
           id="{{ $post->id }}"
-          index="{{ $loop->index }}"
+          index="{{ $loop->index ?? 1 }}"
           title="{{ $post->title }}"
           created="{{ $post->created_at }}"
           slug="{{ $post->slug }}"
@@ -23,6 +23,10 @@
         </x-content-template>
       @endif
     @endforeach
+  </div>
+
+  <div class="flex-x" style="justify-content: center">
+    <button type="button" class="btn btn-warning load-more-posts-button" data-offset="{{ count($posts) }}">Load More</button>
   </div>
 
 </div>

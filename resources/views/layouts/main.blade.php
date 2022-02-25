@@ -17,13 +17,13 @@
 
   @yield('content')
 
-  <div style="position: fixed; top: 90%; left: 50%; z-index: 10000; transform: translate(-50%, -50%); background: rgba(247, 201, 241, 0.4); padding: .5rem 1rem; border-radius: 30px;">
+  <!--<div style="position: fixed; top: 90%; left: 50%; z-index: 10000; transform: translate(-50%, -50%); background: rgba(247, 201, 241, 0.4); padding: .5rem 1rem; border-radius: 30px;">
     <div class="d-block d-sm-none">Extra Small (xs)</div>
     <div class="d-none d-sm-block d-md-none">Small (sm)</div>
     <div class="d-none d-md-block d-lg-none">Medium (md)</div>
     <div class="d-none d-lg-block d-xl-none">Large (lg)</div>
     <div class="d-none d-xl-block" >X-Large (xl)</div>
-  </div>
+  </div>-->
 
   @include('layouts.mobile-nav')
 
