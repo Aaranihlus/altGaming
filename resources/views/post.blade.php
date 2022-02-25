@@ -25,11 +25,8 @@
         @if ( !empty($post->youtube_link) )
           <iframe width="720" height="480" src="{{ "https://www.youtube.com/embed/" . $post->youtube_link }}"></iframe>
         @endif
-
         <br>
-
         <button type="button" class="btn btn-warning"><a class="link-dark" href="http://feeds.feedburner.com/altgaming-podcast">Subscribe</a></button>
-
       </div>
     @endif
 

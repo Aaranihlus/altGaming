@@ -39,7 +39,7 @@ Route::get('blog/{post:slug}', function (Post $post) {
 
 Route::get('/podcast', function () {
   return view('posts', [
-    'posts' => Post::all()->where('type', 'podcast')->latest()->get()
+    'posts' => Post::where('type', 'podcast')->latest()->get()
   ]);
 });
 
