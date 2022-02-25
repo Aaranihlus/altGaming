@@ -15,15 +15,21 @@
         <p style="text-align: center;">
           {{ $post->description }}
         </p>
+        <br>
         @if ( !empty($post->audio_file) )
         <div>
           <audio controls src="{{ asset("storage/" . $post->audio_file) }}">Your browser does not support the <code>audio</code> element.</audio>
         </div>
         @endif
-
+        <br>
         @if ( !empty($post->youtube_link) )
-          <iframe width="420" height="315" src="{{ "https://www.youtube.com/embed/" . $post->youtube_link }}"></iframe>
+          <iframe width="720" height="480" src="{{ "https://www.youtube.com/embed/" . $post->youtube_link }}"></iframe>
         @endif
+
+        <br>
+
+        <button type="button" class="btn btn-warning"><a class="link-dark" href="http://feeds.feedburner.com/altgaming-podcast">Subscribe</a></button>
+
       </div>
     @endif
 

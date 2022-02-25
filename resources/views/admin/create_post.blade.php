@@ -62,7 +62,7 @@
         </div>
 
         <div class="mb-3 podcast_only" style="display: none;">
-          <label for="youtube_link" class="form-label">Youtube Link</label>
+          <label for="youtube_link" class="form-label">Youtube ID</label>
           <input type="text" class="form-control" id="youtube_link" name="youtube_link">
         </div>
 
