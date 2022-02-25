@@ -43,7 +43,9 @@
 
       <div>
         <h5>By {{ $post->user->username }}</h5>
-        <h6>{{ !empty($post->user->title->name) }}</h6>
+        @if(!empty($post->user->title->name))
+          <h6>{{ $post->user->title->name }}</h6>
+        @endif
       </div>
     </div>
 

@@ -17,7 +17,7 @@
           type="{{ $post->type }}"
           description="{{ $post->description }}"
           uploaded-by="{{ $post->user->username }}"
-          uploaded-by-title="{{ !empty($post->user->title->name) }}"
+          uploaded-by-title="{{ $post->user->title->name ?? '' }}"
           uploaded-by-image='{{ $post->user->profile_picture }}'
           uploaded-by-slug='{{ $post->user->slug }}'>
         </x-content-template>
