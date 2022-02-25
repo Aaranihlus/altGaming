@@ -21590,6 +21590,18 @@ p, span, th, a, a:visited {
   border-radius: 12px;
 }
 
+.main-image-border {
+  border-collapse: separate;
+  border-bottom-left-radius: 12px;
+  border-top-left-radius: 12px;
+}
+
+.sub-image-border {
+  border-collapse: separate;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
 a:hover {
   color: yellow;
 }

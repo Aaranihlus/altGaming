@@ -6,10 +6,10 @@
   <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 mb-4">
 @endif
 
-  <div class="content-template bg-alt-yellow extra-rounded @if($index == 0) d-lg-flex d-xl-flex @else flex-y @endif" style="border: 1px solid #ffc107; width: 100%;">
+  <div class="content-template bg-alt-yellow extra-rounded @if($index == 0) d-lg-flex d-xl-flex @else flex-y @endif" style="border: 2px solid #ffc107; width: 100%;">
 
       <div class="g-0" style="flex-basis: 45%;">
-        <img src='{{ asset($thumbnail) }}' alt="Thumbnail" class="extra-rounded img-fluid">
+        <img src='{{ asset($thumbnail) }}' alt="Thumbnail" class="img-fluid @if($index == 0) main-image-border @else sub-image-border @endif">
       </div>
 
       <div class="p-3 flex-y" style="justify-content: space-between; flex-basis: 55%;">

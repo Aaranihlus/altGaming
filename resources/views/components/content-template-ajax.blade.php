@@ -1,10 +1,9 @@
-
 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 mb-4">
 
   <div class="content-template bg-alt-yellow extra-rounded flex-y" style="border: 1px solid #ffc107; width: 100%;">
 
       <div class="g-0" style="flex-basis: 45%;">
-        <img src='{{ asset("storage/" . $post->thumbnail) }}' alt="Thumbnail" class="extra-rounded img-fluid">
+        <img src='{{ asset("storage/" . $post->thumbnail) }}' alt="Thumbnail" class="img-fluid sub-image-border">
       </div>
 
       <div class="p-3 flex-y" style="justify-content: space-between; flex-basis: 55%;">
