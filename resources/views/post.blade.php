@@ -43,7 +43,7 @@
 
       <div>
         <h5>By {{ $post->user->username }}</h5>
-        <h6>Engineer</h6>
+        <h6>{{ !empty($post->user->title->name) }}</h6>
       </div>
     </div>
 
