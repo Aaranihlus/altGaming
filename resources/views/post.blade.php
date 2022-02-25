@@ -22,7 +22,7 @@
         @endif
 
         @if ( !empty($post->youtube_link) )
-          <iframe width="420" height="315" src="{{$post->youtube_link}}"></iframe>
+          <iframe width="420" height="315" src="{{ "https://www.youtube.com/embed/" . $post->youtube_link }}"></iframe>
         @endif
       </div>
     @endif
