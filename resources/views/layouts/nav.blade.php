@@ -1,4 +1,4 @@
-<nav class="navbar bg-alt-yellow navbar-expand-lg navbar-dark" style="display: flex; justify-content: space-between;">
+<nav class="navbar bg-alt-yellow navbar-expand-lg navbar-dark" style="display: flex; justify-content: space-between; height: 10vh; max-height: 10vh;">
 
   <div>
     <a href="/" style="display: flex;">

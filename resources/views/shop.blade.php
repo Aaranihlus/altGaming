@@ -30,7 +30,7 @@
     <div class="row">
 
       @foreach( $items as $item )
-        <div class="col-4 mb-3">
+        <div class="col-3 mb-3" style="height: 100%;">
           <x-item-template
           id="{{ $item->id }}"
           name="{{ $item->name }}"

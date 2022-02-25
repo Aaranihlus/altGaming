@@ -2,7 +2,9 @@
 
 @section('content')
 
-  <div class="container bg-alt-yellow p-4 extra-rounded" style="width: 25%; margin-top: 20vh;">
+  <div class="flex-x" style="height: 80vh; align-items: center;">
+
+  <div class="container bg-alt-yellow p-4 extra-rounded" style="width: 25%;">
 
     <h1 class="text-xl font-bold uppercase">Register</h1>
     <span>You will be able to set up your profile after registration</span>
@@ -42,6 +44,8 @@
         <button type="submit" class="btn btn-warning mx-1">Sign Up</button>
       </div>
     </form>
+
+  </div>
 
   </div>
 

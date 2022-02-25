@@ -6,13 +6,13 @@
   <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 mb-4">
 @endif
 
-  <div class="content-template bg-alt-yellow extra-rounded @if($index == 0) flex-x @else flex-y @endif" style="border: 1px solid #ffc107; width: 100%;">
+  <div class="content-template bg-alt-yellow extra-rounded @if($index == 0) d-lg-flex d-xl-flex @else flex-y @endif" style="border: 1px solid #ffc107; width: 100%;">
 
       <div class="g-0" style="flex-basis: 45%;">
         <img src='{{ asset($thumbnail) }}' alt="Thumbnail" class="extra-rounded" style="width: 100%;">
       </div>
 
-      <div class="p-3 flex-y" style="justify-content: space-between; height: 100%; flex-basis: 55%;">
+      <div class="p-3 flex-y" style="justify-content: space-between; flex-basis: 55%;">
 
         <div>
           <h1 class="clip-text-2" style="color: white; text-shadow: 3px 3px #1d1800;">{{ $title }}</h1>

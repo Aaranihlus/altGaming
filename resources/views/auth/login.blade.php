@@ -2,7 +2,9 @@
 
 @section('content')
 
-  <div class="container bg-alt-yellow p-4 extra-rounded" style="width: 25%; margin-top: 25vh;">
+  <div class="flex-x" style="height: 80vh; align-items: center;">
+
+  <div class="container bg-alt-yellow p-4 extra-rounded" style="width: 25%;">
 
     <h1 class="text-xl font-bold uppercase">Welcome back</h1>
 
@@ -30,9 +32,9 @@
 
       <div style="display: flex; align-items: center; justify-content: space-between;">
         @if (Route::has('password.request'))
-            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+            <!--<a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                 {{ __('Forgot your password?') }}
-            </a>
+            </a>-->
         @endif
 
         <button type="submit" class="btn btn-warning">Log In</button>
@@ -40,5 +42,7 @@
     </form>
 
   </div>
+
+</div>
 
 @endsection

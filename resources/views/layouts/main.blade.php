@@ -9,7 +9,7 @@
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body class="antialiased">
+<body style="padding-bottom: 5vh;">
 
   <div class="container-fluid g-0 mb-4" id="header">
     @include('layouts.nav')
@@ -27,9 +27,9 @@
 
   @include('layouts.mobile-nav')
 
-  <div class="container-fluid g-0 mt-4 bg-alt-yellow flex-y" id="footer" style="min-height: 5vh; text-align: center; justify-content: center; position: fixed; bottom: 0; left: 0;">
+  <!--<div class="container-fluid g-0 bg-alt-yellow flex-y" id="footer" style="max-height: 5vh; height: 5vh; text-align: center; justify-content: center; position: fixed; right: 0; bottom: 0; left: 0;">
     <p class="g-0 mb-0">©2022 altGaming Ltd</p>
-  </div>
+  </div>-->
 
 </body>
 
