@@ -8,8 +8,12 @@
 
   <div class="content-template bg-alt-yellow extra-rounded @if($index == 0) d-lg-flex d-xl-flex @else flex-y @endif" style="border: 2px solid #ffc107; width: 100%;">
 
-      <div class="g-0" style="flex-basis: 45%;">
-        <img src='{{ asset($thumbnail) }}' alt="Thumbnail" class="img-fluid @if($index == 0) main-image-border @else sub-image-border @endif">
+      @if($index == 0)
+        <div class="g-0" style="flex-basis: 45%;">
+      @else
+        <div class="g-0" style="flex-basis: 45%; height: 45%; max-height: 45%;">
+      @endif
+        <img src='{{ asset($thumbnail) }}' alt="Thumbnail" class="img-fluid @if($index == 0) main-image-border @else sub-image-border @endif" style="width: 100%; object-fit: cover; height: 100%;">
       </div>
 
       <div class="p-3 flex-y" style="justify-content: space-between; flex-basis: 55%;">
@@ -23,7 +27,7 @@
         </div>
 
         <div>
-          <p class="clip-text-4">{{ $description }}</p>
+          <p class="clip-text-4" style="min-height: 48px;">{{ $description }}</p>
         </div>
 
         <div class="flex-x" style="justify-content: space-between; align-items: flex-end;">
