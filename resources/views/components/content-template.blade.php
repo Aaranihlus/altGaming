@@ -9,7 +9,7 @@
   <div class="content-template bg-alt-yellow extra-rounded @if($index == 0) d-lg-flex d-xl-flex @else flex-y @endif" style="border: 1px solid #ffc107; width: 100%;">
 
       <div class="g-0" style="flex-basis: 45%;">
-        <img src='{{ asset($thumbnail) }}' alt="Thumbnail" class="extra-rounded" style="width: 100%;">
+        <img src='{{ asset($thumbnail) }}' alt="Thumbnail" class="extra-rounded img-fluid">
       </div>
 
       <div class="p-3 flex-y" style="justify-content: space-between; flex-basis: 55%;">

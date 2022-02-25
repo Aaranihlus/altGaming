@@ -4,8 +4,6 @@
 
   <div class="container">
 
-    <!--<img src='{{asset("storage/$post->thumbnail")}}'>-->
-
     <h1 style="text-align: center;">{{ $post->title }}</h1>
 
     <h6 style="text-align: center;">{{ \Carbon\Carbon::parse( $post->created_at )->diffForHumans() }}</h6>
