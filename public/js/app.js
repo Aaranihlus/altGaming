@@ -5611,6 +5611,25 @@ if ($('#paypal-container').length > 0) {
   });
 }
 
+$('.post-comment-button').on('click', function () {
+  axios.post('/comment/store', {
+    comment: $('#comment').val(),
+    post_id: $(this).data('post-id')
+  }).then(function (response) {
+    console.log(response);
+  })["catch"](function (error) {
+    console.log(response);
+  });
+});
+$('.delete-comment-button').on('click', function () {
+  axios.post('/comment/delete', {
+    comment_id: $(this).data('id')
+  }).then(function (response) {
+    console.log(response);
+  })["catch"](function (error) {
+    console.log(response);
+  });
+});
 $('.load-more-posts-button').on('click', function () {
   var offset = $(this).data('offset');
   $(this).hide();

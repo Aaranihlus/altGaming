@@ -38,9 +38,9 @@
 
     <hr>
 
-    <div style="display: flex;">
+    <div class="flex-x">
 
-      @if(empty($uploadedByImage))
+      @if(empty($post->user->profile_picture))
         <img class="img-fluid rounded me-2" style="width: 64px;" src="{{ asset('images/placeholder-small.png') }}" alt="Profile Picture">
       @else
         <img class="rounded me-2" style="width: 64px;" src='{{ asset("storage/" . $post->user->profile_picture) }}' alt="Profile Picture">
@@ -53,6 +53,43 @@
         @endif
       </div>
     </div>
+
+    <div class="flex-y" style="margin-bottom: 2vh;">
+      <hr>
+      <br>
+      <h2>Comments</h2>
+      @if(count($post->comments) == 0)
+        <p>No comments yet, be the first!</p>
+      @else
+        @foreach($post->comments as $comment)
+          <div class="flex-x bg-alt-yellow p-2 rounded" style="align-items: center; width: 100%;">
+            @if(empty($comment->user->profile_picture))
+              <img class="rounded me-2" style="width: 64px;" src="{{ asset('images/placeholder-small.png') }}" alt="Profile Picture">
+            @else
+              <img class="rounded me-2" style="width: 64px;" src='{{ asset("storage/" . $comment->user->profile_picture) }}' alt="Profile Picture">
+            @endif
+            <div class="flex-y" style="width: 100%;">
+              <div class="flex-x" style="margin-right: 8px; align-items: center; justify-content: space-between; width: 100%;">
+                <div><span>{{ $comment->user->username }} - {{ \Carbon\Carbon::parse( $comment->created_at )->diffForHumans() }}</span></div>
+                @if( (Auth::id() AND Auth::id() == $comment->user->id) OR $comment->user->roles->contains('name', 'Admin') )
+                  <div><span class="delete-comment-button" data-id="{{ $comment->id }}" style="cursor: pointer; font-size: 0.9rem;"><i class="far fa-times-circle"></i> Delete</span></div>
+                @endif
+              </div>
+              <p>{{ $comment->comment }}</p>
+            </div>
+          </div>
+        @endforeach
+        <br>
+      @endif
+
+      @if(Auth::id())
+      <div class="flex-x">
+        <input type="text" class="form-control" id="comment" name="comment" style="width: 50%; margin-right: 6px;" placeholder="Leave a comment">
+        <button type="button" class="btn btn-warning post-comment-button" data-post-id="{{ $post->id }}">Comment</button>
+      </div>
+      @endif
+    </div>
+
 
   </div>
 

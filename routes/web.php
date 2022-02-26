@@ -11,6 +11,7 @@ use App\Models\Item;
 use App\Models\ItemOrder;
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CommentController;
 
 use Carbon\Carbon;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -67,7 +68,8 @@ Route::post('/loadposts', function (Request $request) {
 });
 
 
-
+Route::post('/comment/store', [CommentController::class, 'store'])->middleware('auth');
+Route::post('/comment/delete', [CommentController::class, 'delete'])->middleware('auth');
 
 
 Route::post('/cart/add', [CartController::class, 'add'])->middleware('auth');
