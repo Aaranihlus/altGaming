@@ -8,9 +8,9 @@
 
       <div class="row" style="justify-content: center">
 
-        <div class="offset-lg-2 offset-xl-2 offset-sm-2 offset-xs-2 offset-md-2"></div>
+        <div class="offset-xl-2 offset-lg-2 offset-md-2 offset-sm-2 offset-xs-2"></div>
 
-        <div class="col-lg-8 col-xl-8 col-sm-8 col-xs-8 col-md-8 bg-alt-yellow p-4 extra-rounded">
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-xs-8 bg-alt-yellow p-4 extra-rounded">
           <h1 class="text-xl font-bold uppercase">Welcome back</h1>
 
           <hr>
@@ -43,7 +43,7 @@
         </form>
       </div>
 
-      <div class="offset-lg-2 offset-xl-2 offset-sm-2 offset-xs-2 offset-md-2"></div>
+      <div class="offset-xl-2 offset-lg-2 offset-md-2 offset-sm-2 offset-xs-2"></div>
 
     </div>
 
