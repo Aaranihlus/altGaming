@@ -5633,6 +5633,7 @@ $('.delete-comment-button').on('click', function () {
 $('.load-more-posts-button').on('click', function () {
   var offset = $(this).data('offset');
   $(this).hide();
+  $('#loading-spinner').show();
   var newOffset = offset + 6;
   $(this).data('offset', newOffset);
   axios.post('/loadposts', {
@@ -5642,6 +5643,7 @@ $('.load-more-posts-button').on('click', function () {
   })["catch"](function (error) {
     console.log(response);
   }).then(function () {
+    $('#loading-spinner').hide();
     $('.load-more-posts-button').show();
   });
 });

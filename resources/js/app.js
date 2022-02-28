@@ -96,6 +96,7 @@ $('.load-more-posts-button').on('click', function(){
 
   var offset = $(this).data('offset');
   $(this).hide();
+  $('#loading-spinner').show();
 
   var newOffset = offset + 6;
   $(this).data('offset', newOffset);
@@ -104,12 +105,15 @@ $('.load-more-posts-button').on('click', function(){
     offset: offset
   })
   .then(function (response) {
-      $('#post-container').append(response.data.html);
+    $('#post-container').append(response.data.html);
   })
   .catch(function (error) {
       console.log(response);
   }).then(function () {
+
+    $('#loading-spinner').hide();
     $('.load-more-posts-button').show();
+
   });
 });
 
