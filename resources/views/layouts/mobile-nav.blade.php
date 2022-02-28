@@ -1,4 +1,4 @@
-<div style="display: none; position: fixed; width: 100vw; min-height: 100vw; padding:30px; background: black; opacity: 0.85; top: 0; left: 0;" id="mobile-nav-container">
+<div style="display: none; position: fixed; width: 100vw; min-height: 100vh; padding:30px; background: black; opacity: 0.9; top: 0; left: 0;" id="mobile-nav-container">
 
   <p id="close-mobile-nav" style="font-size: xx-large;"><i class="fas fa-times"></i> Close</p>
 
