@@ -6,11 +6,11 @@
 
     <div class="container">
 
-      <div class="row" style="justify-content: center">
+      <div class="row">
 
-        <div class="offset-xl-2 offset-lg-2 offset-md-2 offset-sm-2 offset-xs-2"></div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
 
-        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-xs-8 bg-alt-yellow p-4 extra-rounded">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 bg-alt-yellow p-4 extra-rounded">
           <h1 class="text-xl font-bold uppercase">Welcome back</h1>
 
           <hr>
@@ -43,7 +43,7 @@
         </form>
       </div>
 
-      <div class="offset-xl-2 offset-lg-2 offset-md-2 offset-sm-2 offset-xs-2"></div>
+      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
 
     </div>
 
