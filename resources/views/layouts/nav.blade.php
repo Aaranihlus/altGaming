@@ -1,7 +1,7 @@
 <nav class="navbar bg-alt-yellow navbar-expand-lg navbar-dark" style="display: flex; justify-content: space-between; height: 10vh; max-height: 10vh;">
 
   <div style="height: 100%;">
-    <img src="/images/logo.png" class="img-fluid mx-4" alt="Owlie Logo" style="height: 100%;">
+    <a href="/"><img src="/images/logo.png" class="img-fluid mx-4 p-1" alt="Owlie Logo" style="height: 100%;"></a>
   </div>
 
   <div id="navigation" class="d-none d-lg-block">

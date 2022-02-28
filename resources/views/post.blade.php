@@ -21,7 +21,7 @@
         @endif
         <br>
         @if ( !empty($post->youtube_link) )
-          <iframe width="720" height="480" src="{{ "https://www.youtube.com/embed/" . $post->youtube_link }}"></iframe>
+          <iframe src="{{ "https://www.youtube.com/embed/" . $post->youtube_link }}"></iframe>
         @endif
         <br>
         <button type="button" class="btn btn-warning"><a class="link-dark" href="http://feeds.feedburner.com/altgaming-podcast">Subscribe</a></button>
@@ -71,7 +71,7 @@
             <div class="flex-y" style="width: 100%;">
               <div class="flex-x" style="margin-right: 8px; align-items: center; justify-content: space-between; width: 100%;">
                 <div><span>{{ $comment->user->username }} - {{ \Carbon\Carbon::parse( $comment->created_at )->diffForHumans() }}</span></div>
-                @if( (Auth::id() AND Auth::id() == $comment->user->id) OR $comment->user->roles->contains('name', 'Admin') )
+                @if( (Auth::id() AND Auth::id() == $comment->user->id) OR (!empty(auth()->user()->id) AND auth()->user()->roles->contains('name', 'Admin')) )
                   <div><span class="delete-comment-button" data-id="{{ $comment->id }}" style="cursor: pointer; font-size: 0.9rem;"><i class="far fa-times-circle"></i> Delete</span></div>
                 @endif
               </div>
