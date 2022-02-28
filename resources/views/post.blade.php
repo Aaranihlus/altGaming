@@ -43,11 +43,11 @@
       @if(empty($post->user->profile_picture))
         <img class="img-fluid rounded me-2" style="width: 64px;" src="{{ asset('images/placeholder-small.png') }}" alt="Profile Picture">
       @else
-        <img class="rounded me-2" style="width: 64px;" src='{{ asset("storage/" . $post->user->profile_picture) }}' alt="Profile Picture">
+        <img class="img-fluid rounded me-2" style="width: 64px;" src='{{ asset("storage/" . $post->user->profile_picture) }}' alt="Profile Picture">
       @endif
 
       <div>
-        <h5>By {{ $post->user->username }}</h5>
+        <h5>Posted By {{ $post->user->username }}</h5>
         @if(!empty($post->user->title->name))
           <h6>{{ $post->user->title->name }}</h6>
         @endif
