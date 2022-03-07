@@ -45,17 +45,21 @@
 
   <div>
     <h1 class="text-2xl font-bold mb-2">Achievements</h1>
-    <div style="width: 100%; overflow-x: scroll; white-space: nowrap;">
-      @foreach($user->achievements as $achievement)
-        <div class="mr-2" style="display: inline-block; text-align: center; margin-bottom: 4px;">
-          <div class="bg-alt-yellow p-2 extra-rounded" style="width: 200px; max-width: 200px;">
-            <p style="white-space: pre-wrap;">{{ $achievement->name }}</p>
-            <img class="img-fluid rounded m-3" style="width: 96px;" src="{{ asset("storage/".$achievement->image) }}">
-            <p style="white-space: pre-wrap;">{{ $achievement->description }}</p>
+    @if(!empty($user->achievements))
+      <div style="width: 100%; overflow-x: scroll; white-space: nowrap;">
+        @foreach($user->achievements as $achievement)
+          <div class="mr-2" style="display: inline-block; text-align: center; margin-bottom: 4px;">
+            <div class="bg-alt-yellow p-2 extra-rounded" style="width: 200px; max-width: 200px;">
+              <p style="white-space: pre-wrap;">{{ $achievement->name }}</p>
+              <img class="img-fluid rounded m-3" style="width: 96px;" src="{{ asset("storage/".$achievement->image) }}">
+              <p style="white-space: pre-wrap;">{{ $achievement->description }}</p>
+            </div>
           </div>
-        </div>
-      @endforeach
-    </div>
+        @endforeach
+      </div>
+    @else
+      <p>None yet!</p>
+    @endif
   </div>
 
   <br>
