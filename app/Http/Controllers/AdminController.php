@@ -27,7 +27,8 @@ class AdminController extends Controller {
   public function users () {
     return view('admin.users', [
       'users' => User::all(),
-      'roles' => Role::all()
+      'roles' => Role::all(),
+      'achievements' => Achievement::all()
     ]);
   }
 
