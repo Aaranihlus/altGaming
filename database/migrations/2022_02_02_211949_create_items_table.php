@@ -20,8 +20,9 @@ class CreateItemsTable extends Migration
             $table->string('price');
             $table->string('slug');
             $table->boolean('is_alt_ticket')->default(false);
-            $table->boolean('visible')->default(false);
-            $table->string('role_id')->nullable();
+            $table->boolean('visible')->default(true);
+            $table->foreignId('event_id')->nullable();
+            $table->foreignId('achievement_id')->nullable();
             $table->timestamps();
         });
     }

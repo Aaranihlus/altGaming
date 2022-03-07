@@ -23,9 +23,14 @@
           <input type="text" class="form-control" id="description" name="description">
         </div>
 
+        <div class="mb-3">
+          <label for="image" class="form-label">Image</label>
+          <input type="file" class="form-control" id="image" name="image">
+        </div>
+
         <div class="form-check mb-3">
           <input class="form-check-input" type="checkbox" name="unlock_item" id="unlock_item">
-          <label class="form-check-label" for="unlock_item">Does this achievement unlock a shop item?</label>
+          <label class="form-check-label" for="unlock_item">Does this Achievement unlock a shop item?</label>
         </div>
 
         <div class="mb-3" id="item-select-container" style="display: none;">

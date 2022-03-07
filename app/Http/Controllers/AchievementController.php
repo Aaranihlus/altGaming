@@ -24,13 +24,20 @@ class AchievementController extends Controller {
         'name' => ['required', 'string', 'max:255']
     ]);
 
-    $path = $img->store('item_images');
+    $path = $request->file('image')->store('achievement_images');
 
     $achievement = Achievement::create([
         'name' => $request->name,
-        'unlock_item' => $request->unlock_item,
+        'description' => $request->description,
+        'item_id' => !empty($request->item_id) ? $request->item_id : null,
         'image' => $path
     ]);
+
+    if ( !empty($request->item_id) ) {
+      $item = Item::find($request->item_id);
+      $item->achievement_id = $achievement->id;
+      $item->save();
+    }
 
     return redirect("/admin/achievements");
 

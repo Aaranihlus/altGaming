@@ -9,7 +9,10 @@ class Achievement extends Model {
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'image',
+        'item_id',
+        'description'
     ];
 
 }

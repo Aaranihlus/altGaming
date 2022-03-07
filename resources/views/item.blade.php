@@ -6,7 +6,7 @@
 
     <div class="row">
 
-      <div class="col-6" style="display: flex; flex-direction: column;">
+      <div class="col-5" style="display: flex; flex-direction: column;">
         @foreach( $item->images as $k => $i )
           @if ($k == 0 )
             <img class="rounded img-fluid my-2 shop-item-image" style="width: 100%;" id="image-0" src='{{asset("storage/$i->path")}}'>
@@ -32,7 +32,7 @@
         @endif
       </div>
 
-      <div class="col-6">
+      <div class="col-7">
         <h1>{{ $item->name }}</h1>
         <hr>
         <h2>£{{ $item->price }}</h2>

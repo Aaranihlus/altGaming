@@ -61,9 +61,6 @@ class User extends Authenticatable {
       return $this->belongsToMany(Badge::class);
     }
 
-
-
-
     public function badge() {
       return $this->belongsTo(Badge::class);
     }
@@ -73,7 +70,7 @@ class User extends Authenticatable {
     }
 
     public function achievements() {
-      return $this->belongsToMany(achievements::class);
+      return $this->belongsToMany(Achievement::class);
     }
 
     public function orders() {

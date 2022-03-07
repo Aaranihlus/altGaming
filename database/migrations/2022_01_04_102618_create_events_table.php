@@ -19,8 +19,12 @@ class CreateEventsTable extends Migration
             $table->string('start_date');
             $table->string('location');
             $table->string('description');
-            $table->boolean('is_alt_lan')->default(false);
+            $table->string('type');
+            $table->string('slug');
+            $table->string('alt_lan_number')->default(null);
             $table->foreignId('user_id');
+            $table->string('thumbnail');
+            $table->string('achievement_id')->nullable();
             $table->timestamps();
         });
     }

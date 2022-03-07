@@ -5576,12 +5576,12 @@ var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute(
 if ($('#paypal-container').length > 0) {
   (0,_paypal_paypal_js__WEBPACK_IMPORTED_MODULE_3__.loadScript)({
     "client-id": "AeP4Jw3oo6EJqxgUvRjqV9_a4INg2ROvqqp6S8gmYgepbzgbsY4nW93pi7LW4IcxnrMKS1yUGxbpi_ch",
-    currency: "GBP",
+    "buyer-country": "GB",
+    "currency": "GBP",
     "enable-funding": "paylater"
   }).then(function (paypal) {
     paypal.Buttons({
       createOrder: function createOrder(data, actions) {
-        // This function sets up the details of the transaction, including the amount and line item details.
         return actions.order.create({
           purchase_units: [{
             amount: {

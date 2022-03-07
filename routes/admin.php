@@ -47,6 +47,7 @@ Route::get('/admin/order/view/{order:paypal_id}', [OrderController::class, 'view
 
 // Items
 Route::get('/admin/items', [AdminController::class, 'items'])->middleware('admin');
+Route::get('/admin/items/all', [AdminController::class, 'all_items'])->middleware('admin');
 Route::post('/admin/item/store', [ItemController::class, 'store'])->middleware('admin');
 Route::get('/admin/item/create', [ItemController::class, 'create'])->middleware('admin');
 Route::get('/admin/item/edit/{item}', [ItemController::class, 'edit'])->middleware('admin');
@@ -56,6 +57,7 @@ Route::post('/admin/item/update/{id}', [ItemController::class, 'update'])->middl
 Route::get('/admin/events', [AdminController::class, 'events'])->middleware('organiser');
 Route::post('/admin/event/store', [EventController::class, 'store'])->middleware('admin');
 Route::get('/admin/event/create', [EventController::class, 'create'])->middleware('admin');
+Route::get('/admin/event/tickets/{event}', [EventController::class, 'tickets'])->middleware('admin');
 
 // Titles and Badges
 Route::get('/admin/titles_badges', [AdminController::class, 'titles_badges'])->middleware('admin');

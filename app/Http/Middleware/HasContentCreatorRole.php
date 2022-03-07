@@ -10,21 +10,16 @@ class HasContentCreatorRole {
 
   public function handle(Request $request, Closure $next) {
 
-    if ( Auth::id() ) {
-
-      $user = Auth::user();
-
-      if(empty($user)) return redirect("/");
-
-      foreach ( $user->roles as $role ) {
-        if ( $role['name'] == "Content Creator" OR $role['name'] == "Admin" ) {
-          return $next($request);
-        }
-      }
-
+    if ( !Auth::user() ) {
       return redirect("/");
+    }
 
+    $user = Auth::user();
+
+    if ( $user->roles->contains('name', 'Content Creator') OR $user->roles->contains('name', 'Admin') ) {
+      return $next($request);
     }
 
   }
+
 }

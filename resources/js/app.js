@@ -14,13 +14,13 @@ if ( $('#paypal-container').length > 0 ) {
 
   loadScript({
     "client-id": "AeP4Jw3oo6EJqxgUvRjqV9_a4INg2ROvqqp6S8gmYgepbzgbsY4nW93pi7LW4IcxnrMKS1yUGxbpi_ch",
-    currency: "GBP",
+    "buyer-country": "GB",
+    "currency": "GBP",
     "enable-funding": "paylater"
   }).then((paypal) => {
 
     paypal.Buttons({
       createOrder: function(data, actions) {
-        // This function sets up the details of the transaction, including the amount and line item details.
         return actions.order.create({
           purchase_units: [{
             amount: {

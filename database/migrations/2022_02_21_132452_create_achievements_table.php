@@ -17,7 +17,8 @@ class CreateAchievementsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('image');
-            $table->foreignId('item_id');
+            $table->string('description')->nullable();
+            $table->foreignId('item_id')->nullable();
             $table->timestamps();
         });
     }

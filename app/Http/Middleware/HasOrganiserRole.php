@@ -10,21 +10,16 @@ class HasOrganiserRole {
 
   public function handle(Request $request, Closure $next) {
 
-    if ( Auth::id() ) {
-
-      $user = Auth::user();
-
-      if(empty($user)) return redirect("/");
-
-      foreach ( $user->roles as $role ) {
-        if ( $role['name'] == "Organiser" OR $role['name'] == "Admin" ) {
-          return $next($request);
-        }
-      }
-
+    if ( !Auth::user() ) {
       return redirect("/");
+    }
 
+    $user = Auth::user();
+
+    if ( $user->roles->contains('name', 'Organiser') OR $user->roles->contains('name', 'Admin') ) {
+      return $next($request);
     }
 
   }
+
 }

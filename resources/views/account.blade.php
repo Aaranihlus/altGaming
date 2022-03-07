@@ -67,11 +67,13 @@
     </thead>
     <tbody>
       @foreach($user->orders as $order)
+        <tr>
         <td><span>{{ $order->paypal_id }}</span></td>
         <td><span>{{ $order->created_at }}</span></td>
         <td><span>{{ count($order->items) }}</span></td>
         <td><span>{{ $order->amount }}</span></td>
         <td><button type="submit" class="btn btn-warning mx-1"><a href="/account/order/{{ $order->paypal_id }}">View</a></button></td>
+      </tr>
       @endforeach
     </tbody>
   </table>

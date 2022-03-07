@@ -1,3 +1,7 @@
+@extends('layouts.main')
+
+@section('content')
+
 <h2 style="position: fixed; left: 25; top: 0;"><a href="/">X Return To Home</a></h2>
 
 <div style="width: 100vw;height: 100vh;background:black;display: flex;flex-direction: column;flex-wrap: nowrap;align-content: center;justify-content: center;align-items: center; padding:0; margin:0;" id="box0">
@@ -124,3 +128,5 @@ body{
   border: 1px solid #73AD21;
 }
 </style>
+
+@endsection

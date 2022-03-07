@@ -12,6 +12,9 @@ use App\Models\Badge;
 use App\Models\Role;
 use App\Models\Event;
 use App\Models\ItemImage;
+use App\Models\Order;
+use App\Models\ItemOrder;
+use App\Models\Achievement;
 
 class EventController extends Controller {
 
@@ -19,58 +22,84 @@ class EventController extends Controller {
     return view('admin.create_event', []);
   }
 
+  public function tickets (Event $event) {
+    return view('admin.tickets_sold', [
+      'event' => $event
+    ]);
+  }
+
   public function store( Request $request ) {
 
     $request->validate([
-        'title' => ['required', 'string', 'max:255']
+        //'title' => ['required', 'string', 'max:255']
     ]);
 
-    $slug = \Str::slug($request->title);
+    if ( $request->type == "altlan" ) {
 
-    $event = Event::create([
-        'title' => $request->title,
-        'start_date' => $request->start_date,
-        'location' => $request->location,
-        'description' => $request->description,
-        'slug' => $slug,
-        'user_id' => Auth::id(),
-        'is_alt_lan' => $request->type == "alt lan" ? 1 : 0
-    ]);
+      $altLans = Event::where('type', 'altlan')->get();
+      $altLanCount = count($altLans);
+      $altLanCount = $altLanCount + 1;
 
-    if($request->type == "alt lan"){
+      $path = $request->file('thumbnail')->store('event_thumbnails');
 
-      $item1 = Item::create([
-          'name' => "altLAN Ticket",
+      $achievement = Achievement::create([
+          'name' => "altLAN #" . $altLanCount . " Attendee",
+          'description' => "Awarded for attending altLAN #" . $altLanCount,
+          'image' => 'item_images/placeholder-big.png',
+          'item_id' => null
+      ]);
+
+      $event = Event::create([
+          'title' => "altLAN #" . $altLanCount,
+          'start_date' => $request->start_date,
+          'location' => "Test",
+          'description' => $request->description,
+          'slug' => \Str::slug("altLAN #" . $altLanCount),
+          'user_id' => Auth::id(),
+          'type' => $request->type,
+          'alt_lan_number' => $altLanCount,
+          'thumbnail' => $path,
+          'achievement_id' => $achievement->id
+      ]);
+
+      Item::where('is_alt_ticket', 1)->update(['visible' => 0]);
+
+      $standardTicket = Item::create([
+          'name' => "altLAN #" . $altLanCount . " Standard Ticket",
           'price' => 99.00,
-          'description' => "altLAN ticket",
-          'slug' => \Str::slug("altLAN Ticket"),
+          'description' => "altLAN #" . $altLanCount . " Standard Ticket",
+          'slug' => \Str::slug("altLAN #" . $altLanCount . " Standard Ticket"),
           'is_alt_ticket' => 1,
-          'visible' => 1
+          'event_id' => $event->id,
+          'visible' => 1,
+          'achievement_id' => null
       ]);
 
-      $itemimage1 = ItemImage::create([
-          'item_id' => $item1->id,
-          'path' => 'item_images/placeholder-big.png'
+      $standardTicketImage = ItemImage::create([
+          'item_id' => $standardTicket->id,
+          'path' => 'item_images/standard-ticket.png'
       ]);
 
-      $item2 = Item::create([
-          'name' => "altLAN BYOC Ticket",
+      $ByocTicket = Item::create([
+          'name' => "altLAN #" . $altLanCount . " BYOC Ticket",
           'price' => 119.00,
-          'description' => "altLAN BYOC ticket",
-          'slug' => \Str::slug("altLAN BYOC Ticket"),
+          'description' => "altLAN #" . $altLanCount . " BYOC Ticket",
+          'slug' => \Str::slug("altLAN #" . $altLanCount . " BYOC Ticket"),
           'is_alt_ticket' => 1,
-          'visible' => 1
+          'event_id' => $event->id,
+          'visible' => 1,
+          'achievement_id' => null
       ]);
 
-      $itemimage2 = ItemImage::create([
-          'item_id' => $item2->id,
-          'path' => 'item_images/placeholder-big.png'
+      $ByocTicketImage = ItemImage::create([
+          'item_id' => $ByocTicket->id,
+          'path' => 'item_images/byoc-ticket.png'
       ]);
 
     }
 
     return redirect("/admin/events");
-
   }
+
 
 }

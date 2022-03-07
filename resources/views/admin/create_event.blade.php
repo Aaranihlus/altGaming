@@ -20,7 +20,7 @@
           <label class="form-label">Event Type</label>
 
           <div class="form-check">
-            <input class="form-check-input event_type_radio" type="radio" name="type" id="alt_lan" value="alt lan">
+            <input class="form-check-input event_type_radio" type="radio" name="type" id="alt_lan" value="altlan">
             <label class="form-check-label" for="alt_lan">
               altLAN
             </label>
@@ -36,27 +36,34 @@
 
         <hr>
 
-        <div class="mb-3 other_only" style="display: none;">
+        <div class="mb-3 other_only">
           <label for="title" class="form-label">Title</label>
           <input type="text" class="form-control" id="title" name="title">
         </div>
 
-        <div class="mb-3 lan_only" style="display: none;">
+        <div class="mb-3 lan_only">
           <label for="location" class="form-label">Location</label>
           <input type="text" class="form-control" id="location" name="location">
         </div>
 
+        <div class="mb-3 lan_only">
+          <label for="google_maps_pin" class="form-label">Google Maps Pin</label>
+          <input type="text" class="form-control" id="google_maps_pin" name="google_maps_pin">
+        </div>
 
         <div class="mb-3">
           <label for="start_date" class="form-label">Start Date</label>
           <input type="date" class="form-control" id="start_date" name="start_date">
         </div>
 
-
-
         <div class="mb-3">
           <label for="description" class="form-label">Description</label>
           <input type="text" class="form-control" id="description" name="description">
+        </div>
+
+        <div class="mb-3">
+          <label for="thumbnail" class="form-label">Thumbnail</label>
+          <input type="file" class="form-control" id="thumbnail" name="thumbnail">
         </div>
 
         <button type="submit" class="btn btn-warning">Create</button>

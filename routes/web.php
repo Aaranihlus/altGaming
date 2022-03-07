@@ -9,6 +9,9 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\Item;
 use App\Models\ItemOrder;
+use App\Models\Event;
+use App\Models\AchievementUser;
+use App\Models\Achievement;
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
@@ -23,6 +26,12 @@ require __DIR__.'/admin.php';
 Route::get('/', function () {
   return view('home', [
     'posts' => Post::latest()->limit(9)->get()
+  ]);
+});
+
+Route::get('/events', function () {
+  return view('events', [
+    'events' => Event::all()
   ]);
 });
 
@@ -137,6 +146,8 @@ Route::post('/order/create', function(Request $request) {
     return redirect("/");
   }
 
+  $user = User::find(Auth::id());
+
   $order = Order::create([
       'user_id' => Auth::id(),
       'paypal_id' => $request->id,
@@ -144,11 +155,23 @@ Route::post('/order/create', function(Request $request) {
   ]);
 
   foreach ( session()->get('cart') as $item ) {
+
     ItemOrder::create([
       'order_id' => $order->id,
       'item_id' => $item['id'],
       'quantity' => $item['quantity']
     ]);
+
+    $item = Item::find($item['id']);
+    if ( !empty($item) ) {
+      if ( $item->event->achievement_id != null AND !$user->achievements->contains('id', $item->event->achievement_id) ) {
+        $achievement = AchievementUser::create([
+          'user_id' => Auth::id(),
+          'achievement_id' => $item->event->achievement_id
+        ]);
+      }
+    }
+
   }
 
   return response()->json(['success' => true]);

@@ -57,7 +57,15 @@ class AdminController extends Controller {
 
   public function items () {
     return view('admin.items', [
-      'items' => Item::all()
+      'items' => Item::where('visible', 1)->get(),
+      'filter' => "active_only"
+    ]);
+  }
+
+  public function all_items () {
+    return view('admin.items', [
+      'items' => Item::all(),
+      'filter' => "all"
     ]);
   }
 

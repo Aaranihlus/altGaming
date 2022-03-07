@@ -6,21 +6,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class BadgeUser extends Model {
-    use HasFactory;
+  use HasFactory;
 
-    protected $table = "badge_user";
+  protected $table = "badge_user";
 
-    protected $fillable = [
-        'user_id',
-        'badge_id'
-    ];
+  protected $fillable = [
+    'user_id',
+    'badge_id'
+  ];
 
-    public function user() {
-      return $this->hasOne(User::class);
-    }
+  public function user() {
+    return $this->hasOne(User::class);
+  }
 
-    public function badge() {
-      return $this->hasOne(Badge::class);
-    }
+  public function badge() {
+    return $this->hasOne(Badge::class);
+  }
 
 }
