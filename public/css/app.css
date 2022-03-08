@@ -21652,6 +21652,10 @@ a:hover {
   background: #332b00;
 }
 
+.content-highlighted {
+  border: 2px solid #ffc107;
+}
+
 .highlighted {
   border: 3px solid #ffc107;
 }
