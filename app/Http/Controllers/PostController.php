@@ -53,12 +53,12 @@ class PostController extends Controller {
     $post->spotify_link = $request->spotify_link;
     $post->apple_link = $request->apple_link;
 
-    $published = 0;
+    /*$published = 0;
     if ( $request->publish == "on" ) {
       $published = 1;
     }
 
-    $post->published = $published;
+    $post->published = $published;*/
 
     if ( isset($request->new_thumbnail) ) {
       $path = $request->file('new_thumbnail')->store('post_thumbnails');
