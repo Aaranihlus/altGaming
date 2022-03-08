@@ -26,6 +26,23 @@
 
           <hr>
 
+          @if($post->type == "podcast")
+            <div class="mb-3">
+              <label for="spotify_link" class="form-label">Spotify Link</label>
+              <input type="text" class="form-control" id="spotify_link" name="spotify_link">
+            </div>
+
+            <div class="mb-3">
+              <label for="apple_link" class="form-label">Apple Link</label>
+              <input type="text" class="form-control" id="apple_link" name="apple_link">
+            </div>
+
+            <div class="mb-3">
+              <label for="youtube_link" class="form-label">Youtube ID</label>
+              <input type="text" class="form-control" id="youtube_link" name="youtube_link">
+            </div>
+          @endif
+
           <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <input type="text" class="form-control" id="description" name="description" value="{{ $post->description }}">
