@@ -18,9 +18,10 @@ class CreateEventsTable extends Migration
             $table->string('title');
             $table->string('start_date');
             $table->string('location');
-            $table->string('description');
+            $table->text('information');
             $table->string('type');
             $table->string('slug');
+            $table->boolean('active')->default(null);
             $table->string('alt_lan_number')->default(null);
             $table->foreignId('user_id');
             $table->string('thumbnail');

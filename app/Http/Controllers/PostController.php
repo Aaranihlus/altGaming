@@ -75,8 +75,8 @@ class PostController extends Controller {
   public function store( Request $request ) {
 
     $request->validate([
-        'title' => ['required', 'string', 'max:255'],
-        'description' => ['required', 'string', 'max:255']
+        'title' => ['required', 'string', 'max:255']
+        //'description' => ['required', 'string', 'max:255']
     ]);
 
     $slug = \Str::slug($request->title);
