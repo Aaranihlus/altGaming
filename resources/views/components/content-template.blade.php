@@ -9,14 +9,18 @@
   <div class="content-template bg-alt-yellow extra-rounded @if($index == 0) d-lg-flex d-xl-flex @else flex-y @endif" style="border: 2px solid #ffc107; width: 100%;">
 
       @if($index == 0)
-        <div class="g-0" style="flex-basis: 45%;">
+        <div class="g-0" style="flex-basis: 50%;">
       @else
         <div class="g-0" style="flex-basis: 45%; height: 45%; max-height: 45%;">
       @endif
         <img src='{{ asset("storage/" . $post->thumbnail) }}' alt="Thumbnail" class="img-fluid @if($index == 0) main-image-border @else sub-image-border @endif" style="width: 100%; object-fit: cover; height: 100%;">
       </div>
 
-      <div class="p-3 flex-y" style="justify-content: space-between; flex-basis: 55%;">
+      @if($index == 0)
+        <div class="p-3 flex-y" style="justify-content: space-between; flex-basis: 50%;">
+      @else
+        <div class="p-3 flex-y" style="justify-content: space-between; flex-basis: 55%;">
+      @endif
 
         <div>
           <h1 class="clip-text-2 post-title">{{ $post->title }}</h1>
