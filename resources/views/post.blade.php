@@ -8,6 +8,7 @@
 
     <h6 style="text-align: center;">{{ \Carbon\Carbon::parse( $post->created_at )->diffForHumans() }}</h6>
 
+
     @if($post->type == "podcast")
       <div class="flex-y" style="align-items: center;">
         <p style="text-align: center;">
@@ -22,7 +23,9 @@
         <br>
         @if ( !empty($post->youtube_link) )
           <div class="container" style="min-height: 30vh;">
-            <iframe src="{{ "https://www.youtube.com/embed/" . $post->youtube_link }}" style="width: 100%; height: 100%;"></iframe>
+            <div class="iframe-container" style="overflow: hidden; padding-top: 56.25%; position: relative;">
+              <iframe loading="lazy" src="{{ "https://www.youtube.com/embed/" . $post->youtube_link }}" style="border: 0; height: 100%; left: 0; position: absolute; top: 0; width: 100%;"></iframe>
+            </div>
           </div>
         @endif
         <br>
