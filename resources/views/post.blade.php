@@ -21,7 +21,9 @@
         @endif
         <br>
         @if ( !empty($post->youtube_link) )
-          <iframe src="{{ "https://www.youtube.com/embed/" . $post->youtube_link }}"></iframe>
+          <div class="container" style="min-height: 30vh;">
+            <iframe src="{{ "https://www.youtube.com/embed/" . $post->youtube_link }}" style="width: 100%; height: 100%;"></iframe>
+          </div>
         @endif
         <br>
         <button type="button" class="btn btn-warning"><a class="link-dark" href="http://feeds.feedburner.com/altgaming-podcast">Subscribe</a></button>
@@ -30,6 +32,8 @@
 
     @if($post->type == "blog")
       <hr>
+    @else
+      <br>
     @endif
 
     <div>
