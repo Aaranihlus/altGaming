@@ -41,7 +41,7 @@
           <input type="text" class="form-control" id="title" name="title">
         </div>
 
-        <div class="mb-3" style="display: none;">
+        <div class="mb-3">
           <label for="editor" class="form-label">Post Content</label>
           <textarea id="editor" name="content"></textarea>
         </div>
