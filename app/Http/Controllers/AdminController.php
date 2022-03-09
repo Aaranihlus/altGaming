@@ -34,7 +34,7 @@ class AdminController extends Controller {
 
   public function posts () {
     return view('admin.posts', [
-      'posts' => Post::with('user')->get()
+      'posts' => Post::with('user')->orderBy('id', 'desc')->get()
     ]);
   }
 
