@@ -25,7 +25,8 @@ require __DIR__.'/admin.php';
 //General pages
 Route::get('/', function () {
   return view('home', [
-    'posts' => Post::latest()->limit(9)->get()
+    'posts' => Post::latest()->limit(9)->get(),
+    'highlighted_event' => Event::where('highlighted', 1)->get()->first()
   ]);
 });
 
@@ -64,6 +65,7 @@ Route::post('/loadposts', function (Request $request) {
   $offset = $request->offset;
 
   $posts = Post::with('user')->latest()->offset($offset)->limit(6)->get();
+  $count = count($posts);
 
   if ( !empty($posts) ) {
     $postHtml = "";
@@ -72,7 +74,11 @@ Route::post('/loadposts', function (Request $request) {
     }
   }
 
-  return response()->json([ 'success' => true, 'html' => $postHtml ]);
+  return response()->json([
+    'success' => true,
+    'html' => $postHtml,
+    'count' => $count
+  ]);
 
 });
 
@@ -173,6 +179,8 @@ Route::post('/order/create', function(Request $request) {
     }
 
   }
+
+  $request->session()->forget('cart');
 
   return response()->json(['success' => true]);
 

@@ -5640,11 +5640,15 @@ $('.load-more-posts-button').on('click', function () {
     offset: offset
   }).then(function (response) {
     $('#post-container').append(response.data.html);
+    var count = response.data.count;
   })["catch"](function (error) {
     console.log(response);
   }).then(function () {
     $('#loading-spinner').hide();
-    $('.load-more-posts-button').show();
+
+    if (count == 6) {
+      $('.load-more-posts-button').show();
+    }
   });
 });
 $('#open-mobile-nav-button').on('click', function () {
@@ -5772,19 +5776,25 @@ $(".anim").mouseenter(function () {
   $(this).removeClass("animate__animated animate__pulse");
 });
 $('.publish-button').on('click', function () {
+  var e = $(this);
   axios.post('/admin/post/publish', {
     id: $(this).data('id')
   }).then(function (response) {
-    console.log(response);
+    $(e).parent().find('.hide-button').show();
+    $(e).hide();
+    $(e).parent().parent().find('.published-status').text("Yes");
   })["catch"](function (error) {
     console.log(response);
   });
 });
 $('.hide-button').on('click', function () {
+  var e = $(this);
   axios.post('/admin/post/hide', {
     id: $(this).data('id')
   }).then(function (response) {
-    console.log(response);
+    $(e).parent().find('.publish-button').show();
+    $(e).hide();
+    $(e).parent().parent().find('.published-status').text("No");
   })["catch"](function (error) {
     console.log(response);
   });

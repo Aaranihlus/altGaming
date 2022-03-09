@@ -45,7 +45,7 @@
 
             <div>
               <h5><a href="/profile/{{ $post->user->slug }}">{{ $post->user->username }}</a></h5>
-              <h6>{{ $post->user->title->name }}</h6>
+              <h6>{{ $post->user->title->name ?? "" }}</h6>
             </div>
           </div>
 

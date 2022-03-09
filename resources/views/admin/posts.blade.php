@@ -32,13 +32,10 @@
                 <th><span>{{ ucfirst($post->type) }}</span></th>
                 <th><span>{{$post->user->username}}</span></th>
                 <td><span>{{ \Carbon\Carbon::parse( $post->created_at )->toDayDateTimeString() }}</span></td>
-                <td><span>{{ $post->published == 1 ? "Yes" : "No" }}</span></td>
+                <td><span class="published-status">{{ $post->published == 1 ? "Yes" : "No" }}</span></td>
                 <td>
-                  @if($post->published == 0)
-                    <button class="btn btn-warning publish-button" type="button" data-id="{{$post->id}}">Publish</button>
-                  @else
-                    <button class="btn btn-warning hide-button" type="button" data-id="{{$post->id}}">Hide</button>
-                  @endif
+                  <button class="btn btn-warning publish-button" @if($post->published == 1) style="display: none;" @endif type="button" data-id="{{ $post->id }}">Publish</button>
+                  <button class="btn btn-warning hide-button" @if($post->published == 0) style="display: none;" @endif type="button" data-id="{{ $post->id }}">Hide</button>
                   <button class="btn btn-warning edit-button" type="button"><a href="/admin/posts/edit/{{$post->id}}">Edit</a></button>
                   <button class="btn btn-warning delete-button" type="button" data-id="{{$post->id}}">Delete</button>
                 </td>

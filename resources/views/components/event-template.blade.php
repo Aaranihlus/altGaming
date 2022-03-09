@@ -14,6 +14,13 @@
         <h4>£{{ $event->location }}</h4>
       </div>
 
+      @if($event->type == "altlan")
+        <div>
+          <button type="button" class="btn btn-warning"><a class="link-dark" href="/shop/tickets">Get Tickets</a></button>
+          <button type="button" class="btn btn-warning"><a class="link-dark" href="/altlan">More Info</a></button>
+        </div>
+      @endif
+
   </div>
 
 </div>
