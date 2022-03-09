@@ -1,6 +1,7 @@
 import "bootstrap";
 import "./stripe";
 import { ClassicEditor } from "./ckeditor";
+import { Eggy } from '@s-r0/eggy-js';
 
 window.$ = require('./jquery')
 window._ = require('lodash');
@@ -130,18 +131,11 @@ $('.load-more-posts-button').on('click', function(){
 
 $('#open-mobile-nav-button').on('click', function(){
   $('#mobile-nav-container').show();
-
 });
 
 $('#close-mobile-nav').on('click', function (){
   $('#mobile-nav-container').hide();
 });
-
-
-
-
-
-
 
 
 
@@ -320,6 +314,11 @@ $('.publish-button').on('click', function(){
     $(e).parent().find('.hide-button').show();
     $(e).hide();
     $(e).parent().parent().find('.published-status').text("Yes");
+    Eggy({
+      title:  'Success',
+      message:  'Post has been published',
+      type:  'success'
+    });
   })
   .catch(function (error) {
       console.log(response);
@@ -337,6 +336,11 @@ $('.hide-button').on('click', function(){
       $(e).parent().find('.publish-button').show();
       $(e).hide();
       $(e).parent().parent().find('.published-status').text("No");
+      Eggy({
+        title:  'Success',
+        message:  'Post has been hidden',
+        type:  'success'
+      });
   })
   .catch(function (error) {
       console.log(response);
