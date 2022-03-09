@@ -5829,7 +5829,11 @@ $('.delete-button').on('click', function () {
   axios.post('/admin/post/delete', {
     id: $(this).data('id')
   }).then(function (response) {
-    console.log(response);
+    (0,_s_r0_eggy_js__WEBPACK_IMPORTED_MODULE_3__.Eggy)({
+      title: 'Success',
+      message: 'Post has been deleted',
+      type: 'success'
+    });
   })["catch"](function (error) {
     console.log(response);
   });

@@ -352,7 +352,11 @@ $('.delete-button').on('click', function(){
     id: $(this).data('id')
   })
   .then(function (response) {
-      console.log(response);
+    Eggy({
+      title:  'Success',
+      message:  'Post has been deleted',
+      type:  'success'
+    });
   })
   .catch(function (error) {
       console.log(response);
