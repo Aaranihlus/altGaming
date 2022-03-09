@@ -5641,15 +5641,14 @@ $('.load-more-posts-button').on('click', function () {
   }).then(function (response) {
     $('#post-container').append(response.data.html);
     var count = response.data.count;
-  })["catch"](function (error) {
-    console.log(response);
-  }).then(function () {
     $('#loading-spinner').hide();
 
     if (count == 6) {
       $('.load-more-posts-button').show();
     }
-  });
+  })["catch"](function (error) {
+    console.log(response);
+  }).then(function () {});
 });
 $('#open-mobile-nav-button').on('click', function () {
   $('#mobile-nav-container').show();
