@@ -28,6 +28,12 @@ class AdminController extends Controller {
 
   public function discord () {
     $discord = new DiscordClient(['token' => env('DISCORD_BOT_TOKEN')]);
+
+    $discord->channel->createMessage([
+      'channel.id' => 946499469720035328,
+      'content' => "Test Message From HTTP Server, Yo!"
+    ]);
+
     dd($discord->guild->getGuild(['guild.id' => 607337690886701066]));
     return view('admin.discord');
   }
