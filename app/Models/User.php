@@ -62,7 +62,7 @@ class User extends Authenticatable
       return $this->belongsToMany(Role::class);
     }
 
-    /*public function titles() {
+    public function titles() {
       return $this->belongsToMany(Title::class);
     }
 
@@ -84,6 +84,6 @@ class User extends Authenticatable
 
     public function orders() {
       return $this->hasMany(Order::class);
-    }*/
+    }
 
 }
