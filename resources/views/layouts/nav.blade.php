@@ -19,16 +19,18 @@
         <li class="nav-item dropdown me-4">
 
           <span class="dropdown-toggle" id="user-actions" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ auth()->user()->username }}
+            <img class="h-8 w-8 rounded-full object-cover mr-2" src="https://cdn.discordapp.com/avatars/{{ Auth::user()->id }}/{{ Auth::user()->avatar }}.webp" alt="{{ Auth::user()->username }}#{{ Auth::user()->discriminator }}" />
+            {{-- {{ auth()->user()->username }} --}}
+            {{ Auth::user()->username }}#{{ Auth::user()->discriminator }}
           </span>
 
           <ul class="dropdown-menu bg-alt-yellow p-2 me-4" aria-labelledby="user-actions">
             <li><a href="{{ url('/profile/' . auth()->user()->slug) }}" class="text-md uppercase mt-8">Profile</a></li>
             <li><a href="/account" class="text-md uppercase mt-8">Account</a></li>
 
-            @if(auth()->user()->roles->contains('name', 'Admin'))
+            {{--@if(auth()->user()->roles->contains('name', 'Admin'))
               <li><a href="/admin" class="text-md uppercase mt-8">Admin</a></li>
-            @endif
+            @endif--}}
 
             <li><a href="/logout" class="text-md uppercase mt-8">Logout</a></li>
           </ul>

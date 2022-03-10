@@ -15,9 +15,9 @@
       <a href="{{ url('/profile/' . auth()->user()->slug) }}" class="text-md uppercase mt-8">Profile</a>
       <a href="/account" class="text-md uppercase mt-8">Account</a>
 
-      @if(auth()->user()->roles->contains('name', 'Admin'))
+      {{--@if(auth()->user()->roles->contains('name', 'Admin'))
         <a href="/admin">Admin</a>
-      @endif
+      @endif--}}
 
       <a href="/logout">Logout</a>
 
