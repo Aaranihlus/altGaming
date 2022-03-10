@@ -73,7 +73,6 @@ class DiscordController extends Controller {
         // Using the access_token to get the user's Discord ID.
         try {
             $user = $this->getDiscordUser($accessToken->access_token);
-            dd($user);
         } catch (\Exception $e) {
             if (env('APP_DEBUG')) {
                 return response()->json([
@@ -166,6 +165,7 @@ class DiscordController extends Controller {
             ],
             [
                 'username' => $user->username,
+                'slug' => \Str::slug($user->username),
                 'discriminator' => $user->discriminator,
                 'email' => $user->email,
                 'avatar' => $user->avatar ?: NULL,
