@@ -26,7 +26,8 @@ class User extends Authenticatable
         'verified',
         'locale',
         'mfa_enabled',
-        'refresh_token'
+        'refresh_token',
+        'slug'
     ];
 
     /**
@@ -54,6 +55,7 @@ class User extends Authenticatable
         'locale' => 'string',
         'mfa_enabled' => 'boolean',
         'refresh_token' => 'encrypted',
+        'slug' => 'string'
     ];
 
     /*public function roles() {
