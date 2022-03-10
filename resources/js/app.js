@@ -96,6 +96,12 @@ $('.delete-comment-button').on('click', function(){
 $('.load-more-posts-button').on('click', function(){
 
   var offset = $(this).data('offset');
+
+  var type = null;
+  if ($(this).data('type')) {
+    type = $(this).data('type');
+  }
+
   $(this).hide();
   $('#loading-spinner').show();
 
@@ -103,7 +109,8 @@ $('.load-more-posts-button').on('click', function(){
   $(this).data('offset', newOffset);
 
   axios.post('/loadposts', {
-    offset: offset
+    offset: offset,
+    type: type
   })
   .then(function (response) {
     $('#post-container').append(response.data.html);

@@ -38,7 +38,8 @@ Route::get('/events', function () {
 
 Route::get('/blog', function () {
   return view('posts', [
-    'posts' => Post::where('type', 'blog')->latest()->limit(9)->get()
+    'posts' => Post::where('type', 'blog')->latest()->limit(9)->get(),
+    'type' => "blog"
   ]);
 });
 
@@ -50,7 +51,8 @@ Route::get('blog/{post:slug}', function (Post $post) {
 
 Route::get('/podcast', function () {
   return view('posts', [
-    'posts' => Post::where('type', 'podcast')->latest()->limit(9)->get()
+    'posts' => Post::where('type', 'podcast')->latest()->limit(9)->get(),
+    'type' => "podcast"
   ]);
 });
 
@@ -64,7 +66,12 @@ Route::post('/loadposts', function (Request $request) {
 
   $offset = $request->offset;
 
-  $posts = Post::with('user')->latest()->offset($offset)->limit(6)->get();
+  if(isset($request->type)){
+    $posts = Post::with('user')->where('type', $request->type)->latest()->offset($offset)->limit(6)->get();
+  } else {
+    $posts = Post::with('user')->latest()->offset($offset)->limit(6)->get();
+  }
+
   $count = count($posts);
 
   if ( !empty($posts) ) {
