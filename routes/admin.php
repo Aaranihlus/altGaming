@@ -16,6 +16,8 @@ use App\Models\ItemImage;
 
 Route::get('/admin', [AdminController::class, 'show'])->middleware('admin');
 
+Route::get('/admin/discord', [AdminController::class, 'discord'])->middleware('admin');
+
 // Achievements
 Route::get('/admin/achievements', [AdminController::class, 'achievements'])->middleware('admin');
 Route::post('/admin/achievement/store', [AchievementController::class, 'store'])->middleware('admin');

@@ -18,10 +18,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
+use RestCord\DiscordClient;
+
 class AdminController extends Controller {
 
   public function show () {
     return view('admin.home');
+  }
+
+  public function discord () {
+    $discord = new DiscordClient(['token' => 'OTQ1MTE0NDg3ODMxMjc3NjQ4.YhLcdQ.Kl3XQKJAqmswsWqiXeqff5V8Nuc']);
+    dd($discord->guild->getGuild(['guild.id' => 81384788765712384]));
+    return view('admin.discord');
   }
 
   public function users () {
