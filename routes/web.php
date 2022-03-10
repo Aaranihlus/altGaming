@@ -289,7 +289,7 @@ Route::get('/profile/{user:slug}', function (User $user) {
   }
 
   return view('profile', [
-    'user' => User::with('roles', 'badge', 'title')->get()->first()
+    'user' => User::with('roles', 'badge', 'title')->where('slug', $user->slug)->get()->first()
   ]);
 });
 
