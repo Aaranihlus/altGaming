@@ -58,11 +58,11 @@ class User extends Authenticatable
         'slug' => 'string'
     ];
 
-    /*public function roles() {
+    public function roles() {
       return $this->belongsToMany(Role::class);
     }
 
-    public function titles() {
+    /*public function titles() {
       return $this->belongsToMany(Title::class);
     }
 
