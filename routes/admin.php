@@ -59,6 +59,8 @@ Route::post('/admin/item/update/{id}', [ItemController::class, 'update'])->middl
 Route::get('/admin/events', [AdminController::class, 'events'])->middleware('organiser');
 Route::post('/admin/event/store', [EventController::class, 'store'])->middleware('admin');
 Route::get('/admin/event/create', [EventController::class, 'create'])->middleware('admin');
+Route::get('/admin/event/edit/{event}', [EventController::class, 'edit'])->middleware('admin');
+Route::post('/admin/event/update/{id}', [EventController::class, 'update'])->middleware('admin');
 Route::get('/admin/event/tickets/{event}', [EventController::class, 'tickets'])->middleware('admin');
 
 // Titles and Badges

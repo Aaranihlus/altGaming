@@ -28,6 +28,39 @@ class EventController extends Controller {
     ]);
   }
 
+  public function edit (Event $event) {
+    return view('admin.edit_event', [
+      'event' => $event
+    ]);
+  }
+
+
+  public function update( $id, Request $request ) {
+
+    $event = Event::find($id);
+
+    $event->title = $request->title;
+    $event->start_date = $request->start_date;
+    $event->end_date = $request->end_date;
+    $event->location = $request->location;
+    $event->description = $request->description;
+    $event->slug = \Str::slug($request->title);
+
+    if ( isset($request->new_thumbnail) ) {
+      $path = $request->file('new_thumbnail')->store('event_thumbnails');
+      $event->thumbnail = $path;
+    }
+
+    $event->save();
+
+    return redirect("/admin/events");
+
+  }
+
+
+
+
+
   public function store( Request $request ) {
 
     $request->validate([
