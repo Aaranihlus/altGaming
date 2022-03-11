@@ -1,6 +1,6 @@
 <?php
 
-namespace Jakyeru\Larascord\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,8 +42,6 @@ class DiscordController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function handle(Request $request) {
-
-      dd($request);
 
         // Checking if the authorization code is present in the request.
         if ($request->missing('code')) {

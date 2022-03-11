@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
-use Jakyeru\Larascord\Http\Controllers\DiscordController;
+use App\Http\Controllers\DiscordController;
 
 Route::redirect('/login', 'https://discord.com/oauth2/authorize?client_id=' . config('larascord.client_id')
     . '&redirect_uri=' . config('larascord.redirect_uri')
