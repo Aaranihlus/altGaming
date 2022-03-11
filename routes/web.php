@@ -21,6 +21,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
+require __DIR__.'/larascord.php';
 
 //General pages
 Route::get('/', function () {
