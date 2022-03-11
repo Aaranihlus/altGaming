@@ -122,7 +122,7 @@ class DiscordController extends Controller {
         }
 
         // Redirecting the user to the intended page or to the home page.
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect('/');
     }
 
     /**
