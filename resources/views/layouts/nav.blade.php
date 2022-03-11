@@ -24,7 +24,7 @@
             {{ Auth::user()->username }}#{{ Auth::user()->discriminator }}
           </span>
 
-          <ul class="bg-alt-yellow p-2 me-4" aria-labelledby="user-actions">
+          <ul class="dropdown-menu bg-alt-yellow p-2 me-4" aria-labelledby="user-actions">
             <li><a href="{{ url('/profile/' . auth()->user()->slug) }}" class="text-md uppercase mt-8">Profile</a></li>
             <li><a href="/account" class="text-md uppercase mt-8">Account</a></li>
 
