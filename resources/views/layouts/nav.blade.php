@@ -31,7 +31,7 @@
               <li><a href="/admin" class="text-md uppercase mt-8">Admin</a></li>
             @endif
 
-            <li><a href="/logout" class="text-md uppercase mt-8">Logout</a></li>
+            <!--<li><a href="/logout" class="text-md uppercase mt-8">Logout</a></li>-->
           </ul>
 
         </li>
