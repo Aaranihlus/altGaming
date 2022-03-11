@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3832f71ba8e72b76e674856ba68ad2d6",
+    "content-hash": "e168b2d69d9a8bf7265833dfcca948e3",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1292,56 +1292,6 @@
                 }
             ],
             "time": "2021-12-16T16:49:26+00:00"
-        },
-        {
-            "name": "jakyeru/larascord",
-            "version": "v3.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/JakyeRU/Larascord.git",
-                "reference": "92bf30fad68093b7b8184f5976e90b3bf8fce26f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/JakyeRU/Larascord/zipball/92bf30fad68093b7b8184f5976e90b3bf8fce26f",
-                "reference": "92bf30fad68093b7b8184f5976e90b3bf8fce26f",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^7.4"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^6.22"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Jakyeru\\Larascord\\LarascordServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Jakyeru\\Larascord\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jakye",
-                    "email": "jakyeru@gmail.com"
-                }
-            ],
-            "description": "Larascord is a package that allows you to authenticate users in your Laravel application using Discord.",
-            "support": {
-                "issues": "https://github.com/JakyeRU/Larascord/issues",
-                "source": "https://github.com/JakyeRU/Larascord/tree/v3.0.5"
-            },
-            "time": "2022-01-21T15:35:51+00:00"
         },
         {
             "name": "laravel/breeze",
