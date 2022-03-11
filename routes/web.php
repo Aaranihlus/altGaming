@@ -22,8 +22,6 @@ use Intervention\Image\ImageManagerStatic as Image;
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
 
-Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware(['auth'])->name('logout');
-
 //General pages
 Route::get('/', function () {
   return view('home', [
