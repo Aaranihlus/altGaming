@@ -134,7 +134,12 @@ body {
 
 
 .dropdown-menu {
-  min-width: 5vw;
+  min-width: 100%;
+
+  li {
+    font-size: 1.25em;
+  }
+
 }
 
 .link-dark {

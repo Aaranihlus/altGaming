@@ -21599,7 +21599,7 @@ body {
 }
 
 .dropdown-menu {
-  min-width: 5vw;
+  min-width: 100%;
 }
 
 .link-dark {
