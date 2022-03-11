@@ -43,6 +43,8 @@ class DiscordController extends Controller {
      */
     public function handle(Request $request) {
 
+      dd($request);
+
         // Checking if the authorization code is present in the request.
         if ($request->missing('code')) {
             if (env('APP_DEBUG')) {
@@ -159,8 +161,6 @@ class DiscordController extends Controller {
 
 
     private function createOrUpdateUser(object $user, string $refresh_token): User {
-
-      dd($user);
 
         return User::updateOrCreate(
             [

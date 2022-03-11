@@ -30,9 +30,6 @@ Route::get('/confirm-password', [ConfirmablePasswordController::class, 'show'])
 //Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware(['auth'])->name('logout');
 
 Route::group(['prefix' => config('larascord.prefix'), 'middleware' => ['web']], function() {
-    Route::get('/callback', [DiscordController::class, 'handle'])
-        ->name('larascord.login');
-
-    Route::redirect('/refresh-token', '/login')
-        ->name('larascord.refresh_token');
+    Route::get('/callback', [DiscordController::class, 'handle'])->name('larascord.login');
+    Route::redirect('/refresh-token', '/login')->name('larascord.refresh_token');
 });
