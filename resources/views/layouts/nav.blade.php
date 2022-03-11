@@ -20,7 +20,6 @@
 
           <span class="dropdown-toggle" id="user-actions" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <img class="h-8 w-8 rounded-full object-cover mr-2" style="border-radius: 50%; width: 2vw;" src="https://cdn.discordapp.com/avatars/{{ Auth::user()->id }}/{{ Auth::user()->avatar }}.webp" alt="{{ Auth::user()->username }}#{{ Auth::user()->discriminator }}" />
-            {{-- {{ auth()->user()->username }} --}}
             {{ Auth::user()->username }}#{{ Auth::user()->discriminator }}
           </span>
 
@@ -37,8 +36,8 @@
 
         </li>
       @else
-        <li class="anim nav-item me-4"><a href="/login" class="text-md font-bold uppercase mr-4">Log in</a></li>
-        <li class="anim nav-item me-4"><a href="/register" class="text-md font-bold uppercase mr-4">Register</a></li>
+        <li class="anim nav-item me-4"><a href="/login" class="text-md font-bold uppercase mr-4"><i class="fab fa-discord"></i> Log in</a></li>
+        <!--<li class="anim nav-item me-4"><a href="/register" class="text-md font-bold uppercase mr-4">Register</a></li>-->
       @endauth
 
     </ul>
