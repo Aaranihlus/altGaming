@@ -16,14 +16,15 @@
 
       @auth
         <li class="anim nav-item me-4"><a href="/cart"><i class="fas fa-shopping-cart"></i> {{ session()->get('cart_item_qty') }}</a></li>
-        <li class="nav-item dropdown me-4">
+
+        <li class="nav-item dropdown me-4 extra-rounded p-3" style="background: black; border: 2px solid #ffc107; width: 100%;">
 
           <span class="dropdown-toggle" id="user-actions" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img class="h-8 w-8 rounded-full object-cover mr-2" style="border-radius: 50%; width: 2vw;" src="https://cdn.discordapp.com/avatars/{{ Auth::user()->id }}/{{ Auth::user()->avatar }}.webp" alt="{{ Auth::user()->username }}#{{ Auth::user()->discriminator }}" />
+            <img class="mr-2" style="border-radius: 50%; width: 2vw;" src="https://cdn.discordapp.com/avatars/{{ Auth::user()->id }}/{{ Auth::user()->avatar }}.webp" alt="{{ Auth::user()->username }}#{{ Auth::user()->discriminator }}" />
             {{ Auth::user()->username }}#{{ Auth::user()->discriminator }}
           </span>
 
-          <ul class="dropdown-menu bg-alt-yellow p-2 me-4" aria-labelledby="user-actions">
+          <ul class="bg-alt-yellow p-2 me-4" aria-labelledby="user-actions" style="width: 100%;">
             <li><a href="{{ url('/profile/' . auth()->user()->slug) }}" class="text-md uppercase mt-8">Profile</a></li>
             <li><a href="/account" class="text-md uppercase mt-8">Account</a></li>
 
