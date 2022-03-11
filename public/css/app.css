@@ -21601,6 +21601,9 @@ body {
 .dropdown-menu {
   min-width: 100%;
 }
+.dropdown-menu li {
+  font-size: 1.25em;
+}
 
 .link-dark {
   text-decoration: none;
