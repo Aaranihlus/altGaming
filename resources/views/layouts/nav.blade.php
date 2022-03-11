@@ -17,7 +17,7 @@
       @auth
         <li class="anim nav-item me-4"><a href="/cart"><i class="fas fa-shopping-cart"></i> {{ session()->get('cart_item_qty') }}</a></li>
 
-        <li class="nav-item dropdown me-4" style="background: black; padding: 8px; border-radius: 8px;">
+        <li class="nav-item dropdown me-4" style="background: #1d1800; padding: 8px; border-radius: 8px; border: 2px solid #ffc107;">
 
           <span class="dropdown-toggle" id="user-actions" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <img class="mr-2" style="border-radius: 50%; width: 2vw;" src="https://cdn.discordapp.com/avatars/{{ Auth::user()->id }}/{{ Auth::user()->avatar }}.webp" alt="{{ Auth::user()->username }}#{{ Auth::user()->discriminator }}" />
