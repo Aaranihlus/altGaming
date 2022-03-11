@@ -27,7 +27,7 @@ Route::get('/confirm-password', [ConfirmablePasswordController::class, 'show'])
     ->middleware(['web', 'auth'])
     ->name('password.confirm');
 
-Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware(['auth'])->name('logout');
+//Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware(['auth'])->name('logout');
 
 Route::group(['prefix' => config('larascord.prefix'), 'middleware' => ['web']], function() {
     Route::get('/callback', [DiscordController::class, 'handle'])
