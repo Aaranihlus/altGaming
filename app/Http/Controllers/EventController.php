@@ -100,7 +100,8 @@ class EventController extends Controller {
 
       $discordRole = $discord->guild->createGuildRole([
         'guild.id' => 607337690886701066,
-        'name' => "altLAN #" . $altLanCount . " Attendee"
+        'name' => "altLAN #1 Attendee"
+        //'name' => "altLAN #" . $altLanCount . " Attendee"
       ]);
 
       dd($discordRole);
