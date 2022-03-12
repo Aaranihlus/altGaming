@@ -18,7 +18,7 @@
             </div>
             <div style="display: flex; align-items: center;">
               <input style="width: 50px" type="number" value="{{ $c->quantity }}" class="form-control item-quantity mx-2 rounded"/>
-              <i class="fas fa-trash delete-cart-item mx-4" data-index="{{ $k }}"></i>
+              <i class="fas fa-trash delete-cart-item mx-4" data-id={{ $c->id }} data-index="{{ $k }}"></i>
               <h5 class="mx-4 my-0">£ {{ $c->price }}</h5>
             </div>
           </div>

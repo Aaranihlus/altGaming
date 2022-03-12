@@ -73,11 +73,18 @@ class CartController extends Controller {
       }
     }
 
+    $item = Item::where('id', $request->id)->get()->first();
+
     session(['cart_item_qty' => $cart_item_qty]);
 
     if ( $cart_item_qty == 0 ) {
       $request->session()->forget('cart_item_qty');
     }
+
+    return response()->json([
+      'success' => true,
+      'item_name' => $item['name']
+    ]);
 
   }
 

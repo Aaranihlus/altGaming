@@ -15,7 +15,7 @@
       <li class="anim nav-item me-4"><a href="/shop/all">Shop</a></li>
 
       @auth
-        <li class="anim nav-item me-4"><a href="/cart"><i class="fas fa-shopping-cart"></i> {{ session()->get('cart_item_qty') }}</a></li>
+        <li class="anim nav-item me-4"><a href="/cart"><i class="fas fa-shopping-cart"></i> <span id="cart_total_items">{{ session()->get('cart_item_qty') }}</span></a></li>
 
         <li class="nav-item dropdown me-4" style="background: #1d1800; padding: 8px; /*border-radius: 8px; border: 2px solid #ffc107;*/">
 

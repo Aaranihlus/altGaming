@@ -258,7 +258,7 @@ $('.add-to-cart').on('click', function(){
   .then(function (response) {
     Eggy({
       title:  'Success',
-      message:  response.itemname + " added to cart",
+      message:  response.item_name + " added to cart",
       type:  'success'
     });
   })
@@ -270,12 +270,13 @@ $('.add-to-cart').on('click', function(){
 
 $('.delete-cart-item').on('click', function(){
   axios.post('/cart/remove', {
+    id: $(this).data('id'),
     index: $(this).data('index')
   })
   .then(function (response) {
       Eggy({
         title:  'Success',
-        message:  response.itemname + " removed from cart",
+        message:  response.item_name + " removed from cart",
         type:  'success'
       });
   })
