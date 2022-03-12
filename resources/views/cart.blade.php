@@ -6,8 +6,6 @@
 
     <div class="row">
 
-
-
         @if ( !empty($cart) )
           <div class="col-lg-8 col-xl-8 col-sm-12 col-md-12 col-xs-12">
           <h1>Your cart</h1>
@@ -25,16 +23,12 @@
           </div>
         @endforeach
         </div>
-
       @else
-
         <div class="flex-y" style="align-items: center;">
           <h1>Your cart is empty!</h1>
           <button type="button" class="btn btn-warning my-4"><a class="link-dark" href="/shop/all">Go To Shop</a></button>
         </div>
       @endif
-
-
 
       @if ( !empty($cart) )
       <div class="col-lg-4 col-xl-4 col-sm-12 col-md-12 col-xs-12 bg-alt-yellow extra-rounded p-3" style="display: flex; flex-direction: column; flex-wrap: nowrap; align-content: center; justify-content: space-around; align-items: stretch; text-align: center;">
