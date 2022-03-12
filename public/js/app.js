@@ -5758,10 +5758,21 @@ $('.delete-image-button').on('click', function () {
   });
 });
 $('.add-to-cart').on('click', function () {
+  var data = {};
+  data.id = $(this).data('id');
+
+  if ($('#quantity').length > 0) {
+    data.quantity = $('#quantity').val();
+  }
+
   axios.post('/cart/add', {
-    id: $(this).data('id')
+    data: data
   }).then(function (response) {
-    console.log(response);
+    (0,_s_r0_eggy_js__WEBPACK_IMPORTED_MODULE_3__.Eggy)({
+      title: 'Success',
+      message: response.itemname + " added to cart",
+      type: 'success'
+    });
   })["catch"](function (error) {
     console.log(response);
   });
@@ -5770,7 +5781,11 @@ $('.delete-cart-item').on('click', function () {
   axios.post('/cart/remove', {
     index: $(this).data('index')
   }).then(function (response) {
-    console.log(response);
+    (0,_s_r0_eggy_js__WEBPACK_IMPORTED_MODULE_3__.Eggy)({
+      title: 'Success',
+      message: response.itemname + " removed from cart",
+      type: 'success'
+    });
   })["catch"](function (error) {
     console.log(response);
   });

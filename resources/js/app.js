@@ -250,11 +250,23 @@ $('.delete-image-button').on('click', function(){
 
 
 $('.add-to-cart').on('click', function(){
+
+  var data = {};
+  data.id = $(this).data('id');
+
+  if ( $('#quantity').length > 0 ) {
+    data.quantity = $('#quantity').val();
+  }
+
   axios.post('/cart/add', {
-    id: $(this).data('id')
+    data: data
   })
   .then(function (response) {
-      console.log(response);
+    Eggy({
+      title:  'Success',
+      message:  response.itemname + " added to cart",
+      type:  'success'
+    });
   })
   .catch(function (error) {
       console.log(response);
@@ -267,7 +279,11 @@ $('.delete-cart-item').on('click', function(){
     index: $(this).data('index')
   })
   .then(function (response) {
-      console.log(response);
+      Eggy({
+        title:  'Success',
+        message:  response.itemname + " removed from cart",
+        type:  'success'
+      });
   })
   .catch(function (error) {
       console.log(response);

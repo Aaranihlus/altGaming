@@ -50,6 +50,13 @@ class CartController extends Controller {
       $request->session()->forget('cart_item_qty');
     }
 
+    $item = Item::where('id' , $request->id)->get()->first();
+
+    return response()->json([
+      'success' => true,
+      'item_name' => $item['name']
+    ]);
+
   }
 
   public function remove (Request $request) {

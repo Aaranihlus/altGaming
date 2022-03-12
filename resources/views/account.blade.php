@@ -8,12 +8,7 @@
 
     <div class="mb-3">
       <label for="email" class="form-label">Email</label>
-      <input type="text" class="form-control" id="email" name="email" value="{{ $user->email }}">
-    </div>
-
-    <div class="mb-3">
-      <label for="password" class="form-label">Set New Password</label>
-      <input type="password" class="form-control" id="password" name="password">
+      <input type="text" class="form-control" id="email" name="email" readonly value="{{ $user->email }}">
     </div>
 
   <hr>
@@ -43,6 +38,11 @@
   <div class="mb-3">
     <label for="address_line4" class="form-label">Address Line 4</label>
     <input type="text" class="form-control" id="address_line4" name="address_line4">
+  </div>
+
+  <div class="mb-3">
+    <label for="county" class="form-label">County</label>
+    <input type="text" class="form-control" id="county" name="county">
   </div>
 
   <div class="mb-3">
