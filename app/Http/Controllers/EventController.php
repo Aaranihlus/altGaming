@@ -98,7 +98,7 @@ class EventController extends Controller {
       // Create Discord Role
       $discord = new DiscordClient(['token' => env('DISCORD_BOT_TOKEN')]);
 
-      $discordRole = $client->guild->createGuildRole([
+      $discordRole = $discord->guild->createGuildRole([
         'guild.id' => 607337690886701066,
         'name' => "altLAN #" . $altLanCount . " Attendee"
       ]);
