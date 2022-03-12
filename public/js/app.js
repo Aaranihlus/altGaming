@@ -5762,6 +5762,7 @@ $('.add-to-cart').on('click', function () {
     id: $(this).data('id'),
     quantity: $('#quantity').length > 0 ? $('#quantity').val() : 1
   }).then(function (response) {
+    console.log(response);
     (0,_s_r0_eggy_js__WEBPACK_IMPORTED_MODULE_3__.Eggy)({
       title: 'Success',
       message: response.item_name + " added to cart",
@@ -5778,6 +5779,7 @@ $('.delete-cart-item').on('click', function () {
     id: $(this).data('id'),
     index: $(this).data('index')
   }).then(function (response) {
+    console.log(response);
     (0,_s_r0_eggy_js__WEBPACK_IMPORTED_MODULE_3__.Eggy)({
       title: 'Success',
       message: response.item_name + " removed from cart",

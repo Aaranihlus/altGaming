@@ -255,6 +255,7 @@ $('.add-to-cart').on('click', function(){
     quantity: $('#quantity').length > 0 ? $('#quantity').val() : 1
   })
   .then(function (response) {
+    console.log(response);
     Eggy({
       title:  'Success',
       message:  response.item_name + " added to cart",
@@ -277,6 +278,7 @@ var elem = $(this);
     index: $(this).data('index')
   })
   .then(function (response) {
+      console.log(response);
       Eggy({
         title:  'Success',
         message:  response.item_name + " removed from cart",
