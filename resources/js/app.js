@@ -260,7 +260,7 @@ $('.add-to-cart').on('click', function(){
       message:  response.data.item_name + " added to cart",
       type:  'success'
     });
-    $('#cart_total_items').val(response.data.total_cart_items);
+    $('#cart_total_items').text(response.data.total_cart_items);
   })
   .catch(function (error) {
       console.log(response);
@@ -282,7 +282,7 @@ var elem = $(this);
         message:  response.data.item_name + " removed from cart",
         type:  'success'
       });
-      $('#cart_total_items').val(response.data.total_cart_items);
+      $('#cart_total_items').text(response.data.total_cart_items);
       $(elem).parent().parent().remove();
   })
   .catch(function (error) {
