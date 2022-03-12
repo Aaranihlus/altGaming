@@ -258,7 +258,8 @@ $('.add-to-cart').on('click', function(){
     Eggy({
       title:  'Success',
       message:  response.data.item_name + " added to cart",
-      type:  'success'
+      type:  'success',
+      position: 'bottom-left'
     });
     $('#cart_total_items').text(response.data.total_cart_items);
   })
@@ -280,7 +281,8 @@ var elem = $(this);
       Eggy({
         title:  'Success',
         message:  response.data.item_name + " removed from cart",
-        type:  'success'
+        type:  'success',
+        position: 'bottom-left'
       });
 
       if(response.data.total_cart_items > 0){
@@ -346,7 +348,8 @@ $('.publish-button').on('click', function(){
     Eggy({
       title:  'Success',
       message:  'Post has been published',
-      type:  'success'
+      type:  'success',
+      position: 'bottom-left'
     });
   })
   .catch(function (error) {
@@ -368,7 +371,8 @@ $('.hide-button').on('click', function(){
       Eggy({
         title:  'Success',
         message:  'Post has been hidden',
-        type:  'success'
+        type:  'success',
+        position: 'bottom-left'
       });
   })
   .catch(function (error) {
@@ -384,7 +388,8 @@ $('.delete-button').on('click', function(){
     Eggy({
       title:  'Success',
       message:  'Post has been deleted',
-      type:  'success'
+      type:  'success',
+      position: 'bottom-left'
     });
   })
   .catch(function (error) {
