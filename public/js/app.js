@@ -5783,7 +5783,13 @@ $('.delete-cart-item').on('click', function () {
       message: response.data.item_name + " removed from cart",
       type: 'success'
     });
-    $('#cart_total_items').text(response.data.total_cart_items);
+
+    if (response.data.total_cart_items > 0) {
+      $('#cart_total_items').text(response.data.total_cart_items);
+    } else {
+      $('#cart_total_items').text("");
+    }
+
     $(elem).parent().parent().remove();
   })["catch"](function (error) {
     console.log(response);
