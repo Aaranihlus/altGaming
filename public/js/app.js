@@ -5787,7 +5787,7 @@ $('.delete-cart-item').on('click', function () {
     if (response.data.total_cart_items > 0) {
       $('#cart_total_items').text(response.data.total_cart_items);
     } else {
-      $('#cart_total_items').text("");
+      location.reload();
     }
 
     $(elem).parent().parent().remove();
