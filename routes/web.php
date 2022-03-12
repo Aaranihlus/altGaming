@@ -16,6 +16,8 @@ use App\Models\Achievement;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
 
+use RestCord\DiscordClient;
+
 use Carbon\Carbon;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -182,12 +184,23 @@ Route::post('/order/create', function(Request $request) {
 
     $item = Item::find($item['id']);
     if ( !empty($item) ) {
+
+
       if ( $item->event->achievement_id != null AND !$user->achievements->contains('id', $item->event->achievement_id) ) {
         $achievement = AchievementUser::create([
           'user_id' => Auth::id(),
           'achievement_id' => $item->event->achievement_id
         ]);
       }
+
+      if ( $item->discord_role_id != null ) {
+        $client->guild->addGuildMemberRole([
+          'guild.id' => 607337690886701066,
+          'user.id' => $user->id,
+          'role.id' => $item->discord_role_id
+        ]);
+      }
+
     }
 
   }

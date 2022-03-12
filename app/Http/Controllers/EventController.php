@@ -16,6 +16,8 @@ use App\Models\Order;
 use App\Models\ItemOrder;
 use App\Models\Achievement;
 
+use RestCord\DiscordClient;
+
 class EventController extends Controller {
 
   public function create () {
@@ -63,10 +65,6 @@ class EventController extends Controller {
 
   public function store( Request $request ) {
 
-    $request->validate([
-        //'title' => ['required', 'string', 'max:255']
-    ]);
-
     if ( $request->type == "altlan" ) {
 
       $altLans = Event::where('type', 'altlan')->get();
@@ -97,6 +95,14 @@ class EventController extends Controller {
 
       Item::where('is_alt_ticket', 1)->update(['visible' => 0]);
 
+      // Create Discord Role
+      $discord = new DiscordClient(['token' => env('DISCORD_BOT_TOKEN')]);
+
+      $discordRole = $client->guild->createGuildRole([
+        'guild.id' => 607337690886701066,
+        'name' => "altLAN #" . $altLanCount . " Attendee"
+      ]);
+
       $standardTicket = Item::create([
           'name' => "altLAN #" . $altLanCount . " Standard Ticket",
           'price' => 99.00,
@@ -105,7 +111,8 @@ class EventController extends Controller {
           'is_alt_ticket' => 1,
           'event_id' => $event->id,
           'visible' => 1,
-          'achievement_id' => null
+          'achievement_id' => null,
+          'discord_role_id' = $discordRole['id']
       ]);
 
       $standardTicketImage = ItemImage::create([
@@ -121,7 +128,8 @@ class EventController extends Controller {
           'is_alt_ticket' => 1,
           'event_id' => $event->id,
           'visible' => 1,
-          'achievement_id' => null
+          'achievement_id' => null,
+          'discord_role_id' = $discordRole['id']
       ]);
 
       $ByocTicketImage = ItemImage::create([
