@@ -5758,15 +5758,9 @@ $('.delete-image-button').on('click', function () {
   });
 });
 $('.add-to-cart').on('click', function () {
-  var data = {};
-  data.id = $(this).data('id');
-
-  if ($('#quantity').length > 0) {
-    data.quantity = $('#quantity').val();
-  }
-
   axios.post('/cart/add', {
-    data: data
+    id: $(this).data('id'),
+    quantity: $('#quantity').length > 0 ? $('#quantity').val() : 1
   }).then(function (response) {
     (0,_s_r0_eggy_js__WEBPACK_IMPORTED_MODULE_3__.Eggy)({
       title: 'Success',

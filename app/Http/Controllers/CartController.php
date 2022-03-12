@@ -50,7 +50,7 @@ class CartController extends Controller {
       $request->session()->forget('cart_item_qty');
     }
 
-    $item = Item::where('id' , $request->id)->get()->first();
+    $item = Item::where('id', $request->id)->get()->first();
 
     return response()->json([
       'success' => true,
