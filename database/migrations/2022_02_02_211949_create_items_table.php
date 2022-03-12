@@ -23,7 +23,7 @@ class CreateItemsTable extends Migration
             $table->boolean('visible')->default(true);
             $table->foreignId('event_id')->nullable();
             $table->foreignId('achievement_id')->nullable();
-            $table->string('discord_role_id');
+            $table->string('discord_role_id')->nullable();
             $table->timestamps();
         });
     }
