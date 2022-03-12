@@ -194,7 +194,8 @@ Route::post('/order/create', function(Request $request) {
       }
 
       if ( $item->discord_role_id != null ) {
-        $client->guild->addGuildMemberRole([
+        $discord = new DiscordClient(['token' => env('DISCORD_BOT_TOKEN')]);
+        $discord->guild->addGuildMemberRole([
           'guild.id' => 607337690886701066,
           'user.id' => $user->id,
           'role.id' => $item->discord_role_id
