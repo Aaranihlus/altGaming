@@ -16,7 +16,8 @@ class Item extends Model {
     'is_alt_ticket',
     'visible',
     'event_id',
-    'achievement_id'
+    'achievement_id',
+    'discord_role_id'
   ];
 
   public function user() {

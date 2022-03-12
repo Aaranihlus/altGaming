@@ -67,7 +67,7 @@ class EventController extends Controller {
 
     if ( $request->type == "altlan" ) {
 
-      /*$altLans = Event::where('type', 'altlan')->get();
+      $altLans = Event::where('type', 'altlan')->get();
       $altLanCount = count($altLans);
       $altLanCount = $altLanCount + 1;
 
@@ -93,7 +93,7 @@ class EventController extends Controller {
           'achievement_id' => $achievement->id
       ]);
 
-      Item::where('is_alt_ticket', 1)->update(['visible' => 0]);*/
+      Item::where('is_alt_ticket', 1)->update(['visible' => 0]);
 
       // Create Discord Role
       $discord = new DiscordClient(['token' => env('DISCORD_BOT_TOKEN')]);
@@ -104,11 +104,7 @@ class EventController extends Controller {
         //'name' => "altLAN #" . $altLanCount . " Attendee"
       ]);
 
-      echo $discordRole->id;
-
-      dd($discordRole);
-
-      /*$standardTicket = Item::create([
+      $standardTicket = Item::create([
           'name' => "altLAN #" . $altLanCount . " Standard Ticket",
           'price' => 99.00,
           'description' => "altLAN #" . $altLanCount . " Standard Ticket",
@@ -140,7 +136,7 @@ class EventController extends Controller {
       $ByocTicketImage = ItemImage::create([
           'item_id' => $ByocTicket->id,
           'path' => 'item_images/byoc-ticket.png'
-      ]);*/
+      ]);
 
     }
 
