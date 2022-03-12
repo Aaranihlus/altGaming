@@ -51,11 +51,15 @@
           <input type="text" class="form-control" id="google_maps_pin" name="google_maps_pin">
         </div>-->
 
-        <div class="mb-3 flex-x">
-          <label for="start_date" class="form-label">Starting</label>
-          <input type="date" class="form-control" id="start_date" name="start_date">
-          <label for="start_date" class="form-label">Until</label>
-          <input type="date" class="form-control" id="end_date" name="end_date">
+        <div class="form-row row mb-3">
+          <div class="form-group col-2">
+            <label for="start_date">Starting</label>
+            <input type="date" class="form-control" id="start_date" name="start_date">
+          </div>
+          <div class="form-group col-2">
+            <label for="end_date">Until</label>
+            <input type="date" class="form-control" id="end_date" name="end_date">
+          </div>
         </div>
 
         <div class="mb-3">
