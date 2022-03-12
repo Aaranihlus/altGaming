@@ -104,6 +104,8 @@ class EventController extends Controller {
         //'name' => "altLAN #" . $altLanCount . " Attendee"
       ]);
 
+      echo $discordRole->id;
+
       dd($discordRole);
 
       /*$standardTicket = Item::create([
