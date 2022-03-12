@@ -129,7 +129,7 @@ class EventController extends Controller {
           'event_id' => $event->id,
           'visible' => 1,
           'achievement_id' => null,
-          'discord_role_id' => $discordRole['id']
+          'discord_role_id' => $discordRole->id
       ]);
 
       $ByocTicketImage = ItemImage::create([
