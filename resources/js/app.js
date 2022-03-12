@@ -255,13 +255,12 @@ $('.add-to-cart').on('click', function(){
     quantity: $('#quantity').length > 0 ? $('#quantity').val() : 1
   })
   .then(function (response) {
-    console.log(response);
     Eggy({
       title:  'Success',
-      message:  response.item_name + " added to cart",
+      message:  response.data.item_name + " added to cart",
       type:  'success'
     });
-    $('#cart_total_items').val(response.total_cart_items);
+    $('#cart_total_items').val(response.data.total_cart_items);
   })
   .catch(function (error) {
       console.log(response);
@@ -278,13 +277,12 @@ var elem = $(this);
     index: $(this).data('index')
   })
   .then(function (response) {
-      console.log(response);
       Eggy({
         title:  'Success',
-        message:  response.item_name + " removed from cart",
+        message:  response.data.item_name + " removed from cart",
         type:  'success'
       });
-      $('#cart_total_items').val(response.total_cart_items);
+      $('#cart_total_items').val(response.data.total_cart_items);
       $(elem).parent().parent().remove();
   })
   .catch(function (error) {
