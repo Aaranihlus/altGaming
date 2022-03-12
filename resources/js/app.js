@@ -250,7 +250,6 @@ $('.delete-image-button').on('click', function(){
 
 
 $('.add-to-cart').on('click', function(){
-
   axios.post('/cart/add', {
     id: $(this).data('id'),
     quantity: $('#quantity').length > 0 ? $('#quantity').val() : 1
@@ -261,6 +260,7 @@ $('.add-to-cart').on('click', function(){
       message:  response.item_name + " added to cart",
       type:  'success'
     });
+    $('#cart_total_items').val(response.total_cart_items);
   })
   .catch(function (error) {
       console.log(response);
@@ -279,6 +279,8 @@ $('.delete-cart-item').on('click', function(){
         message:  response.item_name + " removed from cart",
         type:  'success'
       });
+      $('#cart_total_items').val(response.total_cart_items);
+      $(this).parent().parent().remove();
   })
   .catch(function (error) {
       console.log(response);

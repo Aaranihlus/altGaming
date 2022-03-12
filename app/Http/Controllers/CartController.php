@@ -54,7 +54,8 @@ class CartController extends Controller {
 
     return response()->json([
       'success' => true,
-      'item_name' => $item['name']
+      'item_name' => $item['name'],
+      'total_cart_items' => $cart_item_qty
     ]);
 
   }
@@ -83,7 +84,8 @@ class CartController extends Controller {
 
     return response()->json([
       'success' => true,
-      'item_name' => $item['name']
+      'item_name' => $item['name'],
+      'total_cart_items' => $cart_item_qty
     ]);
 
   }
