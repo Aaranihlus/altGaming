@@ -5773,6 +5773,7 @@ $('.add-to-cart').on('click', function () {
   });
 });
 $('.delete-cart-item').on('click', function () {
+  var elem = $(this);
   axios.post('/cart/remove', {
     id: $(this).data('id'),
     index: $(this).data('index')
@@ -5783,7 +5784,7 @@ $('.delete-cart-item').on('click', function () {
       type: 'success'
     });
     $('#cart_total_items').val(response.total_cart_items);
-    $(this).parent().parent().remove();
+    $(elem).parent().parent().remove();
   })["catch"](function (error) {
     console.log(response);
   });
