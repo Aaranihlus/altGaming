@@ -259,7 +259,7 @@ $('.add-to-cart').on('click', function(){
       title:  'Success',
       message:  response.data.item_name + " added to cart",
       type:  'success',
-      position: 'bottom-left'
+      position: 'bottom-right'
     });
     $('#cart_total_items').text(response.data.total_cart_items);
   })
@@ -282,7 +282,7 @@ var elem = $(this);
         title:  'Success',
         message:  response.data.item_name + " removed from cart",
         type:  'success',
-        position: 'bottom-left'
+        position: 'bottom-right'
       });
 
       if(response.data.total_cart_items > 0){
@@ -349,7 +349,7 @@ $('.publish-button').on('click', function(){
       title:  'Success',
       message:  'Post has been published',
       type:  'success',
-      position: 'bottom-left'
+      position: 'bottom-right'
     });
   })
   .catch(function (error) {
@@ -372,7 +372,7 @@ $('.hide-button').on('click', function(){
         title:  'Success',
         message:  'Post has been hidden',
         type:  'success',
-        position: 'bottom-left'
+        position: 'bottom-right'
       });
   })
   .catch(function (error) {
@@ -389,7 +389,7 @@ $('.delete-button').on('click', function(){
       title:  'Success',
       message:  'Post has been deleted',
       type:  'success',
-      position: 'bottom-left'
+      position: 'bottom-right'
     });
   })
   .catch(function (error) {
