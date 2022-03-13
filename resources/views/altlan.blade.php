@@ -2,6 +2,11 @@
 
 @section('content')
 
+<div style="margin: 0px;
+  padding: 0px;
+  color: white;
+  overflow: hidden;">
+
 <h2 style="position: fixed; left: 25; top: 0;"><a href="/">X Return To Home</a></h2>
 
 <div style="width: 100vw;height: 100vh;background:black;display: flex;flex-direction: column;flex-wrap: nowrap;align-content: center;justify-content: center;align-items: center; padding:0; margin:0;" id="box0">
@@ -61,8 +66,16 @@
   </div>
 </div>
 
+</div>
 
-<div class="bottom-nav" style="background: blue; text-align: center; position: fixed; bottom: 50; right: 0; width: 100vw; border: 1px solid #73AD21;">
+
+<div class="bottom-nav" style="  background: blue;
+  text-align: center;
+  position: fixed;
+  bottom: 50px;
+  right: 0;
+  width: 100vw;
+  border: 1px solid #73AD21;">
   <button id="button0">Home</button>
   <button id="button1">Key Details</button>
   <button id="button2">Gallery</button>
@@ -74,8 +87,10 @@
   <button id="button8">Privacy</button>
 </div>
 
+
+
 <script>
-/*var button0 = document.getElementById("button0");
+var button0 = document.getElementById("button0");
 var button1 = document.getElementById("button1");
 var button2 = document.getElementById("button2");
 var button3 = document.getElementById("button3");
@@ -93,10 +108,14 @@ button1.onclick = function(){
   scrollTo("box1");
 };
 
+
+
 function scrollTo(id){
   var element = document.getElementById(id);
   element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
-}*/
+}
+
+
 </script>
 
 @endsection
