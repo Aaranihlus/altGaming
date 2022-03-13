@@ -38,8 +38,7 @@
           <label class="form-label">Create Option Groups</label>
           <div class="form-row row mb-3">
             <div class="form-group col-4">
-              <label for="new_group_name">Group Name</label>
-              <input type="text" class="form-control" id="new_group_name">
+              <input type="text" class="form-control" id="new_group_name" placeholder="New Group Name">
             </div>
             <div class="form-group col-4">
               <button type="button" id="create-option-group-button" class="btn btn-warning">Create Group</button>
