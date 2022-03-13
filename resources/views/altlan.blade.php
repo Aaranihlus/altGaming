@@ -2,11 +2,6 @@
 
 @section('content')
 
-<div style="margin: 0px;
-  padding: 0px;
-  color: white;
-  overflow: hidden;">
-
 <h2 style="position: fixed; left: 25; top: 0;"><a href="/">X Return To Home</a></h2>
 
 <div style="width: 100vw;height: 100vh;background:black;display: flex;flex-direction: column;flex-wrap: nowrap;align-content: center;justify-content: center;align-items: center; padding:0; margin:0;" id="box0">
@@ -66,8 +61,6 @@
   </div>
 </div>
 
-</div>
-
 
 <div class="bottom-nav" style="  background: blue;
   text-align: center;
@@ -89,6 +82,17 @@
 
 
 
+
+
+<style>
+  body {
+    margin: 0px;
+    padding: 0px;
+    color: white;
+    overflow: hidden;
+  }
+</style>
+
 <script>
 var button0 = document.getElementById("button0");
 var button1 = document.getElementById("button1");
@@ -107,8 +111,6 @@ button0.onclick = function(){
 button1.onclick = function(){
   scrollTo("box1");
 };
-
-
 
 function scrollTo(id){
   var element = document.getElementById(id);
