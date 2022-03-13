@@ -18,9 +18,11 @@ class ItemController extends Controller {
 
   public function store( Request $request ) {
 
+    dd($request);
+
     $request->validate([
-        'name' => ['required', 'string', 'max:255'],
-        'price' => ['required', 'string', 'max:255']
+      'name' => ['required', 'string', 'max:255'],
+      'price' => ['required', 'string', 'max:255']
     ]);
 
     $slug = \Str::slug($request->name);
@@ -32,16 +34,23 @@ class ItemController extends Controller {
         'slug' => $slug
     ]);
 
+    // Image Array
     foreach ( $request->file('image') as $img ) {
-
       $path = $img->store('item_images');
-
       $image = ItemImage::create([
           'item_id' => $item->id,
           'path' => $path
       ]);
-
     }
+
+    //Options Array
+
+
+
+    //Variations Array
+
+
+
 
     return redirect("/admin/items");
 

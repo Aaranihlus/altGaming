@@ -17,7 +17,8 @@ class Item extends Model {
     'visible',
     'event_id',
     'achievement_id',
-    'discord_role_id'
+    'discord_role_id',
+    'type'
   ];
 
   public function user() {
