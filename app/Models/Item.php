@@ -37,4 +37,8 @@ class Item extends Model {
     return $this->hasMany(ItemOrder::class);
   }
 
+  public function groups() {
+    return $this->hasMany(ItemOptionGroup::class);
+  }
+
 }

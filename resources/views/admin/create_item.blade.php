@@ -35,22 +35,34 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Option Groups</label>
-          <input type="text" class="form-control my-2" id="new_group_name">
-          <button type="button" id="create-option-group-button" class="btn btn-warning">Create Group</button>
+          <label class="form-label">Create Option Groups</label>
+          <div class="form-row row mb-3">
+            <div class="form-group col-2">
+              <label for="new_group_name">Group Name</label>
+              <input type="text" class="form-control my-2" id="new_group_name">
+            </div>
+            <div class="form-group col-2">
+              <button type="button" id="create-option-group-button" class="btn btn-warning">Create Group</button>
+            </div>
+          </div>
         </div>
+
 
         <div class="mb-3">
           <label class="form-label">Colour Options</label>
           <input type="hidden" name="group[0]" value="Colour">
 
           <div>
+            <label class="form-label">Option Name</label>
             <input type="text" class="form-control my-2" name="option_name[0][0]">
+            <label class="form-label">Option Price</label>
             <input type="text" class="form-control my-2" name="option_price[0][0]">
           </div>
 
           <div>
+            <label class="form-label">Option Name</label>
             <input type="text" class="form-control my-2" name="option_name[0][1]">
+            <label class="form-label">Option Price</label>
             <input type="text" class="form-control my-2" name="option_price[0][1]">
           </div>
 
