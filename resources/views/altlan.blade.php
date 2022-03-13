@@ -62,7 +62,7 @@
 </div>
 
 
-<div class="bottom-nav">
+<div class="bottom-nav" style="background: blue; text-align: center; position: fixed; bottom: 50; right: 0; width: 100vw; border: 1px solid #73AD21;">
   <button id="button0">Home</button>
   <button id="button1">Key Details</button>
   <button id="button2">Gallery</button>
@@ -74,11 +74,8 @@
   <button id="button8">Privacy</button>
 </div>
 
-
-
-
 <script>
-var button0 = document.getElementById("button0");
+/*var button0 = document.getElementById("button0");
 var button1 = document.getElementById("button1");
 var button2 = document.getElementById("button2");
 var button3 = document.getElementById("button3");
@@ -96,37 +93,10 @@ button1.onclick = function(){
   scrollTo("box1");
 };
 
-
-
 function scrollTo(id){
   var element = document.getElementById(id);
   element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
-}
-
-
+}*/
 </script>
-
-
-
-
-
-<style>
-body{
-  margin: 0px;
-  padding: 0px;
-  color: white;
-  overflow: hidden;
-}
-
-.bottom-nav {
-  background: blue;
-  text-align: center;
-  position: fixed;
-  bottom: 50;
-  right: 0;
-  width: 100vw;
-  border: 1px solid #73AD21;
-}
-</style>
 
 @endsection
