@@ -95,6 +95,11 @@ class EventController extends Controller {
 
       Item::where('is_alt_ticket', 1)->update(['visible' => 0]);
 
+      Event::where('type', "altlan")->update([
+        'active' => 0,
+        'highlighted' => 0
+      ]);
+
       // Create Discord Role
       $discord = new DiscordClient(['token' => env('DISCORD_BOT_TOKEN')]);
 
