@@ -14,7 +14,7 @@ import { loadScript } from "@paypal/paypal-js";
 if ( $('#paypal-container').length > 0 ) {
 
   loadScript({
-    "client-id": "AeP4Jw3oo6EJqxgUvRjqV9_a4INg2ROvqqp6S8gmYgepbzgbsY4nW93pi7LW4IcxnrMKS1yUGxbpi_ch",
+    "client-id": "ASXGJoskJTqv_HAXBw4jESxN4sQon-UcDJci7rE4d4xNe-ompGPOp2KHwt1c6fXhwPGGRNSQzOiQ4epY",
     "buyer-country": "GB",
     "currency": "GBP",
     "enable-funding": "paylater"

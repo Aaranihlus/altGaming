@@ -5592,7 +5592,7 @@ var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute(
 
 if ($('#paypal-container').length > 0) {
   (0,_paypal_paypal_js__WEBPACK_IMPORTED_MODULE_4__.loadScript)({
-    "client-id": "AeP4Jw3oo6EJqxgUvRjqV9_a4INg2ROvqqp6S8gmYgepbzgbsY4nW93pi7LW4IcxnrMKS1yUGxbpi_ch",
+    "client-id": "ASXGJoskJTqv_HAXBw4jESxN4sQon-UcDJci7rE4d4xNe-ompGPOp2KHwt1c6fXhwPGGRNSQzOiQ4epY",
     "buyer-country": "GB",
     "currency": "GBP",
     "enable-funding": "paylater"
@@ -5766,7 +5766,7 @@ $('.add-to-cart').on('click', function () {
       title: 'Success',
       message: response.data.item_name + " added to cart",
       type: 'success',
-      position: 'bottom-left'
+      position: 'bottom-right'
     });
     $('#cart_total_items').text(response.data.total_cart_items);
   })["catch"](function (error) {
@@ -5783,7 +5783,7 @@ $('.delete-cart-item').on('click', function () {
       title: 'Success',
       message: response.data.item_name + " removed from cart",
       type: 'success',
-      position: 'bottom-left'
+      position: 'bottom-right'
     });
 
     if (response.data.total_cart_items > 0) {
@@ -5832,7 +5832,7 @@ $('.publish-button').on('click', function () {
       title: 'Success',
       message: 'Post has been published',
       type: 'success',
-      position: 'bottom-left'
+      position: 'bottom-right'
     });
   })["catch"](function (error) {
     console.log(response);
@@ -5849,7 +5849,8 @@ $('.hide-button').on('click', function () {
     (0,_s_r0_eggy_js__WEBPACK_IMPORTED_MODULE_3__.Eggy)({
       title: 'Success',
       message: 'Post has been hidden',
-      type: 'success'
+      type: 'success',
+      position: 'bottom-right'
     });
   })["catch"](function (error) {
     console.log(response);
@@ -5862,7 +5863,8 @@ $('.delete-button').on('click', function () {
     (0,_s_r0_eggy_js__WEBPACK_IMPORTED_MODULE_3__.Eggy)({
       title: 'Success',
       message: 'Post has been deleted',
-      type: 'success'
+      type: 'success',
+      position: 'bottom-right'
     });
   })["catch"](function (error) {
     console.log(response);
