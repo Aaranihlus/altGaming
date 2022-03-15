@@ -197,19 +197,19 @@ background-repeat: no-repeat; align-content: center; padding:0; margin:0;" id="b
 
     <p style="color: white;">A few words from those that have experienced it first hand…</p>
 
-    <p style="color: white; margin-bottom: 0px;">I can’t believe it’s over already, when is the next one?</p>
+    <p style="color: white; margin-bottom: 0px; font-style: italic;">"I can’t believe it’s over already, when is the next one?"</p>
     <p>KIRSTY / LILASAUR</p>
 
-    <p style="color: white; margin-bottom: 0px;">I’m not sure how I managed to win the QuadShot, I’ve never played any of those games before.</p>
+    <p style="color: white; margin-bottom: 0px; font-style: italic;">"I’m not sure how I managed to win the QuadShot, I’ve never played any of those games before."</p>
     <p>IAIN / IAIN</p>
 
-    <p style="color: white; margin-bottom: 0px;">I need to sleep now.</p>
+    <p style="color: white; margin-bottom: 0px; font-style: italic;">"I need to sleep now."</p>
     <p>JASON / DASTARDLYJAY</p>
 
-    <p style="color: white; margin-bottom: 0px;">There aren’t enough words to describe the amount of enjoyment I had</p>
+    <p style="color: white; margin-bottom: 0px; font-style: italic;">"There aren’t enough words to describe the amount of enjoyment I had."</p>
     <p>KELTON / GOODAY</p>
 
-    <p style="color: white; margin-bottom: 0px;">It’s all one big beautiful blur at this point, but I can’t wait for the next one.</p>
+    <p style="color: white; margin-bottom: 0px; font-style: italic;">"It’s all one big beautiful blur at this point, but I can’t wait for the next one."</p>
     <p>CHAD / CHAD</p>
 
   </div>
