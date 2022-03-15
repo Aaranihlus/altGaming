@@ -5628,6 +5628,42 @@ if ($('#paypal-container').length > 0) {
   });
 }
 
+var currentSection = 0;
+var scrolling = false;
+/*if ( $('#button0').length > 0 ) {
+  window.onscroll = function(e) {
+
+    if(!scrolling){
+      scrolling = true;
+
+      // print "false" if direction is down and "true" if up
+      console.log(this.oldScroll > this.scrollY);
+
+      if ( this.oldScroll > this.scrollY ) {
+        currentSection = currentSection - 1;
+        scrollTo('box' + currentSection)
+      } else {
+        currentSection = currentSection + 1;
+        scrollTo('box' + currentSection)
+      }
+
+      console.log(currentSection)
+      this.oldScroll = this.scrollY;
+      scrolling = false;
+    }
+
+  }
+}*/
+
+function scrollTo(id) {
+  var element = document.getElementById(id);
+  element.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+    inline: "nearest"
+  });
+}
+
 $('.post-comment-button').on('click', function () {
   axios.post('/comment/store', {
     comment: $('#comment').val(),

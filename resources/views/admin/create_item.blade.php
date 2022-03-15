@@ -20,7 +20,7 @@
 
         <div class="mb-3">
           <label for="description" class="form-label">Description</label>
-          <textarea type="text" class="form-control" id="description" name="description"></textarea>
+          <textarea type="text" class="form-control" id="description" name="description" style="height: 15vh;"></textarea>
         </div>
 
         <div class="mb-3">
