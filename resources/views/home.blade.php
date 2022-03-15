@@ -14,7 +14,7 @@
         background-repeat: no-repeat;
         min-height: 25vh;
         width: 100%;
-        background-size: contain;
+        background-size: cover;
         flex-basis: 50%;
         border-collapse: separate;
         border-bottom-left-radius: 12px;
