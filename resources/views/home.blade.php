@@ -5,12 +5,11 @@
   <div class="container mb-4">
 
     @if(!empty($highlighted_event))
-    <div class="container-fluid flex-x extra-rounded g-0" style="border: 2px solid #ffc107; width: 100%; justify-content: space-between; align-items: center; min-height: 25vh;">
+    <div class="container-fluid flex-x extra-rounded g-0 bg-alt-yellow" style="border: 2px solid #ffc107; width: 100%; justify-content: space-between; align-items: center; min-height: 25vh;">
 
       <div style="
         background-image: url({{ asset('storage/' . $highlighted_event->thumbnail) }});
-        /* background-attachment: unset; */
-        background-position: left;
+        background-position: top;
         background-repeat: no-repeat;
         min-height: 25vh;
         width: 100%;
