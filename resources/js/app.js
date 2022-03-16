@@ -56,6 +56,8 @@ if ( $('#paypal-container').length > 0 ) {
       console.error("failed to load the PayPal JS SDK script", error);
     });
 
+    $('#paypal-container').css('color', "white");
+
 }
 
 

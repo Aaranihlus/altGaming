@@ -5599,7 +5599,6 @@ if ($('#paypal-container').length > 0) {
   }).then(function (paypal) {
     paypal.Buttons({
       createOrder: function createOrder(data, actions) {
-        $('#paypal-container').addStyle('color', "white");
         return actions.order.create({
           purchase_units: [{
             amount: {
@@ -5627,6 +5626,7 @@ if ($('#paypal-container').length > 0) {
   })["catch"](function (error) {
     console.error("failed to load the PayPal JS SDK script", error);
   });
+  $('#paypal-container').css('color', "white");
 }
 
 $('.post-comment-button').on('click', function () {
