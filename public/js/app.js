@@ -5600,6 +5600,7 @@ $('#show-checkout').on('click', function () {
   }).then(function (paypal) {
     paypal.Buttons({
       createOrder: function createOrder(data, actions) {
+        $('#loading-spinner').hide();
         return actions.order.create({
           purchase_units: [{
             amount: {
@@ -5607,7 +5608,6 @@ $('#show-checkout').on('click', function () {
             }
           }]
         });
-        $('#loading-spinner').hide();
       },
       onApprove: function onApprove(data, actions) {
         // This function captures the funds from the transaction.

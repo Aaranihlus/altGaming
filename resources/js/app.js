@@ -26,6 +26,7 @@ $('#show-checkout').on('click', function (){
 
     paypal.Buttons({
       createOrder: function(data, actions) {
+        $('#loading-spinner').hide();
         return actions.order.create({
           purchase_units: [{
             amount: {
@@ -33,7 +34,6 @@ $('#show-checkout').on('click', function (){
             }
           }]
         });
-        $('#loading-spinner').hide();
       },
 
       onApprove: function(data, actions) {
