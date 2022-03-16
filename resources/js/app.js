@@ -26,7 +26,6 @@ $('#show-checkout').on('click', function (){
 
     paypal.Buttons({
       createOrder: function(data, actions) {
-        $('#loading-spinner').hide();
         return actions.order.create({
           purchase_units: [{
             amount: {
@@ -61,7 +60,7 @@ $('#show-checkout').on('click', function (){
       console.error("failed to load the PayPal JS SDK script", error);
     });
 
-
+    $('#loading-spinner').hide();
 
 });
 

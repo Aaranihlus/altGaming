@@ -5600,7 +5600,6 @@ $('#show-checkout').on('click', function () {
   }).then(function (paypal) {
     paypal.Buttons({
       createOrder: function createOrder(data, actions) {
-        $('#loading-spinner').hide();
         return actions.order.create({
           purchase_units: [{
             amount: {
@@ -5628,6 +5627,7 @@ $('#show-checkout').on('click', function () {
   })["catch"](function (error) {
     console.error("failed to load the PayPal JS SDK script", error);
   });
+  $('#loading-spinner').hide();
 });
 $('.post-comment-button').on('click', function () {
   axios.post('/comment/store', {
