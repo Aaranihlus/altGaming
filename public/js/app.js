@@ -5589,49 +5589,46 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-
-if ($('#paypal-container').length > 0) {
-  $('#show-checkout').on('click', function () {
-    $('#loading-spinner').show();
-    (0,_paypal_paypal_js__WEBPACK_IMPORTED_MODULE_4__.loadScript)({
-      "client-id": "ASXGJoskJTqv_HAXBw4jESxN4sQon-UcDJci7rE4d4xNe-ompGPOp2KHwt1c6fXhwPGGRNSQzOiQ4epY",
-      "buyer-country": "GB",
-      "currency": "GBP",
-      "enable-funding": "paylater"
-    }).then(function (paypal) {
-      paypal.Buttons({
-        createOrder: function createOrder(data, actions) {
-          return actions.order.create({
-            purchase_units: [{
-              amount: {
-                value: $('#order_total').val()
-              }
-            }]
+$('#show-checkout').on('click', function () {
+  $('#show-checkout').hide();
+  $('#loading-spinner').show();
+  (0,_paypal_paypal_js__WEBPACK_IMPORTED_MODULE_4__.loadScript)({
+    "client-id": "ASXGJoskJTqv_HAXBw4jESxN4sQon-UcDJci7rE4d4xNe-ompGPOp2KHwt1c6fXhwPGGRNSQzOiQ4epY",
+    "buyer-country": "GB",
+    "currency": "GBP",
+    "enable-funding": "paylater"
+  }).then(function (paypal) {
+    paypal.Buttons({
+      createOrder: function createOrder(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: $('#order_total').val()
+            }
+          }]
+        });
+        $('#loading-spinner').hide();
+      },
+      onApprove: function onApprove(data, actions) {
+        // This function captures the funds from the transaction.
+        return actions.order.capture().then(function (details) {
+          axios.post('/order/create', {
+            id: details.id,
+            amount: details.purchase_units[0].amount.value
+          }).then(function (response) {
+            window.location.href = "/checkout/success/" + details.id;
+          })["catch"](function (error) {
+            console.log(response);
           });
-        },
-        onApprove: function onApprove(data, actions) {
-          // This function captures the funds from the transaction.
-          return actions.order.capture().then(function (details) {
-            axios.post('/order/create', {
-              id: details.id,
-              amount: details.purchase_units[0].amount.value
-            }).then(function (response) {
-              window.location.href = "/checkout/success/" + details.id;
-            })["catch"](function (error) {
-              console.log(response);
-            });
-          });
-        }
-      }).render("#paypal-container")["catch"](function (error) {
-        console.error("failed to render the PayPal Buttons", error);
-      });
-    })["catch"](function (error) {
-      console.error("failed to load the PayPal JS SDK script", error);
+        });
+      }
+    }).render("#paypal-container")["catch"](function (error) {
+      console.error("failed to render the PayPal Buttons", error);
     });
-    $('#loading-spinner').hide();
+  })["catch"](function (error) {
+    console.error("failed to load the PayPal JS SDK script", error);
   });
-}
-
+});
 $('.post-comment-button').on('click', function () {
   axios.post('/comment/store', {
     comment: $('#comment').val(),

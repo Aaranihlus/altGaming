@@ -11,60 +11,59 @@ var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute(
 
 import { loadScript } from "@paypal/paypal-js";
 
-if ( $('#paypal-container').length > 0 ) {
 
-  $('#show-checkout').on('click', function (){
+$('#show-checkout').on('click', function (){
 
-    $('#loading-spinner').show();
+  $('#show-checkout').hide();
+  $('#loading-spinner').show();
 
-    loadScript({
-      "client-id": "ASXGJoskJTqv_HAXBw4jESxN4sQon-UcDJci7rE4d4xNe-ompGPOp2KHwt1c6fXhwPGGRNSQzOiQ4epY",
-      "buyer-country": "GB",
-      "currency": "GBP",
-      "enable-funding": "paylater"
-    }).then((paypal) => {
+  loadScript({
+    "client-id": "ASXGJoskJTqv_HAXBw4jESxN4sQon-UcDJci7rE4d4xNe-ompGPOp2KHwt1c6fXhwPGGRNSQzOiQ4epY",
+    "buyer-country": "GB",
+    "currency": "GBP",
+    "enable-funding": "paylater"
+  }).then((paypal) => {
 
-      paypal.Buttons({
-        createOrder: function(data, actions) {
-          return actions.order.create({
-            purchase_units: [{
-              amount: {
-                value: $('#order_total').val()
-              }
-            }]
-          });
-        },
-
-        onApprove: function(data, actions) {
-          // This function captures the funds from the transaction.
-          return actions.order.capture().then(function(details) {
-
-            axios.post('/order/create', {
-              id: details.id,
-              amount: details.purchase_units[0].amount.value
-            })
-            .then(function (response) {
-                window.location.href = "/checkout/success/" + details.id;
-            })
-            .catch(function (error) {
-                console.log(response);
-            });
-
-          });
-        }
-      }).render("#paypal-container")
-        .catch((error) => {
-          console.error("failed to render the PayPal Buttons", error);
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: $('#order_total').val()
+            }
+          }]
         });
-      }).catch((error) => {
-        console.error("failed to load the PayPal JS SDK script", error);
+        $('#loading-spinner').hide();
+      },
+
+      onApprove: function(data, actions) {
+        // This function captures the funds from the transaction.
+        return actions.order.capture().then(function(details) {
+
+          axios.post('/order/create', {
+            id: details.id,
+            amount: details.purchase_units[0].amount.value
+          })
+          .then(function (response) {
+              window.location.href = "/checkout/success/" + details.id;
+          })
+          .catch(function (error) {
+              console.log(response);
+          });
+
+        });
+      }
+    }).render("#paypal-container")
+      .catch((error) => {
+        console.error("failed to render the PayPal Buttons", error);
       });
+    }).catch((error) => {
+      console.error("failed to load the PayPal JS SDK script", error);
+    });
 
-      $('#loading-spinner').hide();
 
-  });
 
-}
+});
 
 
 
