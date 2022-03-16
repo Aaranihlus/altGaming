@@ -22,8 +22,6 @@ if ( $('#paypal-container').length > 0 ) {
 
     paypal.Buttons({
       createOrder: function(data, actions) {
-        $('#paypal-container').css('color', "white");
-
         return actions.order.create({
           purchase_units: [{
             amount: {
@@ -57,6 +55,8 @@ if ( $('#paypal-container').length > 0 ) {
     }).catch((error) => {
       console.error("failed to load the PayPal JS SDK script", error);
     });
+
+    $('#paypal-container').css('color', "white");
 
 }
 
