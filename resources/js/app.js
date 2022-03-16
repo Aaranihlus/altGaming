@@ -22,6 +22,7 @@ if ( $('#paypal-container').length > 0 ) {
 
     paypal.Buttons({
       createOrder: function(data, actions) {
+        $('#paypal-container').addStyle('color', "white");
         return actions.order.create({
           purchase_units: [{
             amount: {
@@ -57,43 +58,6 @@ if ( $('#paypal-container').length > 0 ) {
     });
 
 }
-
-
-var currentSection = 0;
-var scrolling = false;
-
-/*if ( $('#button0').length > 0 ) {
-  window.onscroll = function(e) {
-
-    if(!scrolling){
-      scrolling = true;
-
-      // print "false" if direction is down and "true" if up
-      console.log(this.oldScroll > this.scrollY);
-
-      if ( this.oldScroll > this.scrollY ) {
-        currentSection = currentSection - 1;
-        scrollTo('box' + currentSection)
-      } else {
-        currentSection = currentSection + 1;
-        scrollTo('box' + currentSection)
-      }
-
-      console.log(currentSection)
-      this.oldScroll = this.scrollY;
-      scrolling = false;
-    }
-
-  }
-}*/
-
-
-function scrollTo ( id ) {
-  var element = document.getElementById(id);
-  element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
-}
-
-
 
 
 
@@ -221,25 +185,25 @@ $('.show-image-button').on('click', function(){
 
 $('#grant_title').on('change', function(){
   if ( $(this).is(':checked')) {
-    $('#title-container').show();
+    $('.title-container').show();
   } else {
-    $('#title-container').hide();
+    $('.title-container').hide();
   }
 });
 
 $('#grant_badge').on('change', function(){
   if ( $(this).is(':checked')) {
-    $('#badge-container').show();
+    $('.badge-container').show();
   } else {
-    $('#badge-container').hide();
+    $('.badge-container').hide();
   }
 });
 
 $('#unlock_item').on('change', function(){
   if ( $(this).is(':checked')) {
-    $('#choose-item-container').show();
+    $('.item-container').show();
   } else {
-    $('#choose-item-container').hide();
+    $('.item-container').hide();
   }
 });
 
