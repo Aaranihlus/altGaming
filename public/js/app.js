@@ -5628,7 +5628,7 @@ if ($('#paypal-container').length > 0) {
     })["catch"](function (error) {
       console.error("failed to load the PayPal JS SDK script", error);
     });
-    $('#loading-spinner').show();
+    $('#loading-spinner').hide();
   });
 }
 
