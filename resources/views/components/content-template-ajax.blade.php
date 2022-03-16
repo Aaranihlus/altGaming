@@ -30,7 +30,7 @@
             @endif
 
             <div>
-              <h5><a href="/profile/{{ $post->user->slug }}">{{ $post->user->username }}</a></h5>
+              <h5><a href="/profile/{{ $post->user->slug }}">By {{ $post->user->username }}</a></h5>
               @if(!empty($post->user->title->name))
                 <h6>{{ $post->user->title->name ?? "" }}</h6>
               @endif

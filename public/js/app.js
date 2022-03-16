@@ -5596,7 +5596,8 @@ $('#show-checkout').on('click', function () {
     "client-id": "ASXGJoskJTqv_HAXBw4jESxN4sQon-UcDJci7rE4d4xNe-ompGPOp2KHwt1c6fXhwPGGRNSQzOiQ4epY",
     "buyer-country": "GB",
     "currency": "GBP",
-    "enable-funding": "paylater"
+    "enable-funding": "paylater",
+    "disable-funding": "card"
   }).then(function (paypal) {
     paypal.Buttons({
       createOrder: function createOrder(data, actions) {

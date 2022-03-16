@@ -11,7 +11,6 @@ var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute(
 
 import { loadScript } from "@paypal/paypal-js";
 
-
 $('#show-checkout').on('click', function (){
 
   $('#show-checkout').hide();
@@ -21,7 +20,8 @@ $('#show-checkout').on('click', function (){
     "client-id": "ASXGJoskJTqv_HAXBw4jESxN4sQon-UcDJci7rE4d4xNe-ompGPOp2KHwt1c6fXhwPGGRNSQzOiQ4epY",
     "buyer-country": "GB",
     "currency": "GBP",
-    "enable-funding": "paylater"
+    "enable-funding": "paylater",
+    "disable-funding": "card",
   }).then((paypal) => {
 
     paypal.Buttons({
@@ -63,6 +63,7 @@ $('#show-checkout').on('click', function (){
     $('#loading-spinner').hide();
 
 });
+
 
 
 
