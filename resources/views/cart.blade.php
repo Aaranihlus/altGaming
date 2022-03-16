@@ -32,9 +32,11 @@
 
       @if ( !empty($cart) )
       <div class="col-lg-4 col-xl-4 col-sm-12 col-md-12 col-xs-12 bg-alt-yellow extra-rounded p-3" style="display: flex; flex-direction: column; flex-wrap: nowrap; align-content: center; justify-content: space-around; align-items: stretch; text-align: center;">
-        <h1>Ready to checkout?</h1>
+
         <input type="hidden" id="order_total" value="{{ $cart_total }}">
         <h3>Order Total: £<span id="cart-total">{{ number_format($cart_total, 2) }}</span></h3>
+        <button type="button" class="btn btn-warning my-4" id="show-checkout">Checkout Now</button>
+        <i style="display: none;" id="loading-spinner" class="fa-2x fas fa-spinner fa-spin"></i>
         <div id="paypal-container"></div>
         <!--<button type="button" class="btn btn-warning go-to-checkout-button"><a class="link-dark" href="/checkout">Go To Checkout</a></button>-->
       </div>

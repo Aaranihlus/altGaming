@@ -13,50 +13,56 @@ import { loadScript } from "@paypal/paypal-js";
 
 if ( $('#paypal-container').length > 0 ) {
 
-  loadScript({
-    "client-id": "ASXGJoskJTqv_HAXBw4jESxN4sQon-UcDJci7rE4d4xNe-ompGPOp2KHwt1c6fXhwPGGRNSQzOiQ4epY",
-    "buyer-country": "GB",
-    "currency": "GBP",
-    "enable-funding": "paylater"
-  }).then((paypal) => {
+  $('#show-checkout').on('click', function (){
 
-    paypal.Buttons({
-      createOrder: function(data, actions) {
-        return actions.order.create({
-          purchase_units: [{
-            amount: {
-              value: $('#order_total').val()
-            }
-          }]
-        });
-      },
+    $('#loading-spinner').show();
 
-      onApprove: function(data, actions) {
-        // This function captures the funds from the transaction.
-        return actions.order.capture().then(function(details) {
+    loadScript({
+      "client-id": "ASXGJoskJTqv_HAXBw4jESxN4sQon-UcDJci7rE4d4xNe-ompGPOp2KHwt1c6fXhwPGGRNSQzOiQ4epY",
+      "buyer-country": "GB",
+      "currency": "GBP",
+      "enable-funding": "paylater"
+    }).then((paypal) => {
 
-          axios.post('/order/create', {
-            id: details.id,
-            amount: details.purchase_units[0].amount.value
-          })
-          .then(function (response) {
-              window.location.href = "/checkout/success/" + details.id;
-          })
-          .catch(function (error) {
-              console.log(response);
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: $('#order_total').val()
+              }
+            }]
           });
+        },
 
+        onApprove: function(data, actions) {
+          // This function captures the funds from the transaction.
+          return actions.order.capture().then(function(details) {
+
+            axios.post('/order/create', {
+              id: details.id,
+              amount: details.purchase_units[0].amount.value
+            })
+            .then(function (response) {
+                window.location.href = "/checkout/success/" + details.id;
+            })
+            .catch(function (error) {
+                console.log(response);
+            });
+
+          });
+        }
+      }).render("#paypal-container")
+        .catch((error) => {
+          console.error("failed to render the PayPal Buttons", error);
         });
-      }
-    }).render("#paypal-container")
-      .catch((error) => {
-        console.error("failed to render the PayPal Buttons", error);
+      }).catch((error) => {
+        console.error("failed to load the PayPal JS SDK script", error);
       });
-    }).catch((error) => {
-      console.error("failed to load the PayPal JS SDK script", error);
-    });
 
-    $('#paypal-container').css('color', "white");
+      $('#loading-spinner').show();
+
+  });
 
 }
 
