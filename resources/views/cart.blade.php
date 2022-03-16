@@ -38,7 +38,8 @@
         <button type="button" class="btn btn-warning my-2" style="height: 30%;" id="show-checkout">Checkout Now</button>
         <i style="display: none;" id="loading-spinner" class="fa-2x fas fa-spinner fa-spin"></i>
         <div id="paypal-container"></div>
-        <!--<button type="button" class="btn btn-warning go-to-checkout-button"><a class="link-dark" href="/checkout">Go To Checkout</a></button>-->
+        <p style="text-align: center;">OR</p>
+        <div id="advanced-paypal-container">{ AdvancedCheckout TODO }</div>
       </div>
       @endif
 
