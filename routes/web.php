@@ -17,7 +17,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
 
 use RestCord\DiscordClient;
-
+use GuzzleHttp\Client;
 use Carbon\Carbon;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -107,6 +107,18 @@ Route::post('/cart/remove', [CartController::class, 'remove'])->middleware('auth
 
 Route::get('/cart', function (Request $request) {
 
+  $client = new Client();
+
+  $response = $client->request('POST', 'https://api-m.sandbox.paypal.com/v1/identity/generate-token', [
+    'headers' => [
+      'Content-Type' => 'application/json',
+      'Authorization' => 'Bearer <ACCESS-TOKEN>',
+      'Accept-Language' => 'en_US'
+    ]
+  ]);
+
+  dd($response);
+
   $cart = [];
   $cart_total = 0.00;
 
@@ -125,6 +137,7 @@ Route::get('/cart', function (Request $request) {
     'cart' => $cart,
     'cart_total' => $cart_total
   ]);
+
 });
 
 Route::get('/checkout', function () {

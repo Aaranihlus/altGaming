@@ -6,6 +6,7 @@
   <h4>Content</h4>
   <ul>
     <li><a href="/admin/posts">Posts</a></li>
+    <li><a href="/admin/hero">Hero Banner</a></li>
   </ul>
   <hr>
 

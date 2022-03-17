@@ -8,7 +8,7 @@
       @if(empty($user->profile_picture))
         <img class="img-fluid rounded" style="width: 9vw;" src="{{ asset('images/placeholder-big.png') }}" alt="Profile Picture">
       @else
-        <img class="img-fluid rounded" style="width: 9vw;" src="{{ asset("storage/$user->profile_picture") }}">
+        <img class="img-fluid rounded" style="width: 9vw;" src="https://cdn.discordapp.com/avatars/{{ Auth::user()->id }}/{{ Auth::user()->avatar }}.webp" alt="Profile Picture">
       @endif
     </div>
 
