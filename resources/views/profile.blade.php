@@ -26,7 +26,7 @@
     </div>
 
     <div class="mx-4">
-      <p><i class="fab fa-discord"></i> {{ $user->discord_id ?? "Not Set" }}</p>
+      <p><i class="fab fa-discord"></i> {{ Auth::user()->username }}#{{ Auth::user()->discriminator }}</p>
       <p><i class="fab fa-twitch"></i> {{ $user->twitch_channel ?? "Not Set" }}</p>
       <p><i class="fab fa-youtube"></i> {{ $user->youtube_channel ?? "Not Set" }}</p>
     </div>
