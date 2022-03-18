@@ -9,7 +9,7 @@ window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-import { loadScript } from "@paypal/paypal-js";
+/*import { loadScript } from "@paypal/paypal-js";
 
 if ( $('#paypal-container').length > 0 ) {
 
@@ -88,7 +88,7 @@ if ( $('#paypal-container').length > 0 ) {
 
     //$('#loading-spinner').hide();
 }
-
+*/
 
 
 
