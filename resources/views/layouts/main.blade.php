@@ -136,8 +136,7 @@ if (paypal.HostedFields.isEligible()) {
   }).then((cardFields) => {
    document.querySelector("#card-form").addEventListener("submit", (event) => {
       event.preventDefault();
-      cardFields
-        .submit({
+      cardFields.submit({
           // Cardholder's first and last name
           cardholderName: document.getElementById("card-holder-name").value,
           // Billing Address
@@ -204,7 +203,6 @@ if (paypal.HostedFields.isEligible()) {
 }
 
 </script>
-
 
 @endif
 
