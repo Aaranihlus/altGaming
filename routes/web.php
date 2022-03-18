@@ -118,7 +118,6 @@ Route::get('/cart', function (Request $request) {
   $response = $client->request('POST', 'https://api-m.sandbox.paypal.com/v1/oauth2/token', [
     'headers' => [
       'Accept' => 'application/json',
-      'Authorization' => 'Bearer '. $access_token,
       'Accept-Language' => 'en_US'
     ],
     'auth' => [
