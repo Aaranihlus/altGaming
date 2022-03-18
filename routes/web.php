@@ -128,6 +128,29 @@ Route::get('/cart', function (Request $request) {
   $data = json_decode($response->getBody(), true);
   $access_token = $data['access_token'];
 
+  ,
+  "Accept-Language": "en_US",
+  "Content-Type": "application/json",
+
+
+  $response = $client->request('POST', 'https://api-m.sandbox.paypal.com/v1/identity/generate-token', [
+    'headers' => [
+      'Authorization' => 'Bearer ' . $access_token,
+      'Accept-Language' => 'en_US',
+      'Content-Type' => 'application/json'
+    ]
+  ]);
+
+  $data = json_decode($response->getBody(), true);
+  dd($data);
+  $client_token = $data['client_token'];
+
+
+
+
+
+
+
   $cart = [];
   $cart_total = 0.00;
 
