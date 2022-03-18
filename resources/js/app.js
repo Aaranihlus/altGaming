@@ -11,13 +11,14 @@ var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute(
 
 import { loadScript } from "@paypal/paypal-js";
 
-$('#show-checkout').on('click', function (){
+if($('#paypal-container').length > 0 ) {
 
-  $('#show-checkout').hide();
-  $('#loading-spinner').show();
+  //$('#show-checkout').hide();
+  //$('#loading-spinner').show();
 
   loadScript({
     "client-id": "ASXGJoskJTqv_HAXBw4jESxN4sQon-UcDJci7rE4d4xNe-ompGPOp2KHwt1c6fXhwPGGRNSQzOiQ4epY",
+    "data-client-token": $('#access_token').val(),
     "buyer-country": "GB",
     "currency": "GBP",
     "enable-funding": "paylater",
@@ -60,9 +61,10 @@ $('#show-checkout').on('click', function (){
       console.error("failed to load the PayPal JS SDK script", error);
     });
 
-    $('#loading-spinner').hide();
+    //$('#loading-spinner').hide();
+}
 
-});
+
 
 
 

@@ -5589,11 +5589,13 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-$('#show-checkout').on('click', function () {
-  $('#show-checkout').hide();
-  $('#loading-spinner').show();
+
+if ($('#paypal-container').length > 0) {
+  //$('#show-checkout').hide();
+  //$('#loading-spinner').show();
   (0,_paypal_paypal_js__WEBPACK_IMPORTED_MODULE_4__.loadScript)({
     "client-id": "ASXGJoskJTqv_HAXBw4jESxN4sQon-UcDJci7rE4d4xNe-ompGPOp2KHwt1c6fXhwPGGRNSQzOiQ4epY",
+    "data-client-token": $('#access_token').val(),
     "buyer-country": "GB",
     "currency": "GBP",
     "enable-funding": "paylater",
@@ -5627,9 +5629,9 @@ $('#show-checkout').on('click', function () {
     });
   })["catch"](function (error) {
     console.error("failed to load the PayPal JS SDK script", error);
-  });
-  $('#loading-spinner').hide();
-});
+  }); //$('#loading-spinner').hide();
+}
+
 $('.post-comment-button').on('click', function () {
   axios.post('/comment/store', {
     comment: $('#comment').val(),

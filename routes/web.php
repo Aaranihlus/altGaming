@@ -149,7 +149,7 @@ Route::get('/cart', function (Request $request) {
   return view('cart', [
     'cart' => $cart,
     'cart_total' => $cart_total,
-    'access_token' =>$access_token
+    'access_token' => $access_token
   ]);
 
 });

@@ -34,12 +34,52 @@
       <div class="col-lg-4 col-xl-4 col-sm-12 col-md-12 col-xs-12 bg-alt-yellow extra-rounded p-3" style="display: flex; flex-direction: column; flex-wrap: nowrap; align-content: center; justify-content: space-around; align-items: stretch; text-align: center;">
 
         <input type="hidden" id="order_total" value="{{ $cart_total }}">
+        <input type="hidden" id="access_token" value="{{ $access_token }}">
+
         <h3>Order Total: £<span id="cart-total">{{ number_format($cart_total, 2) }}</span></h3>
-        <button type="button" class="btn btn-warning my-2" style="height: 30%;" id="show-checkout">Checkout Now</button>
-        <i style="display: none;" id="loading-spinner" class="fa-2x fas fa-spinner fa-spin"></i>
+        <!--<button type="button" class="btn btn-warning my-2" style="height: 30%;" id="show-checkout">Checkout Now</button>
+        <i style="display: none;" id="loading-spinner" class="fa-2x fas fa-spinner fa-spin"></i>-->
+
         <div id="paypal-container"></div>
         <p style="text-align: center;">OR</p>
-        <div id="advanced-paypal-container">{ AdvancedCheckout TODO }</div>
+        <div class="card_container">
+          <form id="card-form">
+            <label for="card-number">Card Number</label><div id="card-number" class="card_field"></div>
+            <div>
+              <label for="expiration-date">Expiration Date</label>
+              <div id="expiration-date" class="card_field"></div>
+            </div>
+            <div>
+              <label for="cvv">CVV</label><div id="cvv" class="card_field"></div>
+            </div>
+            <label for="card-holder-name">Name on Card</label>
+            <input type="text" id="card-holder-name" name="card-holder-name" autocomplete="off" placeholder="card holder name"/>
+            <div>
+              <label for="card-billing-address-street">Billing Address</label>
+              <input type="text" id="card-billing-address-street" name="card-billing-address-street" autocomplete="off" placeholder="street address"/>
+            </div>
+            <div>
+              <label for="card-billing-address-unit">&nbsp;</label>
+              <input type="text" id="card-billing-address-unit" name="card-billing-address-unit" autocomplete="off" placeholder="unit"/>
+            </div>
+            <div>
+              <input type="text" id="card-billing-address-city" name="card-billing-address-city" autocomplete="off" placeholder="city"/>
+            </div>
+            <div>
+              <input type="text" id="card-billing-address-state" name="card-billing-address-state" autocomplete="off" placeholder="state"/>
+            </div>
+            <div>
+              <input type="text" id="card-billing-address-zip" name="card-billing-address-zip" autocomplete="off" placeholder="zip / postal code"/>
+            </div>
+            <div>
+              <input type="text" id="card-billing-address-country" name="card-billing-address-country" autocomplete="off" placeholder="country code" />
+            </div>
+            <br/><br/>
+            <button value="submit" id="submit" class="btn">Pay</button>
+          </form>
+        </div>
+
+        </div>
       </div>
       @endif
 
