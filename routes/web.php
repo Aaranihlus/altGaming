@@ -20,10 +20,10 @@ use RestCord\DiscordClient;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
 use Intervention\Image\ImageManagerStatic as Image;
+use Barryvdh\DomPDF\Facade\Pdf;
 
-require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
-require __DIR__.'/larascord.php';
+require __DIR__.'/auth.php';
 
 //General pages
 Route::get('/', function () {
@@ -33,9 +33,11 @@ Route::get('/', function () {
   ]);
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/feed', function () {
+  $podcasts = Post::where('type', 'podcast')->get();
+  //echo Storage::size($podcasts[0]->audio_file);
+  return response()->view('feed', compact('podcasts'))->header('Content-Type', 'application/xml');
+});
 
 Route::get('/events', function () {
   return view('events', [
@@ -109,10 +111,14 @@ Route::get('/cart', function (Request $request) {
 
   $client = new Client();
 
+  $paypal_secret = env('PAYPAL_SECRET');
+  $paypal_client_id = env('PAYPAL_CLIENT_ID');
+  $access_token = $paypal_client_id + ":" + $paypal_secret
+
   $response = $client->request('POST', 'https://api-m.sandbox.paypal.com/v1/identity/generate-token', [
     'headers' => [
       'Content-Type' => 'application/json',
-      'Authorization' => 'Bearer <ACCESS-TOKEN>',
+      'Authorization' => 'Bearer '. $access_token,
       'Accept-Language' => 'en_US'
     ]
   ]);
@@ -182,9 +188,9 @@ Route::post('/order/create', function(Request $request) {
   $user = User::find(Auth::id());
 
   $order = Order::create([
-      'user_id' => Auth::id(),
-      'paypal_id' => $request->id,
-      'amount' => $request->amount
+    'user_id' => Auth::id(),
+    'paypal_id' => $request->id,
+    'amount' => $request->amount
   ]);
 
   foreach ( session()->get('cart') as $item ) {
@@ -196,8 +202,8 @@ Route::post('/order/create', function(Request $request) {
     ]);
 
     $item = Item::find($item['id']);
-    if ( !empty($item) ) {
 
+    if ( !empty($item) ) {
 
       if ( $item->event->achievement_id != null AND !$user->achievements->contains('id', $item->event->achievement_id) ) {
         $achievement = AchievementUser::create([
@@ -220,6 +226,13 @@ Route::post('/order/create', function(Request $request) {
   }
 
   $request->session()->forget('cart');
+
+  //$pdf = PDF::loadView('pdf.invoice', $data);
+  //return $pdf->download('invoice.pdf');
+
+
+
+
 
   return response()->json(['success' => true]);
 
@@ -307,6 +320,23 @@ Route::get('/account/order/{order:paypal_id}', function (Order $order) {
   ]);
 
 });
+
+
+
+
+
+Route::get('/discord/get_profile', function (Request $request) {
+
+  $user = User::where('id', $request->user_id);
+
+  return response()->json([
+    'success' => true,
+    'user' => $user
+  ]);
+
+});
+
+
 
 
 
