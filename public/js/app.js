@@ -5595,7 +5595,6 @@ if ($('#paypal-container').length > 0) {
   //$('#loading-spinner').show();
   (0,_paypal_paypal_js__WEBPACK_IMPORTED_MODULE_4__.loadScript)({
     "client-id": "ASXGJoskJTqv_HAXBw4jESxN4sQon-UcDJci7rE4d4xNe-ompGPOp2KHwt1c6fXhwPGGRNSQzOiQ4epY",
-    "data-client-token": $('#access_token').val(),
     "buyer-country": "GB",
     "currency": "GBP",
     "enable-funding": "paylater",
