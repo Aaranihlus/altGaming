@@ -49,43 +49,6 @@ if ( $('#paypal-container').length > 0 ) {
       }
     });
 
-
-    paypal.Buttons({
-      createOrder: function(data, actions) {
-        return actions.order.create({
-          purchase_units: [{
-            amount: {
-              value: $('#order_total').val()
-            }
-          }]
-        });
-      },
-
-      onApprove: function(data, actions) {
-        // This function captures the funds from the transaction.
-        return actions.order.capture().then(function(details) {
-
-          axios.post('/order/create', {
-            id: details.id,
-            amount: $('#order_total').val()
-          })
-          .then(function (response) {
-              window.location.href = "/checkout/success/" + details.id;
-          })
-          .catch(function (error) {
-              console.log(response);
-          });
-
-        });
-      }
-    }).render("#paypal-container").catch((error) => {
-      console.error("failed to render the PayPal Buttons", error);
-    });
-
-  }).catch((error) => {
-    console.error("failed to load the PayPal JS SDK script", error);
-  });
-
     //$('#loading-spinner').hide();
 }
 */
