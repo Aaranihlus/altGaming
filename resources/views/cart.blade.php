@@ -102,6 +102,4 @@
 
   </div>
 
-  <script src="https://www.paypal.com/sdk/js?components=buttons,hosted-fields&client-id={{ $client_id }}" data-client-token="{{ $access_token }}"></script>
-
 @endsection

@@ -63,4 +63,8 @@ if ( $('#editor').length > 0 ) {
 }
 </script>
 
+@if(request()->is('cart'))
+  <script src="https://www.paypal.com/sdk/js?components=buttons,hosted-fields&client-id={{ $client_id }}" data-client-token="{{ $access_token }}"></script>
+@endif
+
 </html>
