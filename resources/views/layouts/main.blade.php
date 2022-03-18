@@ -60,40 +60,37 @@ if ( $('#editor').length > 0 ) {
 </script>
 
 <script>
-paypal
-  .Buttons({
-    // Sets up the transaction when a payment button is clicked
-    createOrder: function (data, actions) {
-      return fetch("/api/orders", {
-        method: "post",
-        // use the "body" param to optionally pass additional order information
-        // like product ids or amount
-      })
-        .then((response) => response.json())
-        .then((order) => order.id);
-    },
-    // Finalize the transaction after payer approval
-    onApprove: function (data, actions) {
-      return fetch(`/api/orders/${data.orderID}/capture`, {
-        method: "post",
-      })
-        .then((response) => response.json())
-        .then((orderData) => {
-          // Successful capture! For dev/demo purposes:
-          console.log( "Capture result", orderData, JSON.stringify(orderData, null, 2));
-          var transaction = orderData.purchase_units[0].payments.captures[0];
-          alert(`Transaction ${transaction.status}: ${transaction.id}
+paypal.Buttons({
+  createOrder: function(data, actions) {
+    return actions.order.create({
+      purchase_units: [{
+        amount: {
+          value: $('#order_total').val()
+        }
+      }]
+    });
+  },
 
-            See console for all available details
-          `);
-          // When ready to go live, remove the alert and show a success message within this page. For example:
-          // var element = document.getElementById('paypal-button-container');
-          // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-          // Or go to another URL:  actions.redirect('thank_you.html');
-        });
-    },
-  })
-  .render("#paypal-container");
+  onApprove: function(data, actions) {
+    // This function captures the funds from the transaction.
+    return actions.order.capture().then(function(details) {
+
+      axios.post('/order/create', {
+        id: details.id,
+        amount: $('#order_total').val()
+      })
+      .then(function (response) {
+          window.location.href = "/checkout/success/" + details.id;
+      })
+      .catch(function (error) {
+          console.log(response);
+      });
+
+    });
+  }
+}).render("#paypal-container").catch((error) => {
+  console.error("failed to render the PayPal Buttons", error);
+});
 </script>
 
 
