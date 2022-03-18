@@ -130,10 +130,7 @@ Route::get('/cart', function (Request $request) {
   ]);
 
   $data = json_decode($response->getBody(), true);
-
   $access_token = $data['access_token'];
-
-  dd($data);
 
   $cart = [];
   $cart_total = 0.00;
@@ -151,7 +148,8 @@ Route::get('/cart', function (Request $request) {
 
   return view('cart', [
     'cart' => $cart,
-    'cart_total' => $cart_total
+    'cart_total' => $cart_total,
+    'access_token' =>$access_token
   ]);
 
 });
