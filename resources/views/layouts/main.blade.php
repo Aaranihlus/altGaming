@@ -17,14 +17,6 @@
 
   @yield('content')
 
-  <!--<div style="position: fixed; top: 90%; left: 50%; z-index: 10000; transform: translate(-50%, -50%); background: rgba(247, 201, 241, 0.4); padding: .5rem 1rem; border-radius: 30px;">
-    <div class="d-block d-sm-none">Extra Small (xs)</div>
-    <div class="d-none d-sm-block d-md-none">Small (sm)</div>
-    <div class="d-none d-md-block d-lg-none">Medium (md)</div>
-    <div class="d-none d-lg-block d-xl-none">Large (lg)</div>
-    <div class="d-none d-xl-block" >X-Large (xl)</div>
-  </div>-->
-
   @include('layouts.mobile-nav')
 
   <!--<div class="container-fluid g-0 bg-alt-yellow flex-y" id="footer" style="max-height: 5vh; height: 5vh; text-align: center; justify-content: center; position: fixed; right: 0; bottom: 0; left: 0;">
@@ -33,7 +25,6 @@
 
 </body>
 
-<!--<script src="https://js.stripe.com/v3/"></script>-->
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
 
@@ -64,7 +55,51 @@ if ( $('#editor').length > 0 ) {
 </script>
 
 @if(request()->is('cart'))
-  <script src="https://www.paypal.com/sdk/js?components=buttons,hosted-fields&client-id={{ $client_id }}" data-client-token="{{ $access_token }}"></script>
+  <script src="https://www.paypal.com/sdk/js?components=buttons,hosted-fields&disable-funding=card&enable-funding=paylater&client-id={{ $client_id }}"
+  data-client-token="{{ $access_token }}">
+</script>
+
+<script>
+paypal
+  .Buttons({
+    // Sets up the transaction when a payment button is clicked
+    createOrder: function (data, actions) {
+      return fetch("/api/orders", {
+        method: "post",
+        // use the "body" param to optionally pass additional order information
+        // like product ids or amount
+      })
+        .then((response) => response.json())
+        .then((order) => order.id);
+    },
+    // Finalize the transaction after payer approval
+    onApprove: function (data, actions) {
+      return fetch(`/api/orders/${data.orderID}/capture`, {
+        method: "post",
+      })
+        .then((response) => response.json())
+        .then((orderData) => {
+          // Successful capture! For dev/demo purposes:
+          console.log( "Capture result", orderData, JSON.stringify(orderData, null, 2));
+          var transaction = orderData.purchase_units[0].payments.captures[0];
+          alert(`Transaction ${transaction.status}: ${transaction.id}
+
+            See console for all available details
+          `);
+          // When ready to go live, remove the alert and show a success message within this page. For example:
+          // var element = document.getElementById('paypal-button-container');
+          // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+          // Or go to another URL:  actions.redirect('thank_you.html');
+        });
+    },
+  })
+  .render("#paypal-container");
+</script>
+
+
+
+
+
 @endif
 
 </html>
