@@ -118,18 +118,22 @@ Route::get('/cart', function (Request $request) {
   $response = $client->request('POST', 'https://api-m.sandbox.paypal.com/v1/oauth2/token', [
     'headers' => [
       'Accept' => 'application/json',
-      'Accept-Language' => 'en_US'
+      'Accept-Language' => 'en_US',
+      'Content-Type' => 'application/x-www-form-urlencoded'
     ],
     'auth' => [
       $paypal_client_id,
-      $paypal_secret
+      $paypal_secret,
+      'basic'
     ],
-    'body' => "grant_type=client_credentials"
+    'body' => 'grant_type=client_credentials'
   ]);
 
+  $data = json_decode($response->getBody(), true);
 
+  $access_token = $data['access_token'];
 
-  dd($response);
+  dd($data);
 
   $cart = [];
   $cart_total = 0.00;
