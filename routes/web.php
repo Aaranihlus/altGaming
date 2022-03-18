@@ -111,10 +111,6 @@ Route::get('/cart', function (Request $request) {
 
   $client = new Client();
 
-  $paypal_secret = env('PAYPAL_SECRET');
-  $paypal_client_id = env('PAYPAL_CLIENT_ID');
-  $access_token = $paypal_client_id . ":" . $paypal_secret;
-
   $response = $client->request('POST', 'https://api-m.sandbox.paypal.com/v1/oauth2/token', [
     'headers' => [
       'Accept' => 'application/json',
@@ -122,8 +118,8 @@ Route::get('/cart', function (Request $request) {
       'Content-Type' => 'application/x-www-form-urlencoded'
     ],
     'auth' => [
-      $paypal_client_id,
-      $paypal_secret,
+      env('PAYPAL_CLIENT_ID'),
+      env('PAYPAL_SECRET'),
       'basic'
     ],
     'body' => 'grant_type=client_credentials'
@@ -149,7 +145,8 @@ Route::get('/cart', function (Request $request) {
   return view('cart', [
     'cart' => $cart,
     'cart_total' => $cart_total,
-    'access_token' => $access_token
+    'access_token' => $access_token,
+    'client_id' => env('PAYPAL_CLIENT_ID')
   ]);
 
 });

@@ -13,11 +13,9 @@ import { loadScript } from "@paypal/paypal-js";
 
 if ( $('#paypal-container').length > 0 ) {
 
-  //$('#show-checkout').hide();
-  //$('#loading-spinner').show();
-
   loadScript({
-    "client-id": "ASXGJoskJTqv_HAXBw4jESxN4sQon-UcDJci7rE4d4xNe-ompGPOp2KHwt1c6fXhwPGGRNSQzOiQ4epY",
+    "client-id": $('#client_id').val(),
+    "data-client-token": $('#access_token').val(),
     "buyer-country": "GB",
     "currency": "GBP",
     "enable-funding": "paylater",
