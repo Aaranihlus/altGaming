@@ -55,7 +55,7 @@ if ( $('#editor').length > 0 ) {
 </script>
 
 @if(request()->is('cart'))
-  <script src="https://www.paypal.com/sdk/js?components=buttons,hosted-fields&disable-funding=card&enable-funding=paylater&client-id={{ $client_id }}"
+  <script src="https://www.paypal.com/sdk/js?components=buttons,hosted-fields&disable-funding=card&enable-funding=paylater,credit&client-id={{ $client_id }}"
   data-client-token="{{ $client_token }}">
 </script>
 
