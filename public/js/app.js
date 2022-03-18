@@ -5599,6 +5599,32 @@ if ($('#paypal-container').length > 0) {
     "enable-funding": "paylater",
     "disable-funding": "card"
   }).then(function (paypal) {
+    paypal.HostedFields.render({
+      styles: {
+        'input': {
+          'font-size': '16pt',
+          'color': '#3A3A3A'
+        },
+        '.number': {
+          'font-family': 'monospace'
+        },
+        '.valid': {
+          'color': 'green'
+        }
+      },
+      fields: {
+        number: {
+          selector: '#card-number'
+        },
+        cvv: {
+          selector: '#cvv',
+          placeholder: '•••'
+        },
+        expirationDate: {
+          selector: '#expiration-date'
+        }
+      }
+    });
     paypal.Buttons({
       createOrder: function createOrder(data, actions) {
         return actions.order.create({
@@ -5627,32 +5653,6 @@ if ($('#paypal-container').length > 0) {
     });
   })["catch"](function (error) {
     console.error("failed to load the PayPal JS SDK script", error);
-  });
-  paypal.HostedFields.render({
-    styles: {
-      'input': {
-        'font-size': '16pt',
-        'color': '#3A3A3A'
-      },
-      '.number': {
-        'font-family': 'monospace'
-      },
-      '.valid': {
-        'color': 'green'
-      }
-    },
-    fields: {
-      number: {
-        selector: '#card-number'
-      },
-      cvv: {
-        selector: '#cvv',
-        placeholder: '•••'
-      },
-      expirationDate: {
-        selector: '#expiration-date'
-      }
-    }
   }); //$('#loading-spinner').hide();
 }
 

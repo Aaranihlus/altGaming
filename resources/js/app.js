@@ -22,6 +22,34 @@ if ( $('#paypal-container').length > 0 ) {
     "disable-funding": "card",
   }).then((paypal) => {
 
+    paypal.HostedFields.render({
+      styles: {
+        'input': {
+          'font-size': '16pt',
+          'color': '#3A3A3A'
+        },
+        '.number': {
+          'font-family': 'monospace'
+        },
+        '.valid':  {
+          'color': 'green'
+        }
+      },
+      fields: {
+        number: {
+          selector: '#card-number'
+        },
+        cvv: {
+          selector: '#cvv',
+          placeholder: '•••'
+        },
+        expirationDate: {
+          selector: '#expiration-date'
+        }
+      }
+    });
+
+
     paypal.Buttons({
       createOrder: function(data, actions) {
         return actions.order.create({
@@ -50,40 +78,13 @@ if ( $('#paypal-container').length > 0 ) {
 
         });
       }
-    }).render("#paypal-container")
-      .catch((error) => {
-        console.error("failed to render the PayPal Buttons", error);
-      });
-    }).catch((error) => {
-      console.error("failed to load the PayPal JS SDK script", error);
+    }).render("#paypal-container").catch((error) => {
+      console.error("failed to render the PayPal Buttons", error);
     });
 
-    paypal.HostedFields.render({
-      styles: {
-        'input': {
-          'font-size': '16pt',
-          'color': '#3A3A3A'
-        },
-        '.number': {
-          'font-family': 'monospace'
-        },
-        '.valid':  {
-          'color': 'green'
-        }
-      },
-      fields: {
-        number: {
-          selector: '#card-number'
-        },
-        cvv: {
-          selector: '#cvv',
-          placeholder: '•••'
-        },
-        expirationDate: {
-          selector: '#expiration-date'
-        }
-      }
-    });
+  }).catch((error) => {
+    console.error("failed to load the PayPal JS SDK script", error);
+  });
 
     //$('#loading-spinner').hide();
 }
