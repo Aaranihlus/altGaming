@@ -113,7 +113,7 @@ Route::get('/cart', function (Request $request) {
 
   $paypal_secret = env('PAYPAL_SECRET');
   $paypal_client_id = env('PAYPAL_CLIENT_ID');
-  $access_token = $paypal_client_id + ":" + $paypal_secret;
+  $access_token = $paypal_client_id . ":" . $paypal_secret;
 
   $response = $client->request('POST', 'https://api-m.sandbox.paypal.com/v1/identity/generate-token', [
     'headers' => [
