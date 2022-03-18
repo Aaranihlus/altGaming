@@ -138,14 +138,7 @@ Route::get('/cart', function (Request $request) {
   ]);
 
   $data = json_decode($response->getBody(), true);
-  dd($data);
   $client_token = $data['client_token'];
-
-
-
-
-
-
 
   $cart = [];
   $cart_total = 0.00;
@@ -164,7 +157,7 @@ Route::get('/cart', function (Request $request) {
   return view('cart', [
     'cart' => $cart,
     'cart_total' => $cart_total,
-    'access_token' => $access_token,
+    'client_token' => $client_token,
     'client_id' => env('PAYPAL_CLIENT_ID')
   ]);
 
