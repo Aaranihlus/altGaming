@@ -44,38 +44,38 @@
 
         <div class="card_container">
           <form id="card-form">
-            <label for="card-number">Card Number</label><div id="card-number" class="card_field"></div>
+            <label for="card-number">Card Number</label><div id="card-number" class="card_field form-control"></div>
             <div>
               <label for="expiration-date">Expiration Date</label>
-              <div id="expiration-date" class="card_field"></div>
+              <div id="expiration-date" class="card_field form-control"></div>
             </div>
             <div>
-              <label for="cvv">CVV</label><div id="cvv" class="card_field"></div>
+              <label for="cvv">CVV</label><div id="cvv" class="card_field form-control"></div>
             </div>
             <label for="card-holder-name">Name on Card</label>
-            <input type="text" id="card-holder-name" name="card-holder-name" autocomplete="off" placeholder="card holder name"/>
-            <div>
+            <input type="text" id="card-holder-name" name="card-holder-name" autocomplete="off" placeholder="card holder name" class="form-control"/>
+            <div class="mb-3">
               <label for="card-billing-address-street">Billing Address</label>
-              <input type="text" id="card-billing-address-street" name="card-billing-address-street" autocomplete="off" placeholder="street address"/>
+              <input type="text" id="card-billing-address-street" name="card-billing-address-street" autocomplete="off" placeholder="street address" class="form-control"/>
             </div>
-            <div>
+            <div class="mb-3">
               <label for="card-billing-address-unit">&nbsp;</label>
-              <input type="text" id="card-billing-address-unit" name="card-billing-address-unit" autocomplete="off" placeholder="unit"/>
+              <input type="text" id="card-billing-address-unit" name="card-billing-address-unit" autocomplete="off" placeholder="unit" class="form-control"/>
             </div>
-            <div>
-              <input type="text" id="card-billing-address-city" name="card-billing-address-city" autocomplete="off" placeholder="city"/>
+            <div class="mb-3">
+              <input type="text" id="card-billing-address-city" name="card-billing-address-city" autocomplete="off" placeholder="city" class="form-control"/>
             </div>
-            <div>
-              <input type="text" id="card-billing-address-state" name="card-billing-address-state" autocomplete="off" placeholder="state"/>
+            <div class="mb-3">
+              <input type="text" id="card-billing-address-state" name="card-billing-address-state" autocomplete="off" placeholder="state" class="form-control"/>
             </div>
-            <div>
-              <input type="text" id="card-billing-address-zip" name="card-billing-address-zip" autocomplete="off" placeholder="zip / postal code"/>
+            <div class="mb-3">
+              <input type="text" id="card-billing-address-zip" name="card-billing-address-zip" autocomplete="off" placeholder="zip / postal code" class="form-control"/>
             </div>
-            <div>
-              <input type="text" id="card-billing-address-country" name="card-billing-address-country" autocomplete="off" placeholder="country code" />
+            <div class="mb-3">
+              <input type="text" id="card-billing-address-country" name="card-billing-address-country" autocomplete="off" placeholder="country code" class="form-control"/>
             </div>
-            <br/><br/>
-            <button type="submit" class="btn btn-warning my-2" style="height: 30%;" id="submit">Pay</button>
+            <br/>
+            <button type="submit" class="btn btn-warning my-2" id="submit" style="width: 75%;">Pay</button>
           </form>
         </div>
 
