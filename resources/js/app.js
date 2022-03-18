@@ -39,7 +39,7 @@ if ( $('#paypal-container').length > 0 ) {
 
           axios.post('/order/create', {
             id: details.id,
-            amount: details.purchase_units[0].amount.value
+            amount: $('#order_total').val()
           })
           .then(function (response) {
               window.location.href = "/checkout/success/" + details.id;
@@ -56,6 +56,33 @@ if ( $('#paypal-container').length > 0 ) {
       });
     }).catch((error) => {
       console.error("failed to load the PayPal JS SDK script", error);
+    });
+
+    paypal.HostedFields.render({
+      styles: {
+        'input': {
+          'font-size': '16pt',
+          'color': '#3A3A3A'
+        },
+        '.number': {
+          'font-family': 'monospace'
+        },
+        '.valid':  {
+          'color': 'green'
+        }
+      },
+      fields: {
+        number: {
+          selector: '#card-number'
+        },
+        cvv: {
+          selector: '#cvv',
+          placeholder: '•••'
+        },
+        expirationDate: {
+          selector: '#expiration-date'
+        }
+      }
     });
 
     //$('#loading-spinner').hide();

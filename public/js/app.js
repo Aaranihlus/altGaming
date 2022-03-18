@@ -5591,10 +5591,9 @@ var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute(
 
 
 if ($('#paypal-container').length > 0) {
-  //$('#show-checkout').hide();
-  //$('#loading-spinner').show();
   (0,_paypal_paypal_js__WEBPACK_IMPORTED_MODULE_4__.loadScript)({
-    "client-id": "ASXGJoskJTqv_HAXBw4jESxN4sQon-UcDJci7rE4d4xNe-ompGPOp2KHwt1c6fXhwPGGRNSQzOiQ4epY",
+    "client-id": $('#client_id').val(),
+    "data-client-token": $('#access_token').val(),
     "buyer-country": "GB",
     "currency": "GBP",
     "enable-funding": "paylater",
@@ -5615,7 +5614,7 @@ if ($('#paypal-container').length > 0) {
         return actions.order.capture().then(function (details) {
           axios.post('/order/create', {
             id: details.id,
-            amount: details.purchase_units[0].amount.value
+            amount: $('#order_total').val()
           }).then(function (response) {
             window.location.href = "/checkout/success/" + details.id;
           })["catch"](function (error) {
@@ -5628,6 +5627,32 @@ if ($('#paypal-container').length > 0) {
     });
   })["catch"](function (error) {
     console.error("failed to load the PayPal JS SDK script", error);
+  });
+  paypal.HostedFields.render({
+    styles: {
+      'input': {
+        'font-size': '16pt',
+        'color': '#3A3A3A'
+      },
+      '.number': {
+        'font-family': 'monospace'
+      },
+      '.valid': {
+        'color': 'green'
+      }
+    },
+    fields: {
+      number: {
+        selector: '#card-number'
+      },
+      cvv: {
+        selector: '#cvv',
+        placeholder: '•••'
+      },
+      expirationDate: {
+        selector: '#expiration-date'
+      }
+    }
   }); //$('#loading-spinner').hide();
 }
 
