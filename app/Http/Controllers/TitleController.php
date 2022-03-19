@@ -25,7 +25,7 @@ class TitleController extends Controller {
         'name' => $request->title,
     ]);
 
-    return redirect("/admin/titles");
+    return redirect("/admin/titles_badges");
 
   }
 

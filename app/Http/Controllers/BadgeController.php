@@ -21,13 +21,11 @@ class BadgeController extends Controller {
 
   public function store( Request $request ) {
 
-    $path = $request->image('badge')->store('badges');
-
     $badge = Badge::create([
-        'image' => $path,
+        'image' => $request->image('badge')->store('badges')
     ]);
 
-    return redirect("/admin/badges");
+    return redirect("/admin/titles_badges");
 
   }
 
