@@ -15,6 +15,7 @@ use App\Models\Achievement;
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\OrderController;
 
 use RestCord\DiscordClient;
 use GuzzleHttp\Client;
@@ -128,7 +129,6 @@ Route::get('/cart', function (Request $request) {
   $data = json_decode($response->getBody(), true);
   $access_token = $data['access_token'];
 
-
   $response = $client->request('POST', 'https://api-m.sandbox.paypal.com/v1/identity/generate-token', [
     'headers' => [
       'Authorization' => 'Bearer ' . $access_token,
@@ -196,6 +196,12 @@ Route::get('/checkout', function () {
 
 
 
+
+
+Route::post('/order/create', [OrderController::class, 'create'])->middleware('auth');
+Route::post('/order/approve', [OrderController::class, 'approve'])->middleware('auth');
+
+
 Route::post('/order/create', function(Request $request) {
 
   if ( !isset($request->id) OR empty($request->id) OR empty(Auth::id()) ) {
@@ -246,10 +252,6 @@ Route::post('/order/create', function(Request $request) {
 
   //$pdf = PDF::loadView('pdf.invoice', $data);
   //return $pdf->download('invoice.pdf');
-
-
-
-
 
   return response()->json(['success' => true]);
 

@@ -9,54 +9,6 @@ window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-/*import { loadScript } from "@paypal/paypal-js";
-
-if ( $('#paypal-container').length > 0 ) {
-
-  loadScript({
-    "client-id": $('#client_id').val(),
-    "data-client-token": $('#access_token').val(),
-    "buyer-country": "GB",
-    "currency": "GBP",
-    "enable-funding": "paylater",
-    "disable-funding": "card",
-  }).then((paypal) => {
-
-    paypal.HostedFields.render({
-      styles: {
-        'input': {
-          'font-size': '16pt',
-          'color': '#3A3A3A'
-        },
-        '.number': {
-          'font-family': 'monospace'
-        },
-        '.valid':  {
-          'color': 'green'
-        }
-      },
-      fields: {
-        number: {
-          selector: '#card-number'
-        },
-        cvv: {
-          selector: '#cvv',
-          placeholder: '•••'
-        },
-        expirationDate: {
-          selector: '#expiration-date'
-        }
-      }
-    });
-
-    //$('#loading-spinner').hide();
-}
-*/
-
-
-
-
-
 $('.post-comment-button').on('click', function(){
 
   axios.post('/comment/store', {
@@ -86,8 +38,6 @@ $('.delete-comment-button').on('click', function(){
   });
 
 });
-
-
 
 
 $('.load-more-posts-button').on('click', function(){
@@ -125,14 +75,6 @@ $('.load-more-posts-button').on('click', function(){
 });
 
 
-
-
-
-
-
-
-
-
 $('#open-mobile-nav-button').on('click', function(){
   $('#mobile-nav-container').show();
 });
@@ -140,8 +82,6 @@ $('#open-mobile-nav-button').on('click', function(){
 $('#close-mobile-nav').on('click', function (){
   $('#mobile-nav-container').hide();
 });
-
-
 
 
 var currentImage = 0;

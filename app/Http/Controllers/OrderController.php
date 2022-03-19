@@ -22,4 +22,29 @@ class OrderController extends Controller {
     ]);
   }
 
+  public function create (Request $request) {
+
+    $user = User::find(Auth::id());
+
+    $order = Order::create([
+      'user_id' => Auth::id(),
+      'paypal_id' => $request->id,
+      'amount' => $request->amount
+    ]);
+
+    foreach ( session()->get('cart') as $item ) {
+      ItemOrder::create([
+        'order_id' => $order->id,
+        'item_id' => $item['id'],
+        'quantity' => $item['quantity']
+      ]);
+    }
+
+  }
+
+  public function approve (Request $request) {
+
+  }
+
+
 }
