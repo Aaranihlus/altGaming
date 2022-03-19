@@ -38,7 +38,7 @@
 
                 <td>
                   <div class="flex-x">
-                    <div>
+                    <div class="flex-x">
                       <select class="form-select role-select" style="width: 25%; margin-right: 3px;">
                         <option></option>
                         @foreach($roles as $role)
@@ -49,7 +49,7 @@
                       </select>
                       <button type="button" class="btn btn-warning grant-role-button ml-2" data-id="{{ $user->id }}">Grant</button>
                     </div>
-                    <div>
+                    <div class="flex-x">
                       <select class="form-select role-select" style="width: 25%; margin-right: 3px;">
                         <option></option>
                         @foreach($user->roles as $role)
@@ -63,7 +63,7 @@
 
                 <td>
                   <div class="flex-x">
-                    <div>
+                    <div class="flex-x">
                       <select class="form-select achievement-select" style="width: 25%; margin-right: 3px;">
                         <option></option>
                         @foreach($achievements as $achievement)
@@ -72,7 +72,7 @@
                       </select>
                       <button type="button" class="btn btn-warning grant-achievement-button ml-2" data-id="{{ $user->id }}">Grant</button>
                     </div>
-                    <div>
+                    <div class="flex-x">
                       <select class="form-select achievement-select" style="width: 25%; margin-right: 3px;">
                         <option></option>
                         @foreach($user->achievements as $achievement)
@@ -86,7 +86,7 @@
 
                 <td>
                   <div class="flex-x">
-                    <div>
+                    <div class="flex-x">
                       <select class="form-select title-select" style="width: 25%; margin-right: 3px;">
                         <option></option>
                         @foreach($titles as $title)
@@ -95,7 +95,7 @@
                       </select>
                       <button type="button" class="btn btn-warning grant-title-button ml-2" data-id="{{ $user->id }}">Grant</button>
                     </div>
-                    <div>
+                    <div class="flex-x">
                       <select class="form-select title-select" style="width: 25%; margin-right: 3px;">
                         <option></option>
                         @foreach($user->titles as $title)
@@ -109,7 +109,7 @@
 
                 <td>
                   <div class="flex-x">
-                    <div>
+                    <div class="flex-x">
                       <select class="form-select badge-select" style="width: 25%; margin-right: 3px;">
                         <option></option>
                         @foreach($badges as $badge)
@@ -118,7 +118,7 @@
                       </select>
                       <button type="button" class="btn btn-warning grant-title-button ml-2" data-id="{{ $user->id }}">Grant</button>
                     </div>
-                    <div>
+                    <div class="flex-x">
                       <select class="form-select badge-select" style="width: 25%; margin-right: 3px;">
                         <option></option>
                         @foreach($user->badges as $badge)
