@@ -12,7 +12,8 @@
 
     @auth
       <a href="/cart">Cart</a>
-      <a href="{{ url('/profile/' . auth()->user()->slug) }}" class="text-md uppercase mt-8">Profile</a>
+      <a href="{{ url('/profile/' . auth()->user()->slug) }}" class="text-md uppercase mt-8">View Profile</a>
+      <li><a href="/profile/edit" class="text-md uppercase mt-8">Edit Profile</a></li>
       <a href="/account" class="text-md uppercase mt-8">Account</a>
 
       @if(auth()->user()->roles->contains('name', 'Admin'))

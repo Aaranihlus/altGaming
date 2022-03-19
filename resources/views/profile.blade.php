@@ -5,7 +5,7 @@
 
   <div style="display: flex;" class="bg-alt-yellow p-3 extra-rounded">
     <div>
-      <img class="img-fluid rounded" style="width: 9vw;" src="https://cdn.discordapp.com/avatars/{{ Auth::user()->id }}/{{ Auth::user()->avatar }}.webp" alt="Profile Picture">
+      <img class="img-fluid rounded" style="width: 7vw;" src="https://cdn.discordapp.com/avatars/{{ Auth::user()->id }}/{{ Auth::user()->avatar }}.webp" alt="Profile Picture">
     </div>
 
     <div class="mx-4">
@@ -30,9 +30,6 @@
     <div class="mx-4">
       <h4>Member For</h4>
       <p>{{ \Carbon\Carbon::parse( $user->created_at )->longAbsoluteDiffForHumans() }}</p>
-      @if(Auth::id() == $user->id)
-        <p><i class="fas fa-edit"></i> <a href="/profile/edit">Edit Profile</a></p>
-      @endif
     </div>
 
   </div>
@@ -42,7 +39,7 @@
   <div>
     <h1 class="text-2xl font-bold mb-2">Achievements</h1>
     @if(!empty($user->achievements))
-      <div style="width: 100%; overflow-x: scroll; white-space: nowrap;">
+      <div style="width: 100%; overflow-x: auto; white-space: nowrap;">
         @foreach($user->achievements as $achievement)
           <div class="mr-2" style="display: inline-block; text-align: center; margin-bottom: 4px;">
             <div class="bg-alt-yellow p-2 extra-rounded" style="width: 200px; max-width: 200px;">
