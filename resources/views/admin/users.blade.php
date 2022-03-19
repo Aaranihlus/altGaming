@@ -16,16 +16,11 @@
             <tr>
               <th scope="col">Username</th>
               <th>Registration Date</th>
-              <th>Admin</th>
-              <th>Content Creator</th>
-              <th>Organiser</th>
-
+              <th>Roles</th>
               <th>Give Role</th>
               <th>Revoke Role</th>
-
               <th>Give Achievement</th>
               <th>Remove Achievement</th>
-
               <th>Actions</th>
             </tr>
           </thead>
@@ -34,9 +29,12 @@
             <tr>
                 <th scope="row"><span>{{$user->username}}</span></th>
                 <td><span>{{ \Carbon\Carbon::parse( $user->created_at )->toDayDateTimeString() }}</span></td>
-                <td><span>@if($user->roles->contains('name', 'Admin')) Yes @else No @endif</span></td>
-                <td><span>@if($user->roles->contains('name', 'Content Creator')) Yes @else No @endif</span></td>
-                <td><span>@if($user->roles->contains('name', 'Event Organiser')) Yes @else No @endif</span></td>
+                <td>
+                  @if($user->roles->contains('name', 'Admin'))<span>Admin</span>@endif
+                  @if($user->roles->contains('name', 'Content Creator'))<span>Content Creator</span>@endif
+                  @if($user->roles->contains('name', 'Event Organiser'))<span>Event Organiser</span>@endif
+                </td>
+
                 <td>
                   <div class="flex-x">
                     <select class="form-select role-select" style="width: 25%; margin-right: 3px;">
@@ -71,19 +69,7 @@
                         <option value="{{ $achievement->id }}">{{ $achievement->name }}</option>
                       @endforeach
                     </select>
-                    <button type="button" class="btn btn-warning give-achievement-button ml-2" data-id="{{ $user->id }}">Give Achievement</button>
-                  </div>
-                </td>
-
-                <td>
-                  <div class="flex-x">
-                    <select class="form-select achievement-select" style="width: 25%; margin-right: 3px;">
-                      <option></option>
-                      @foreach($achievements as $achievement)
-                        <option value="{{ $achievement->id }}">{{ $achievement->name }}</option>
-                      @endforeach
-                    </select>
-                    <button type="button" class="btn btn-warning give-achievement-button ml-2" data-id="{{ $user->id }}">Give Achievement</button>
+                    <button type="button" class="btn btn-warning grant-achievement-button ml-2" data-id="{{ $user->id }}">Grant</button>
                   </div>
                 </td>
 
@@ -95,7 +81,7 @@
                         <option value="{{ $achievement->id }}">{{ $achievement->name }}</option>
                       @endforeach
                     </select>
-                    <button type="button" class="btn btn-warning give-achievement-button ml-2" data-id="{{ $user->id }}">Give Achievement</button>
+                    <button type="button" class="btn btn-warning revoke-achievement-button ml-2" data-id="{{ $user->id }}">Revoke</button>
                   </div>
                 </td>
 
