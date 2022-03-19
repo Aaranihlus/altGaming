@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Badge;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Badge;
 
 class BadgeController extends Controller {
 
@@ -20,7 +20,7 @@ class BadgeController extends Controller {
     dd($request);
 
     $badge = Badge::create([
-        'image' => $request->image('badge')->store('badges')
+        'image' => $request->file('badge')->store('badges')
     ]);
 
     return redirect("/admin/titles_badges");
