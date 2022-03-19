@@ -17,7 +17,7 @@
       </div>
       @if(!empty($user->title_id))
         <hr>
-        <p>{{ $user->title->name }}</p>
+        <h2>{{ $user->title->name }}</h2>
       @endif
     </div>
 
