@@ -13,10 +13,10 @@
         @if(!empty($user->badge_id))
           <img class="img-fluid rounded" style="width: 64px;" src="{{ asset("storage/".$user->badge->image) }}">
         @endif
-        <h1 style="margin-left: 6px;">{{ $user->username }}</h1>
+        <h1 style="margin-left: 6px; margin-bottom: 0px;">{{ $user->username }}</h1>
       </div>
-      <hr>
       @if(!empty($user->title_id))
+        <hr>
         <p>{{ $user->title->name }}</p>
       @endif
     </div>
@@ -41,7 +41,7 @@
     @if(!empty($user->achievements))
       <div style="width: 100%; overflow-x: auto; white-space: nowrap;">
         @foreach($user->achievements as $achievement)
-          <div class="mr-2" style="display: inline-block; text-align: center; margin-bottom: 4px;">
+          <div class="mr-3" style="display: inline-block; text-align: center; margin-bottom: 4px;">
             <div class="bg-alt-yellow p-2 extra-rounded" style="width: 200px; max-width: 200px;">
               <p style="white-space: pre-wrap;">{{ $achievement->name }}</p>
               <img class="img-fluid rounded m-3" style="width: 96px;" src="{{ asset("storage/".$achievement->image) }}">
@@ -53,22 +53,6 @@
     @else
       <p>None yet!</p>
     @endif
-  </div>
-
-  <br>
-
-  <div class="bg-alt-yellow p-3 extra-rounded">
-    <h1 class="text-2xl font-bold mb-2">Merch Unlocks</h1>
-    <p>None :D</p>
-  </div>
-
-  <br>
-
-  <div class="bg-alt-yellow p-3 extra-rounded">
-    <h1 class="text-2xl font-bold mb-2">Roles</h1>
-    @foreach($user->roles as $role)
-      <h3>- {{ $role->name }}</h3>
-    @endforeach
   </div>
 
 </div>
