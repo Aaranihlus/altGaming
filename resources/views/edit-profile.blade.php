@@ -34,13 +34,11 @@
         <label for="badge" class="form-label">Choose Badge</label>
         <input type="hidden" value="{{ $user->badge_id }}" name="badge_id" id="badge_id">
         <div class="badge-display" style="display: flex;">
-          @foreach($user->roles as $role)
-            @if($role->grant_badge == 1)
-              @if($user->badge_id == $role->badge->id)
-                <img class="img-fluid rounded select-badge highlighted" data-id="{{ $role->badge->id }}" style="width: 64px;" src="{{ asset("storage/" . $role->badge->image) }}">
-              @else
-                <img class="img-fluid rounded select-badge" data-id="{{ $role->badge->id }}" style="width: 64px;" src="{{ asset("storage/" . $role->badge->image) }}">
-              @endif
+          @foreach($user->badges as $badge)
+            @if($user->badge_id == $role->badge->id)
+              <img class="img-fluid rounded select-badge highlighted" data-id="{{ $role->badge->id }}" style="width: 64px;" src="{{ asset("storage/" . $role->badge->image) }}">
+            @else
+              <img class="img-fluid rounded select-badge" data-id="{{ $role->badge->id }}" style="width: 64px;" src="{{ asset("storage/" . $role->badge->image) }}">
             @endif
           @endforeach
         </div>
