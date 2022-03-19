@@ -137,5 +137,6 @@ if (paypal.HostedFields.isEligible()) {
   });
 } else {
   // Hides card fields if the merchant isn't eligible
+  console.log("Hosted fields go bye bye");
   document.querySelector("#card-form").style = 'display: none';
 }

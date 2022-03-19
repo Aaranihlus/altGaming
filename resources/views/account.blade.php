@@ -6,7 +6,7 @@
 
   <div class="row">
 
-    <div class="col-6">
+    <div class="col-5">
       <h1>Account Info</h1>
 
         <div class="mb-3">
@@ -57,14 +57,13 @@
 
     </div>
 
-    <div class="col-6">
+    <div class="col-7">
       <h1>Order History</h1>
       <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">Order ID</th>
             <th>Order Date</th>
-            <th>Order Items</th>
             <th>Order Total</th>
             <th></th>
           </tr>
@@ -74,7 +73,6 @@
             <tr>
             <td><span>{{ $order->paypal_id }}</span></td>
             <td><span>{{ $order->created_at }}</span></td>
-            <td><span>{{ count($order->items) }}</span></td>
             <td><span>{{ $order->amount }}</span></td>
             <td>
               <button class="btn btn-warning mx-1"><a href="/account/order/{{ $order->paypal_id }}">View</a></button>
