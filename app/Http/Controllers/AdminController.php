@@ -40,7 +40,9 @@ class AdminController extends Controller {
     return view('admin.users', [
       'users' => User::all(),
       'roles' => Role::all(),
-      'achievements' => Achievement::all()
+      'achievements' => Achievement::all(),
+      'titles' => Title::all(),
+      'badges' => Badge::all()
     ]);
   }
 
