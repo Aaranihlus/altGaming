@@ -5,11 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
-
-use App\Models\Item;
-use App\Models\Title;
 use App\Models\Badge;
-use App\Models\Role;
 
 class BadgeController extends Controller {
 
@@ -20,6 +16,8 @@ class BadgeController extends Controller {
   }
 
   public function store( Request $request ) {
+
+    dd($request);
 
     $badge = Badge::create([
         'image' => $request->image('badge')->store('badges')
