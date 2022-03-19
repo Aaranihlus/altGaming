@@ -35,10 +35,10 @@
         <input type="hidden" value="{{ $user->badge_id }}" name="badge_id" id="badge_id">
         <div class="badge-display" style="display: flex;">
           @foreach($user->badges as $badge)
-            @if($user->badge_id == $role->badge->id)
-              <img class="img-fluid rounded select-badge highlighted" data-id="{{ $role->badge->id }}" style="width: 64px;" src="{{ asset("storage/" . $role->badge->image) }}">
+            @if($user->badge_id == $badge->id)
+              <img class="img-fluid rounded select-badge highlighted" data-id="{{ $badge->id }}" style="width: 64px;" src="{{ asset("storage/" . $badge->image) }}">
             @else
-              <img class="img-fluid rounded select-badge" data-id="{{ $role->badge->id }}" style="width: 64px;" src="{{ asset("storage/" . $role->badge->image) }}">
+              <img class="img-fluid rounded select-badge" data-id="{{ $badge->id }}" style="width: 64px;" src="{{ asset("storage/" . $badge->image) }}">
             @endif
           @endforeach
         </div>
