@@ -34,6 +34,8 @@ paypal.Buttons({
 if (paypal.HostedFields.isEligible()) {
   let orderId;
 
+  document.querySelector("#paypal-card-container").style = 'display: block';
+
   // Renders card fields
   paypal.HostedFields.render({
     // Call your server to set up the transaction
@@ -138,5 +140,5 @@ if (paypal.HostedFields.isEligible()) {
 } else {
   // Hides card fields if the merchant isn't eligible
   console.log("Hosted fields go bye bye");
-  document.querySelector("#card-form").style = 'display: none';
+  document.querySelector("#paypal-card-container").style = 'display: none';
 }

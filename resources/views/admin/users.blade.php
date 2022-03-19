@@ -31,9 +31,9 @@
                 <td><span>{{ \Carbon\Carbon::parse( $user->created_at )->toDayDateTimeString() }}</span></td>
 
                 <td>
-                  @if($user->roles->contains('name', 'Admin'))<span>Admin</span>@endif
-                  @if($user->roles->contains('name', 'Content Creator'))<span>Content Creator</span>@endif
-                  @if($user->roles->contains('name', 'Event Organiser'))<span>Event Organiser</span>@endif
+                  @foreach($user->roles as $role)
+                    <span>{{ $role->name }}</span>
+                  @endforeach
                 </td>
 
                 <td>
