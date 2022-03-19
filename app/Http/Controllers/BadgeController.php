@@ -21,7 +21,7 @@ class BadgeController extends Controller {
 
   public function store( Request $request ) {
 
-    $path = $request->image('badge_image')->store('badge_images');
+    $path = $request->image('badge')->store('badges');
 
     $badge = Badge::create([
         'image' => $path,

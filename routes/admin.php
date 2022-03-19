@@ -66,6 +66,10 @@ Route::get('/admin/event/tickets/{event}', [EventController::class, 'tickets'])-
 // Titles and Badges
 Route::get('/admin/titles_badges', [AdminController::class, 'titles_badges'])->middleware('admin');
 
+Route::get('/admin/title/store', [TitleController::class, 'create'])->middleware('admin');
+Route::get('/admin/badge/store', [BadgeController::class, 'create'])->middleware('admin');
+
+
 // Image Related
 Route::post('/admin/delete_image', function (Request $request) {
   $image = ItemImage::where('id', $request->id)->get()->first()->delete();

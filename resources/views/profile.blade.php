@@ -11,9 +11,9 @@
     <div class="mx-4">
       <div style="display:flex; align-items: center;">
         @if(!empty($user->badge_id))
-          <img class="img-fluid rounded" style="width: 64px;" src="{{ asset("storage/".$user->badge->image) }}">
+          <img class="img-fluid rounded" style="width: 64px; margin-right: 8px; " src="{{ asset("storage/".$user->badge->image) }}">
         @endif
-        <h1 style="margin-left: 6px; margin-bottom: 0px;">{{ $user->username }}</h1>
+        <h1 style="margin-bottom: 0px;">{{ $user->username }}</h1>
       </div>
       @if(!empty($user->title_id))
         <hr>
