@@ -11,6 +11,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\TitleController;
+use App\Http\Controllers\BadgeController;
 use Illuminate\Http\Request;
 use App\Models\ItemImage;
 
