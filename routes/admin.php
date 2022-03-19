@@ -66,8 +66,11 @@ Route::get('/admin/event/tickets/{event}', [EventController::class, 'tickets'])-
 // Titles and Badges
 Route::get('/admin/titles_badges', [AdminController::class, 'titles_badges'])->middleware('admin');
 
-Route::get('/admin/title/store', [TitleController::class, 'create'])->middleware('admin');
-Route::get('/admin/badge/store', [BadgeController::class, 'create'])->middleware('admin');
+Route::get('/admin/title/create', [TitleController::class, 'create'])->middleware('admin');
+Route::get('/admin/badge/create', [BadgeController::class, 'create'])->middleware('admin');
+
+Route::get('/admin/title/store', [TitleController::class, 'store'])->middleware('admin');
+Route::get('/admin/badge/store', [BadgeController::class, 'store'])->middleware('admin');
 
 
 // Image Related
