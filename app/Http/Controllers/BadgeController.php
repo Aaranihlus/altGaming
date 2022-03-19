@@ -17,8 +17,6 @@ class BadgeController extends Controller {
 
   public function store( Request $request ) {
 
-    dd($request);
-
     $badge = Badge::create([
         'image' => $request->file('badge')->store('badges')
     ]);
