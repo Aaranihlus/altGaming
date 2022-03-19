@@ -7,7 +7,7 @@
     <div class="row">
 
       @if ( !empty($cart) )
-        <div class="col-lg-7 col-xl-7 col-sm-12 col-md-12 col-xs-12 bg-alt-yellow extra-rounded p-3" style="display: flex; flex-direction: column; flex-wrap: nowrap; align-content: center; justify-content: space-around; align-items: stretch; text-align: center;">
+        <div class="col-lg-6 col-xl-6 col-sm-12 col-md-12 col-xs-12 bg-alt-yellow extra-rounded p-3" style="display: flex; flex-direction: column; flex-wrap: nowrap; align-content: center; justify-content: center; align-items: center; text-align: center;">
           <input type="hidden" id="order_total" value="{{ $cart_total }}">
           <h3>Order Total: £<span id="cart-total">{{ number_format($cart_total, 2) }}</span></h3>
           <!--<button type="button" class="btn btn-warning my-2" style="height: 30%;" id="show-checkout">Checkout Now</button>
@@ -15,7 +15,8 @@
 
           <div id="paypal-container"></div>
 
-          <div id="paypal-card-container" class="card_container">
+          <div id="paypal-card-container" class="card_container" style="display: none;">
+            <br>
             <p style="text-align: center;">OR</p>
             <form id="card-form">
               <label for="card-number">Card Number</label><div id="card-number" class="card_field form-control"></div>
@@ -54,7 +55,7 @@
           </div>
         </div>
 
-        <div class="col-lg-5 col-xl-5 col-sm-12 col-md-12 col-xs-12">
+        <div class="col-lg-6 col-xl-6 col-sm-12 col-md-12 col-xs-12">
           <h1>Your cart</h1>
           @foreach( $cart as $k => $c )
             <div class="bg-alt-yellow p-2 extra-rounded my-2" style="width: 100%;display: flex;align-content: center;align-items: center;justify-content: space-between;">

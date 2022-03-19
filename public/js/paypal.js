@@ -38,8 +38,18 @@ if (paypal.HostedFields.isEligible()) {
 
   // Renders card fields
   paypal.HostedFields.render({
-    // Call your server to set up the transaction
-    createOrder: () => {
+
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: $('#order_total').val()
+          }
+        }]
+      });
+    },
+
+    /*createOrder: () => {
       return fetch("/api/orders", {
         method: 'post'
         // use the "body" param to optionally pass additional order information like
@@ -50,7 +60,9 @@ if (paypal.HostedFields.isEligible()) {
         orderId = orderData.id; // needed later to complete capture
         return orderData.id
       })
-    },
+    },*/
+
+
     styles: {
       '.valid': {
         color: 'green'
@@ -59,6 +71,7 @@ if (paypal.HostedFields.isEligible()) {
         color: 'red'
       }
     },
+
     fields: {
       number: {
         selector: "#card-number",
@@ -73,6 +86,7 @@ if (paypal.HostedFields.isEligible()) {
         placeholder: "MM/YY"
       }
     }
+
   }).then((cardFields) => {
    document.querySelector("#card-form").addEventListener("submit", (event) => {
       event.preventDefault();
@@ -104,19 +118,24 @@ if (paypal.HostedFields.isEligible()) {
           },
         })
         .then(() => {
+
           fetch(`/api/orders/${orderId}/capture`, {
             method: "post",
+
           })
+
             .then((res) => res.json())
+
             .then((orderData) => {
+
               // Three cases to handle:
               //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
               //   (2) Other non-recoverable errors -> Show a failure message
               //   (3) Successful transaction -> Show confirmation or thank you
               // This example reads a v2/checkout/orders capture response, propagated from the server
               // You could use a different API or structure for your 'orderData'
-              var errorDetail =
-                Array.isArray(orderData.details) && orderData.details[0];
+              var errorDetail = Array.isArray(orderData.details) && orderData.details[0];
+
               if (errorDetail && errorDetail.issue === "INSTRUMENT_DECLINED") {
                 return actions.restart(); // Recoverable state, per:
                 // https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
