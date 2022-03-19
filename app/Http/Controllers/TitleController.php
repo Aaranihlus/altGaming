@@ -22,7 +22,7 @@ class TitleController extends Controller {
   public function store( Request $request ) {
 
     $title = Title::create([
-        'name' => $request->name,
+        'name' => $request->title,
     ]);
 
     return redirect("/admin/titles");
