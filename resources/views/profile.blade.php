@@ -5,7 +5,7 @@
 
   <div style="display: flex;" class="bg-alt-yellow p-3 extra-rounded">
     <div>
-      <img class="img-fluid rounded" style="width: 7vw;" src="https://cdn.discordapp.com/avatars/{{ Auth::user()->id }}/{{ Auth::user()->avatar }}.webp" alt="Profile Picture">
+      <img class="img-fluid rounded" style="width: 7vw;" src="https://cdn.discordapp.com/avatars/{{ $user->id }}/{{ $user->avatar }}.webp" alt="Profile Picture">
     </div>
 
     <div class="mx-4">
@@ -22,7 +22,7 @@
     </div>
 
     <div class="mx-4">
-      <p><i class="fab fa-discord"></i> {{ Auth::user()->username }}#{{ Auth::user()->discriminator }}</p>
+      <p><i class="fab fa-discord"></i> {{ $user->username }}#{{ $user->discriminator }}</p>
       <p><i class="fab fa-twitch"></i> {{ $user->twitch_channel ?? "Not Set" }}</p>
       <p><i class="fab fa-youtube"></i> {{ $user->youtube_channel ?? "Not Set" }}</p>
     </div>
