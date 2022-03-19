@@ -19,9 +19,13 @@
               <th>Admin</th>
               <th>Content Creator</th>
               <th>Organiser</th>
+
               <th>Give Role</th>
               <th>Revoke Role</th>
-              <th>Achievements</th>
+
+              <th>Give Achievement</th>
+              <th>Remove Achievement</th>
+
               <th>Actions</th>
             </tr>
           </thead>
@@ -64,6 +68,30 @@
                     <select class="form-select achievement-select" style="width: 25%; margin-right: 3px;">
                       <option></option>
                       @foreach($achievements as $achievement)
+                        <option value="{{ $achievement->id }}">{{ $achievement->name }}</option>
+                      @endforeach
+                    </select>
+                    <button type="button" class="btn btn-warning give-achievement-button ml-2" data-id="{{ $user->id }}">Give Achievement</button>
+                  </div>
+                </td>
+
+                <td>
+                  <div class="flex-x">
+                    <select class="form-select achievement-select" style="width: 25%; margin-right: 3px;">
+                      <option></option>
+                      @foreach($achievements as $achievement)
+                        <option value="{{ $achievement->id }}">{{ $achievement->name }}</option>
+                      @endforeach
+                    </select>
+                    <button type="button" class="btn btn-warning give-achievement-button ml-2" data-id="{{ $user->id }}">Give Achievement</button>
+                  </div>
+                </td>
+
+                <td>
+                  <div class="flex-x">
+                    <select class="form-select achievement-select" style="width: 25%; margin-right: 3px;">
+                      <option></option>
+                      @foreach($user->achievements as $achievement)
                         <option value="{{ $achievement->id }}">{{ $achievement->name }}</option>
                       @endforeach
                     </select>
