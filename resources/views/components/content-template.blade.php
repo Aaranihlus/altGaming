@@ -1,5 +1,5 @@
 @if($index == 0)
-  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-4">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-4" style="min-height: 30vh;">
 @elseif($index == 1 OR $index == 2)
   <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-4">
 @else
@@ -13,7 +13,7 @@
       @else
         <div class="g-0" style="flex-basis: 45%; height: 45%; max-height: 45%;">
       @endif
-        <img src='{{ asset("storage/" . $post->thumbnail) }}' alt="Thumbnail" class="img-fluid @if($index == 0) main-image-border @else sub-image-border @endif" style="width: 100%; object-fit: cover; height: 100%;">
+        <img src='{{ asset("storage/" . $post->thumbnail) }}' alt="Thumbnail" class="img-fluid @if($index == 0) main-image-border @else sub-image-border @endif" style="width: 100%; object-fit: fill; height: 100%;">
       </div>
 
       @if($index == 0)
