@@ -45,26 +45,6 @@
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Current Profile Picture</label>
-        <br>
-        @if(empty($user->profile_picture))
-          <img class="img-fluid rounded" style="width: 128px;" src="{{ asset('images/placeholder-big.png') }}" alt="Profile Picture">
-        @else
-          <img class="img-fluid rounded" style="width: 128px; height: 128px;" src="{{ asset("storage/$user->profile_picture") }}">
-        @endif
-      </div>
-
-      <div class="mb-3">
-        <label for="profile_picture" class="form-label">New Profile Picture</label>
-        <input type="file" class="form-control" id="profile_picture" name="profile_picture">
-      </div>
-
-      <div class="mb-3">
-        <label for="discord_id" class="form-label">Discord ID</label>
-        <input type="text" class="form-control" id="discord_id" name="discord_id">
-      </div>
-
-      <div class="mb-3">
         <label for="youtube_channel" class="form-label">Youtube Channel</label>
         <input type="text" class="form-control" id="youtube_channel" name="youtube_channel">
       </div>
