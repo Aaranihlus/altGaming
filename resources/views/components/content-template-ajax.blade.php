@@ -23,11 +23,7 @@
         <div class="flex-x" style="justify-content: space-between; align-items: flex-end;">
 
           <div style="display: flex;">
-            @if(empty($post->user->profile_picture))
-              <img class="img-fluid rounded me-2" style="width: 75px;" src="{{ asset('images/placeholder-small.png') }}" alt="Profile Picture">
-            @else
-              <img class="img-fluid rounded me-2" style="width: 75px;" src="https://cdn.discordapp.com/avatars/{{ $user->id }}/{{ $user->avatar }}.webp" alt="Profile Picture">
-            @endif
+            <img class="img-fluid rounded me-2" style="width: 75px;" src="https://cdn.discordapp.com/avatars/{{ $user->id }}/{{ $user->avatar }}.webp" alt="Profile Picture">
 
             <div>
               <h5><a href="/profile/{{ $post->user->slug }}">By {{ $post->user->username }}</a></h5>

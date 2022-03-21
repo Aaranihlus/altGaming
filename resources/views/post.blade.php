@@ -47,11 +47,7 @@
 
     <div class="flex-x">
 
-      @if(empty($post->user->profile_picture))
-        <img class="img-fluid rounded me-2" style="width: 64px;" src="{{ asset('images/placeholder-small.png') }}" alt="Profile Picture">
-      @else
-        <img class="img-fluid rounded me-2" style="width: 64px;" src='{{ asset("storage/" . $post->user->profile_picture) }}' alt="Profile Picture">
-      @endif
+      <img class="img-fluid rounded me-2" style="width: 64px;" src="https://cdn.discordapp.com/avatars/{{ $user->id }}/{{ $user->avatar }}.webp" alt="Profile Picture">
 
       <div>
         <h5>Posted By {{ $post->user->username }}</h5>
