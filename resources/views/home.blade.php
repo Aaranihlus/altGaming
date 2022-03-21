@@ -4,7 +4,7 @@
 
   <div class="container mb-4">
 
-    @if(!empty($highlighted_event))
+    @if( config("app.hero_active") == true )
     <div class="container-fluid flex-x extra-rounded g-0 bg-alt-yellow" style="border: 2px solid #ffc107; width: 100%; justify-content: space-between; align-items: center; min-height: 25vh;">
 
       <div style="

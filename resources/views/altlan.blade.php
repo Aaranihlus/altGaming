@@ -28,7 +28,7 @@ background-repeat: no-repeat; align-content: center; padding:0; margin:0;" id="b
     <hr style="height: 4px; width: 25%;">
 
     <div class="flex-x" style="width: 20%;">
-      <button style="width: 100%; height: 50px" type="submit" class="btn btn-warning mx-2">Get Tickets</button>
+      <button style="width: 100%; height: 50px" type="submit" class="btn btn-warning mx-2"><a href="/shop/tickets">Get Tickets</a></button>
       <!--<button type="submit" class="btn btn-warning mx-2">More Info</button>-->
     </div>
 
@@ -38,39 +38,41 @@ background-repeat: no-repeat; align-content: center; padding:0; margin:0;" id="b
 
 
 <div style="width: 100vw; height: 40vh; background:black; display: flex; flex-direction: column; flex-wrap: nowrap; align-content: center; justify-content: center; align-items: center; padding:0; margin:0;" id="box1">
-  <div id="key_details" class="key_details flex-x">
-    <div>
-      <h3>Key details</h3>
-      <ul class="group headlines">
-        <li><span class="date_date">15‑17</span>
-          <span class="date_month">April</span>
-          <span class="date_year">2022</span>
-          <div class="small">(<a href="http://www.google.com/calendar/render?action=TEMPLATE&amp;text=altLAN%209&amp;dates=20220415/20220417&amp;details=&amp;location=Boundless+Outdoors%2C+Worcestershire+DY9+9UU&amp;trp=false&amp;sprop=&amp;sprop=name:" target="_blank" rel="nofollow">Add to calendar</a>)</div>
-        </li>
-        <li>At <a href="https://goo.gl/maps/4HFYSU2X5ovCK86G8" title="" target="_blank">Boundless Outdoors, Worcestershire DY9 9UU</a></li>
-        <li>Stage events</li>
-        <li>Friendly competitions and&nbsp;group&nbsp;games</li>
-        <li>Saturday Night Quiz</li>
-        <li>Big Rockband setup</li>
-        <li>The Nail Game</li>
-        <li>Firepit</li>
-      </ul>
-    </div>
-    <div>
-      <h4>Plus...</h4>
-      <ul class="group secondary">
-        <li>Beds and showers</li>
-        <li>Board games</li>
-        <li>Cooked breakfast on Saturday and&nbsp;Sunday</li>
-        <li>Small kitchen access, local takeaways and&nbsp;shops&nbsp;nearby</li>
-        <li>Parking and outdoor breakout&nbsp;spaces</li>
-      </ul>
-      <h4><strong>Upgrade to BYOC</strong> for everything from the standard ticket, plus...</h4>
-      <ul class="group secondary">
-        <li>A dedicated desk space for your computer&nbsp;setup</li>
-        <li>Wired network and power within arms&nbsp;reach</li>
-        <li>An extra space to call your own for the&nbsp;weekend</li>
-      </ul>
+  <div id="key_details" class="key_details container">
+    <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+        <h3>Key details</h3>
+        <ul class="group headlines">
+          <li><span class="date_date">15‑17</span>
+            <span class="date_month">April</span>
+            <span class="date_year">2022</span>
+            <div class="small">(<a href="http://www.google.com/calendar/render?action=TEMPLATE&amp;text=altLAN%209&amp;dates=20220415/20220417&amp;details=&amp;location=Boundless+Outdoors%2C+Worcestershire+DY9+9UU&amp;trp=false&amp;sprop=&amp;sprop=name:" target="_blank" rel="nofollow">Add to calendar</a>)</div>
+          </li>
+          <li>At <a href="https://goo.gl/maps/4HFYSU2X5ovCK86G8" title="" target="_blank">Boundless Outdoors, Worcestershire DY9 9UU</a></li>
+          <li>Stage events</li>
+          <li>Friendly competitions and&nbsp;group&nbsp;games</li>
+          <li>Saturday Night Quiz</li>
+          <li>Big Rockband setup</li>
+          <li>The Nail Game</li>
+          <li>Firepit</li>
+        </ul>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+        <h4>Plus...</h4>
+        <ul class="group secondary">
+          <li>Beds and showers</li>
+          <li>Board games</li>
+          <li>Cooked breakfast on Saturday and&nbsp;Sunday</li>
+          <li>Small kitchen access, local takeaways and&nbsp;shops&nbsp;nearby</li>
+          <li>Parking and outdoor breakout&nbsp;spaces</li>
+        </ul>
+        <h4><strong>Upgrade to BYOC</strong> for everything from the standard ticket, plus...</h4>
+        <ul class="group secondary">
+          <li>A dedicated desk space for your computer&nbsp;setup</li>
+          <li>Wired network and power within arms&nbsp;reach</li>
+          <li>An extra space to call your own for the&nbsp;weekend</li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -95,18 +97,20 @@ background-repeat: no-repeat; align-content: center; padding:0; margin:0;" id="b
       <img class="mx-2 img-fluid" style="object-fit: cover;" src="images/IMG_0125-768x1024.jpg">
       <img class="mx-2 img-fluid" style="object-fit: cover;" src="images/21728110_1339786979453600_6162269120443706677_n.jpg">
       <img class="mx-2 img-fluid" style="object-fit: cover;" src="images/IMG_0144-768x1024.jpg">
-      <img class="mx-2 img-fluid" style="object-fit: cover;" src="images/IMG_20180331_223627-768x1024.jpg">
-      <img class="mx-2 img-fluid" style="object-fit: cover;" src="images/IMG_20180401_194628-1024x768.jpg">
     </div>
 
     <div class="flex-x mb-2" style="height: 20vh;">
-
       <img class="mx-2 img-fluid" style="object-fit: cover;" src="images/IMG_0174-1024x768.jpg">
       <img class="mx-2 img-fluid" style="object-fit: cover;" src="images/IMG_0185-1024x768.jpg">
       <img class="mx-2 img-fluid" style="object-fit: cover;" src="images/IMG_0207-1024x768.jpg">
       <img class="mx-2 img-fluid" style="object-fit: cover;" src="images/IMG_0212-1024x886.jpg">
+    </div>
+
+    <div class="flex-x mb-2" style="height: 20vh;">
       <img class="mx-2 img-fluid" style="object-fit: cover;" src="images/IMG_0566-683x1024.jpg">
       <img class="mx-2 img-fluid" style="object-fit: cover;" src="images/IMG_20180401_023837-1024x768.jpg">
+      <img class="mx-2 img-fluid" style="object-fit: cover;" src="images/IMG_20180331_223627-768x1024.jpg">
+      <img class="mx-2 img-fluid" style="object-fit: cover;" src="images/IMG_20180401_194628-1024x768.jpg">
     </div>
 
   </div>
@@ -121,8 +125,6 @@ background-repeat: no-repeat; align-content: center; padding:0; margin:0;" id="b
   background-repeat: no-repeat;
   background-size: cover;">
 </div>
-
-
 
 
 
@@ -281,7 +283,7 @@ background-repeat: no-repeat; align-content: center; padding:0; margin:0;" id="b
   background-size: cover;">
 </div>
 
-<div style="width: 100vw; min-height: 50vh; background: black; padding: 20px; align-items: center;" id="box6" class="flex-y">
+<div style="width: 100vw; background: black; padding: 20px; align-items: center;" id="box6" class="flex-y">
 
   <div id="join" class="join" style="width: 45%; color: white;">
 
@@ -302,12 +304,6 @@ background-repeat: no-repeat; align-content: center; padding:0; margin:0;" id="b
 <div style="width: 100vw; background: black; padding: 20px; align-items: center;">
   <p style="text-align: center; color: white;">©2022 altGaming Ltd.</p>
 </div>
-
-
-
-
-
-
 
 
 

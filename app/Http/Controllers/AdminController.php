@@ -90,6 +90,12 @@ class AdminController extends Controller {
     ]);
   }
 
+  public function hero () {
+    return view('admin.hero', [
+      //'hero_items' => AltLan::all()
+    ]);
+  }
+
   public function events () {
     return view('admin.events', [
       'events' => Event::all()

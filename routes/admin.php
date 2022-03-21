@@ -75,6 +75,9 @@ Route::post('/admin/title/store', [TitleController::class, 'store'])->middleware
 Route::post('/admin/badge/store', [BadgeController::class, 'store'])->middleware('admin');
 
 
+Route::get('/admin/hero', [AdminController::class, 'hero'])->middleware('admin');
+
+
 // Image Related
 Route::post('/admin/delete_image', function (Request $request) {
   $image = ItemImage::where('id', $request->id)->get()->first()->delete();
