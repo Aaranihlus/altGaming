@@ -17,10 +17,11 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\OrderController;
 
+use Illuminate\Support\Facades\Redis;
 use RestCord\DiscordClient;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
-use Intervention\Image\ImageManagerStatic as Image;
+use Intervention\Image\ImageManagerStatic;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 require __DIR__.'/admin.php';
@@ -28,9 +29,27 @@ require __DIR__.'/auth.php';
 
 //General pages
 Route::get('/', function () {
+
+  $heroItems = [];
+  $heroEnabled = false;
+
+  if(Redis::get('hero_active')){
+    $heroEnabled = true;
+    foreach ( \DB::select('select * from hero_banner') as $hero ) {
+      if ( $hero->object_type == "event" ) {
+        $heroItems[] = Event::where('id', $hero->object_id)->get()->first();
+      } elseif( $hero->object_type == "post" ) {
+        $heroItems[] = Post::where('id', $hero->object_id)->get()->first();
+      } elseif( $hero->object_type == "item" ) {
+        $heroItems[] = Item::with('images')->where('id', $hero->object_id)->get()->first();
+      }
+    }
+  }
+
   return view('home', [
     'posts' => Post::latest()->limit(9)->get(),
-    'highlighted_event' => Event::where('highlighted', 1)->get()->first()
+    'heroEnabled' => $heroEnabled,
+    'heroItems' => $heroItems
   ]);
 });
 
@@ -293,13 +312,6 @@ Route::post('/profile/update', function (Request $request) {
 
   $user = User::find(Auth::id());
 
-  if(isset($request->profile_picture)){
-    //$image = Image::make($request->profile_picture->getRealPath());
-    //$image_resize->resize(300, 300);
-    $path = $request->file('profile_picture')->store('profile_pictures');
-    $user->profile_picture = $path;
-  }
-
   $user->profile_visible = 0;
   if($request->profile_visible == "on"){
     $user->profile_visible = 1;
@@ -309,7 +321,6 @@ Route::post('/profile/update', function (Request $request) {
   $user->badge_id = $request->badge_id;
   $user->twitch_channel = $request->twitch_channel;
   $user->youtube_channel = $request->youtube_channel;
-  $user->discord_id = $request->discord_id;
 
   $user->save();
   return redirect("/profile/edit");

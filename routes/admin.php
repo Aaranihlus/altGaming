@@ -13,6 +13,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\TitleController;
 use App\Http\Controllers\BadgeController;
+use App\Http\Controllers\HeroBannerController;
 use Illuminate\Http\Request;
 use App\Models\ItemImage;
 
@@ -75,7 +76,11 @@ Route::post('/admin/title/store', [TitleController::class, 'store'])->middleware
 Route::post('/admin/badge/store', [BadgeController::class, 'store'])->middleware('admin');
 
 
-Route::get('/admin/hero', [AdminController::class, 'hero'])->middleware('admin');
+Route::get('/admin/hero', [AdminController::class, 'hero']);
+Route::post('/admin/items_by_type', [HeroBannerController::class, 'items_by_type']);
+Route::post('/admin/hero/store', [HeroBannerController::class, 'store']);
+Route::post('/admin/hero/enable', [HeroBannerController::class, 'enable']);
+Route::post('/admin/hero/disable', [HeroBannerController::class, 'disable']);
 
 
 // Image Related

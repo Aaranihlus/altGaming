@@ -10,7 +10,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
 $('.post-comment-button').on('click', function(){
-
   axios.post('/comment/store', {
     comment: $('#comment').val(),
     post_id: $(this).data('post-id')
@@ -21,12 +20,10 @@ $('.post-comment-button').on('click', function(){
   .catch(function (error) {
     console.log(response);
   });
-
 });
 
 
 $('.delete-comment-button').on('click', function(){
-
   axios.post('/comment/delete', {
     comment_id: $(this).data('id')
   })
@@ -36,7 +33,6 @@ $('.delete-comment-button').on('click', function(){
   .catch(function (error) {
     console.log(response);
   });
-
 });
 
 
@@ -73,6 +69,116 @@ $('.load-more-posts-button').on('click', function(){
 
   });
 });
+
+
+
+
+$('.hero-type-select').on('change', function(){
+  if($(this).type != ""){
+    $('.hero-item-select').empty();
+    axios.post('/admin/items_by_type', {
+      type: $(this).val()
+    })
+    .then(function (response) {
+      if ( response.data.items.length > 0 ) {
+        if($('.hero-type-select').val() == "item"){
+          response.data.items.forEach(
+            e => $('.hero-item-select').append(`<option value="`+e.id+`">`+e.name+`</option>`)
+          );
+        } else {
+          response.data.items.forEach(
+            e => $('.hero-item-select').append(`<option value="`+e.id+`">`+e.title+`</option>`)
+          );
+        }
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+});
+
+$('.new-hero-item').on('click', function(){
+  var currentItemCount = $('.hero-item').length + 1;
+  $('.hero-items-container').append(`
+    <div class="bg-alt-yellow flex-x extra-rounded p-4 mb-4 hero-item" style="align-items: center;">
+      <input type="hidden" name="hero_id[`+currentItemCount+`]" value="0">
+      <span>#</span>
+      <input type="number" name="order[`+currentItemCount+`]" value="`+currentItemCount+`">
+      <span>Type</span>
+      <input type="text" name="type[`+currentItemCount+`]" value="`+$('.hero-type-select').val()+`">
+      <span>ID</span>
+      <input type="text" name="id[`+currentItemCount+`]" value="`+$('.hero-item-select').val()+`">
+    </div>
+  `);
+});
+
+$('.enable-hero-button').on('click', function(){
+  axios.post('/admin/hero/enable', {
+
+  })
+  .then(function (response) {
+    $('#hero-banner-status').css('color', 'green').text("Enabled");
+    $('.enable-hero-button').hide();
+    $('.disable-hero-button').show();
+  })
+  .catch(function (error) {
+
+  });
+});
+
+$('.disable-hero-button').on('click', function(){
+  axios.post('/admin/hero/disable', {
+
+  })
+  .then(function (response) {
+    $('#hero-banner-status').css('color', 'red').text("Disabled");
+    $('.enable-hero-button').show();
+    $('.disable-hero-button').hide();
+  })
+  .catch(function (error) {});
+});
+
+
+var currentHeroIndex = 0;
+var maxIndex = $('.hero-item').length - 1;
+
+$('#hero-right-button').on('click', function(){
+  $('*[data-hero-index="'+currentHeroIndex+'"]').hide();
+  currentHeroIndex = currentHeroIndex + 1;
+  if(currentHeroIndex > maxIndex){
+    currentHeroIndex = 0;
+  }
+  $('*[data-hero-index="'+currentHeroIndex+'"]').show();
+});
+
+$('#hero-left-button').on('click', function(){
+  $('*[data-hero-index="'+currentHeroIndex+'"]').hide();
+  currentHeroIndex = currentHeroIndex - 1;
+  if(currentHeroIndex < 0){
+    currentHeroIndex = maxIndex1;
+  }
+  $('*[data-hero-index="'+currentHeroIndex+'"]').show();
+});
+
+$('.hero-button').on('click', function(){
+  $('*[data-hero-index="'+currentHeroIndex+'"]').hide();
+  currentHeroIndex = $(this).data('index');
+  $('*[data-hero-index="'+currentHeroIndex+'"]').show();
+});
+
+/*setInterval(function() {
+  $('*[data-hero-index="'+currentHeroIndex+'"]').hide();
+  currentHeroIndex += 1;
+  $('*[data-hero-index="'+currentHeroIndex+'"]').show();
+}, 5000);*/
+
+
+
+
+
+
+
 
 
 $('#open-mobile-nav-button').on('click', function(){

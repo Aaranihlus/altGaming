@@ -1,4 +1,4 @@
-<nav class="navbar bg-alt-yellow navbar-expand-lg navbar-dark" style="display: flex; justify-content: space-between; height: 10vh; max-height: 10vh;">
+<nav class="navbar bg-alt-yellow navbar-expand-lg navbar-dark" style="display: flex; justify-content: space-between; height: 8vh; max-height: 8vh;">
 
   <div style="height: 100%;">
     <a href="/"><img src="/images/logo.png" class="img-fluid mx-4 p-1" alt="Owlie Logo" style="height: 100%;"></a>
@@ -29,9 +29,9 @@
             <li><a href="/profile/edit" class="text-md uppercase mt-8">Edit Profile</a></li>
             <li><a href="/account" class="text-md uppercase mt-8">Account</a></li>
 
-            @if(auth()->user()->roles->contains('name', 'Admin'))
+            {{--@if(auth()->user()->roles->contains('name', 'Admin'))--}}
               <li><a href="/admin" class="text-md uppercase mt-8">Admin</a></li>
-            @endif
+            {{--@endif--}}
 
             <!--<li><a href="/logout" class="text-md uppercase mt-8">Logout</a></li>-->
           </ul>

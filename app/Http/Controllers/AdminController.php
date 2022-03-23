@@ -15,6 +15,7 @@ use App\Models\Achievement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 
 use RestCord\DiscordClient;
 
@@ -92,7 +93,8 @@ class AdminController extends Controller {
 
   public function hero () {
     return view('admin.hero', [
-      //'hero_items' => AltLan::all()
+      'hero_items' => \DB::select('select * from hero_banner', []),
+      'heroEnabled' => Redis::get('hero_active') ?? false
     ]);
   }
 

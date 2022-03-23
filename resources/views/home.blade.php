@@ -2,41 +2,36 @@
 
 @section('content')
 
-  <div class="container mb-4">
+  @if( $heroEnabled )
 
-    @if( config("app.hero_active") == true )
-    <div class="container-fluid flex-x extra-rounded g-0 bg-alt-yellow" style="border: 2px solid #ffc107; width: 100%; justify-content: space-between; align-items: center; min-height: 25vh;">
+    <div class="container-fluid g-0 m-0 flex-x mb-4" style="justify-content: center; align-items: center; border-bottom: 2px solid #ffc107;">
 
-      <div style="
-        background-image: url({{ asset('storage/' . $highlighted_event->thumbnail) }});
-        background-position: top;
-        background-repeat: no-repeat;
-        min-height: 25vh;
-        width: 100%;
-        background-size: cover;
-        flex-basis: 50%;
-        border-collapse: separate;
-        border-bottom-left-radius: 12px;
-        border-top-left-radius: 12px;
-      "></div>
+      @foreach($heroItems as $item)
+        <x-hero-banner-item index="{{ $loop->index }}" :item="$item"></x-hero-banner-item>
+      @endforeach
 
-      <div style="flex-basis: 50%;" class="p-4">
-        <h1><span style="color: white;">{{ $highlighted_event->title }} Tickets</span> on sale <span style="color: white">NOW</span></h1>
-        <h3>{{ \Carbon\Carbon::parse( $highlighted_event->start_date )->diffForHumans() }}</h3>
-        <div>
-          <button type="button" class="btn btn-warning"><a class="link-dark" href="/shop/tickets">Get Tickets</a></button>
-          <button type="button" class="btn btn-warning"><a class="link-dark" href="/altlan">More Info</a></button>
+      @if(count($heroItems) > 1)
+        <div id="hero-left-button" class="mx-3" style="font-size: 2em; cursor: pointer; position: absolute; left: 1vh;"><i class="fas fa-angle-left"></i></div>
+        <div id="hero-right-button" class="mx-3" style="font-size: 2em; cursor: pointer; position: absolute; right: 1vw;"><i class="fas fa-angle-right"></i></div>
+
+        <div class="container-fluid g-0 m-0 flex-x" style="align-items: center; justify-content: center; position: absolute; top: 40vh;">
+          @foreach($heroItems as $item)
+            <button type="button" class="btn btn-warning hero-button mx-2" data-index="{{ $loop->index }}"></button>
+          @endforeach
         </div>
-      </div>
+      @endif
 
     </div>
-    <hr>
-    @endif
+
+  @endif
+
+
+  <div class="container mb-4">
 
     <div class="row" id="post-container">
       @foreach($posts as $post)
         @if ( $post->published == 1 )
-          <x-content-template index="{{ $loop->index ?? 1 }}" :post="$post"> </x-content-template>
+          <x-content-template-alt index="{{ $loop->index ?? 1 }}" :post="$post"> </x-content-template-alt>
         @endif
       @endforeach
     </div>

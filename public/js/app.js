@@ -5299,50 +5299,6 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-/*import { loadScript } from "@paypal/paypal-js";
-
-if ( $('#paypal-container').length > 0 ) {
-
-  loadScript({
-    "client-id": $('#client_id').val(),
-    "data-client-token": $('#access_token').val(),
-    "buyer-country": "GB",
-    "currency": "GBP",
-    "enable-funding": "paylater",
-    "disable-funding": "card",
-  }).then((paypal) => {
-
-    paypal.HostedFields.render({
-      styles: {
-        'input': {
-          'font-size': '16pt',
-          'color': '#3A3A3A'
-        },
-        '.number': {
-          'font-family': 'monospace'
-        },
-        '.valid':  {
-          'color': 'green'
-        }
-      },
-      fields: {
-        number: {
-          selector: '#card-number'
-        },
-        cvv: {
-          selector: '#cvv',
-          placeholder: '•••'
-        },
-        expirationDate: {
-          selector: '#expiration-date'
-        }
-      }
-    });
-
-    //$('#loading-spinner').hide();
-}
-*/
-
 $('.post-comment-button').on('click', function () {
   axios.post('/comment/store', {
     comment: $('#comment').val(),
@@ -5389,6 +5345,79 @@ $('.load-more-posts-button').on('click', function () {
     console.log(response);
   }).then(function () {});
 });
+$('.hero-type-select').on('change', function () {
+  if ($(this).type != "") {
+    $('.hero-item-select').empty();
+    axios.post('/admin/items_by_type', {
+      type: $(this).val()
+    }).then(function (response) {
+      if (response.data.items.length > 0) {
+        if ($('.hero-type-select').val() == "item") {
+          response.data.items.forEach(function (e) {
+            return $('.hero-item-select').append("<option value=\"" + e.id + "\">" + e.name + "</option>");
+          });
+        } else {
+          response.data.items.forEach(function (e) {
+            return $('.hero-item-select').append("<option value=\"" + e.id + "\">" + e.title + "</option>");
+          });
+        }
+      }
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }
+});
+$('.new-hero-item').on('click', function () {
+  var currentItemCount = $('.hero-item').length + 1;
+  $('.hero-items-container').append("\n    <div class=\"bg-alt-yellow flex-x extra-rounded p-4 mb-4 hero-item\" style=\"align-items: center;\">\n      <input type=\"hidden\" name=\"hero_id[" + currentItemCount + "]\" value=\"0\">\n      <span>#</span>\n      <input type=\"number\" name=\"order[" + currentItemCount + "]\" value=\"" + currentItemCount + "\">\n      <span>Type</span>\n      <input type=\"text\" name=\"type[" + currentItemCount + "]\" value=\"" + $('.hero-type-select').val() + "\">\n      <span>ID</span>\n      <input type=\"text\" name=\"id[" + currentItemCount + "]\" value=\"" + $('.hero-item-select').val() + "\">\n    </div>\n  ");
+});
+$('.enable-hero-button').on('click', function () {
+  axios.post('/admin/hero/enable', {}).then(function (response) {
+    $('#hero-banner-status').css('color', 'green').text("Enabled");
+    $('.enable-hero-button').hide();
+    $('.disable-hero-button').show();
+  })["catch"](function (error) {});
+});
+$('.disable-hero-button').on('click', function () {
+  axios.post('/admin/hero/disable', {}).then(function (response) {
+    $('#hero-banner-status').css('color', 'red').text("Disabled");
+    $('.enable-hero-button').show();
+    $('.disable-hero-button').hide();
+  })["catch"](function (error) {});
+});
+var currentHeroIndex = 0;
+var maxIndex = $('.hero-item').length - 1;
+$('#hero-right-button').on('click', function () {
+  $('*[data-hero-index="' + currentHeroIndex + '"]').hide();
+  currentHeroIndex = currentHeroIndex + 1;
+
+  if (currentHeroIndex > maxIndex) {
+    currentHeroIndex = 0;
+  }
+
+  $('*[data-hero-index="' + currentHeroIndex + '"]').show();
+});
+$('#hero-left-button').on('click', function () {
+  $('*[data-hero-index="' + currentHeroIndex + '"]').hide();
+  currentHeroIndex = currentHeroIndex - 1;
+
+  if (currentHeroIndex < 0) {
+    currentHeroIndex = maxIndex1;
+  }
+
+  $('*[data-hero-index="' + currentHeroIndex + '"]').show();
+});
+$('.hero-button').on('click', function () {
+  $('*[data-hero-index="' + currentHeroIndex + '"]').hide();
+  currentHeroIndex = $(this).data('index');
+  $('*[data-hero-index="' + currentHeroIndex + '"]').show();
+});
+/*setInterval(function() {
+  $('*[data-hero-index="'+currentHeroIndex+'"]').hide();
+  currentHeroIndex += 1;
+  $('*[data-hero-index="'+currentHeroIndex+'"]').show();
+}, 5000);*/
+
 $('#open-mobile-nav-button').on('click', function () {
   $('#mobile-nav-container').show();
 });

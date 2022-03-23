@@ -54,8 +54,6 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'hero_active' => false,
-
     'asset_url' => env('ASSET_URL', null),
 
     /*

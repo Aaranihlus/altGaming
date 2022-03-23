@@ -4,7 +4,7 @@
 
 <h1 style="position: fixed; left: 25px; top: 25px; z-index: 9999;"><a href="/"><i class="far fa-times-circle"></i></a></h1>
 
-<div style="width: 100vw; height: 100vh; background-image: url('images/b1.jpg'); background-position: center; background-size: cover;
+<div style="width: 100vw; height: 100vh; background-image: url('images/main-opt.jpg'); background-position: center; background-size: cover;
 background-repeat: no-repeat; align-content: center; padding:0; margin:0;" id="box0">
 
   <div style="display: flex; flex-direction: column; flex-wrap: nowrap; width: 100%; height: 100%; justify-content: center; align-items: center; background:rgba(0,0,0,0.85);">

@@ -22,7 +22,6 @@ class CreateEventsTable extends Migration
             $table->text('information');
             $table->string('type');
             $table->string('slug');
-            $table->boolean('highlighted')->default(null);
             $table->boolean('active')->default(null);
             $table->string('alt_lan_number')->default(null);
             $table->foreignId('user_id');

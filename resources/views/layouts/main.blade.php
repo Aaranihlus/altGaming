@@ -11,13 +11,15 @@
 
 <body style="padding-bottom: 5vh;">
 
-  <div class="container-fluid g-0 mb-4" id="header">
+  <div class="container-fluid g-0 m-0" id="header" style="border-bottom: 2px solid #ffc107;">
     @include('layouts.nav')
   </div>
 
   @yield('content')
 
   @include('layouts.mobile-nav')
+
+  @include('layouts.social-panel')
 
   <!--<div class="container-fluid g-0 bg-alt-yellow flex-y" id="footer" style="max-height: 5vh; height: 5vh; text-align: center; justify-content: center; position: fixed; right: 0; bottom: 0; left: 0;">
     <p class="g-0 mb-0">©2022 altGaming Ltd</p>
