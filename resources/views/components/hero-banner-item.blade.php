@@ -5,6 +5,10 @@
                    background-repeat: no-repeat;
                    background-size: cover;">
   <div style="height: 40vh; min-height: 100%; background: rgba(0, 0, 0, .8); align-items: center; justify-content: center;" class="flex-x">
-    <h1>{{ $item->name ?? $item->title }}</h1>
+    <h1 style="text-shadow: 5px 5px black;
+    font-size: 4rem;
+    font-weight: bold;
+    color: white;
+    font-family: boldfont;">{{ $item->name ?? $item->title }}</h1>
   </div>
 </div>
