@@ -15,6 +15,10 @@
     @include('layouts.nav')
   </div>
 
+  @if( !request()->is('/') )
+    <div class="container m-4"></div>
+  @endif
+
   @yield('content')
 
   @include('layouts.mobile-nav')
