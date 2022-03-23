@@ -18,8 +18,8 @@ class CreateHeroBannerTable extends Migration
             $table->string("order");
             $table->string("object_type");
             $table->string("object_id");
-            $table->string("message");
-            $table->string("image");
+            $table->string("message")->nullable();
+            $table->string("image")->nullable();
             $table->timestamps();
         });
     }

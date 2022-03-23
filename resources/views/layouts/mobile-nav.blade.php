@@ -26,5 +26,15 @@
       <a href="/login">Log in</a>
     @endauth
 
+    <hr>
+
+    <div class="flex-x">
+      <a href="https://discord.gg/jvgX8r7" class="mx-2"><i class="fab fa-discord"></i></a>
+      <a href="https://https://www.facebook.com/altlanuk" class="mx-2"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="mx-2"><i class="fab fa-instagram-square"></i></a>
+      <a href="https://twitter.com/altgaminguk" class="mx-2"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="mx-2"><i class="fab fa-youtube"></i></a>
+    </div>
+
   </div>
 </div>
