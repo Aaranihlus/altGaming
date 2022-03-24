@@ -5,7 +5,7 @@
                    background-repeat: no-repeat;
                    background-size: cover;">
   <div style="height: 40vh; min-height: 100%; background: rgba(0, 0, 0, .8); align-items: center; justify-content: center;" class="flex-x">
-    <h1 style="text-shadow: 5px 5px black;
+    <h1 style="text-shadow: 3px 3px #1d1800;
     font-size: 4rem;
     font-weight: bold;
     color: white;

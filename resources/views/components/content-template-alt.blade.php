@@ -1,7 +1,6 @@
-
 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 mb-4 animate__animated animate__fadeIn">
 
-  <div class="content-template extra-rounded flex-y" style="border: 1px solid #ffc107; height: 350px;
+  <div class="content-template extra-rounded flex-y" style="border: 2px solid #ffc107; height: 350px; box-shadow: 3px 3px;
       background-image: url({{ asset('storage/' . $post->thumbnail) }});
       background-position: center;
       background-repeat: no-repeat;
