@@ -33,25 +33,19 @@
         <input type="text" class="form-control" id="address_line2" name="address_line2">
       </div>
 
-      <div class="mb-3">
-        <label for="address_line3" class="form-label">Address Line 3</label>
-        <input type="text" class="form-control" id="address_line3" name="address_line3">
+      <div class="flex-x">
+        <div class="mb-3 mr-1">
+          <label for="county" class="form-label">County</label>
+          <input type="text" class="form-control" id="county" name="county">
+        </div>
+
+        <div class="mb-3 ml-1">
+          <label for="postcode" class="form-label">Postcode</label>
+          <input type="text" class="form-control" id="postcode" name="postcode">
+        </div>
       </div>
 
-      <div class="mb-3">
-        <label for="address_line4" class="form-label">Address Line 4</label>
-        <input type="text" class="form-control" id="address_line4" name="address_line4">
-      </div>
 
-      <div class="mb-3">
-        <label for="county" class="form-label">County</label>
-        <input type="text" class="form-control" id="county" name="county">
-      </div>
-
-      <div class="mb-3">
-        <label for="postcode" class="form-label">Postcode</label>
-        <input type="text" class="form-control" id="postcode" name="postcode">
-      </div>
 
       <button type="submit" class="btn btn-warning mx-1">Update Account</button>
 
