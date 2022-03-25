@@ -366,7 +366,7 @@ Route::get('/account/invoice/{order_id}', function ( $order_id ) {
       'quantity' => $v->quantity,
       'price' => $v->item->price,
       'name' => $v->item->name
-    ]
+    ];
   }
 
   $data['order_total'] = $order->amount;
