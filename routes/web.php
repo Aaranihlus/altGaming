@@ -350,9 +350,9 @@ Route::get('/account/order/{order:paypal_id}', function (Order $order) {
 
 });
 
-Route::get('/account/invoice/{order_id}', function (Request $request) {
+Route::get('/account/invoice/{order_id}', function ( $order_id ) {
 
-  $order = Order::with('items', 'user')->where('id', $request->order_id)->get()->first();
+  $order = Order::with('items', 'user')->where('paypal_id', $order_id)->get()->first();
 
   if ( !Auth::id() OR Auth::id() != $order->user_id ) {
     return redirect("/");
