@@ -143,7 +143,7 @@ $('.disable-hero-button').on('click', function(){
 var currentHeroIndex = 0;
 var maxIndex = $('.hero-item').length - 1;
 
-heroTimer = setInterval(heroStepForward, 12000);
+var heroTimer = setInterval(heroStepForward, 12000);
 
 $('#hero-right-button').on('click', function(){
   $('*[data-hero-index="'+currentHeroIndex+'"]').hide();
