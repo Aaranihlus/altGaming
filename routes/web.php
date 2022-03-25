@@ -358,7 +358,7 @@ Route::get('/account/invoice/{order_id}', function ( $order_id ) {
     return redirect("/");
   }
 
-  $pdf = PDF::loadView( 'invoice', $order->toArray() );
+  $pdf = PDF::loadView( 'invoice', compact($order->toArray()) );
   return $pdf->stream( 'invoice_'.$order->paypal_id.'.pdf' );
 });
 
