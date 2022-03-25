@@ -167,11 +167,11 @@ $('.hero-button').on('click', function(){
   $('*[data-hero-index="'+currentHeroIndex+'"]').show();
 });
 
-/*setInterval(function() {
+setInterval(function() {
   $('*[data-hero-index="'+currentHeroIndex+'"]').hide();
   currentHeroIndex += 1;
   $('*[data-hero-index="'+currentHeroIndex+'"]').show();
-}, 5000);*/
+}, 10000);
 
 
 

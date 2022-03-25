@@ -5412,12 +5412,11 @@ $('.hero-button').on('click', function () {
   currentHeroIndex = $(this).data('index');
   $('*[data-hero-index="' + currentHeroIndex + '"]').show();
 });
-/*setInterval(function() {
-  $('*[data-hero-index="'+currentHeroIndex+'"]').hide();
+setInterval(function () {
+  $('*[data-hero-index="' + currentHeroIndex + '"]').hide();
   currentHeroIndex += 1;
-  $('*[data-hero-index="'+currentHeroIndex+'"]').show();
-}, 5000);*/
-
+  $('*[data-hero-index="' + currentHeroIndex + '"]').show();
+}, 10000);
 $('#open-mobile-nav-button').on('click', function () {
   $('#mobile-nav-container').show();
 });

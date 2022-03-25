@@ -14,9 +14,9 @@
         <div id="hero-left-button" class="mx-3" style="font-size: 2em; cursor: pointer; position: absolute; left: 1vh;"><i class="fas fa-angle-left"></i></div>
         <div id="hero-right-button" class="mx-3" style="font-size: 2em; cursor: pointer; position: absolute; right: 1vw;"><i class="fas fa-angle-right"></i></div>
 
-        <div class="container-fluid g-0 m-0 flex-x" style="align-items: center; justify-content: center; position: absolute; top: 40vh;">
+        <div class="container-fluid g-0 m-0 flex-x" style="align-items: center; justify-content: center; position: absolute; top: 46vh;">
           @foreach($heroItems as $item)
-            <button type="button" class="btn btn-warning hero-button mx-2" data-index="{{ $loop->index }}"></button>
+            <button type="button" class="btn btn-warning hero-button mx-2" style="width: 50px;" data-index="{{ $loop->index }}"></button>
           @endforeach
         </div>
       @endif
