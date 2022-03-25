@@ -341,14 +341,23 @@ Route::get('/account', function () {
 
 Route::get('/account/order/{order:paypal_id}', function (Order $order) {
 
-  if ( !Auth::id() OR Auth::id() != $order->user_id ) {
+  if ( !Auth::id() OR Auth::id() != $order->user_id )
     return redirect("/");
-  }
 
   return view('order', [
     'order' => $order
   ]);
 
+});
+
+Route::get('/account/invoice/{order:paypal_id}', function (Order $order) {
+
+  if ( !Auth::id() OR Auth::id() != $order->user_id ) {
+    return redirect("/");
+  }
+
+  $pdf = PDF::loadView('invoice', $order);
+  return $pdf->download('invoice_'.$order->paypal_id.'.pdf');
 });
 
 

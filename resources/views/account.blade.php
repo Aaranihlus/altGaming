@@ -76,7 +76,7 @@
             <td><span>{{ $order->amount }}</span></td>
             <td>
               <button class="btn btn-warning mx-1"><a href="/account/order/{{ $order->paypal_id }}">View</a></button>
-              <button class="btn btn-warning mx-1"><a href="/order/invoice/{{ $order->paypal_id }}">Invoice</a></button>
+              <button class="btn btn-warning mx-1"><a href="/account/invoice/{{ $order->paypal_id }}">Invoice</a></button>
             </td>
           </tr>
           @endforeach
