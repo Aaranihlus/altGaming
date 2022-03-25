@@ -361,7 +361,7 @@ Route::get('/account/invoice/{order_id}', function ( $order_id ) {
   $data = [];
   $data['paypal_id'] = $order->paypal_id;
   $data['order_items'] = [];
-  foreach ( $order->order_items as $k => $v ) {
+  foreach ( $order->items as $k => $v ) {
     $data['order_items'][] = [
       'quantity' => $v->quantity,
       'price' => $v->item->price,
