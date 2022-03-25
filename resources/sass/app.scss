@@ -25,12 +25,14 @@
     src: url('/../fonts/qanelassoft-thin.ttf');
 }
 
-
-#paypal-container > p {
-  color: white !important;
+@keyframes animatedBackground {
+  from {
+    background-position: 50% 1%;
+  }
+  to {
+    background-position: 50% 100%;
+  }
 }
-
-
 
 /* width */
 ::-webkit-scrollbar {

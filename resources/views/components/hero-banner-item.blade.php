@@ -3,7 +3,8 @@
                    background-attachment: unset;
                    background-position: center;
                    background-repeat: no-repeat;
-                   background-size: cover;">
+                   background-size: cover;
+                   animation: animatedBackground 60s linear infinite alternate">
   <div style="height: 40vh; min-height: 100%; background: rgba(0, 0, 0, .8); align-items: center; justify-content: center;" class="flex-x">
     <h1 style="text-shadow: 3px 3px #1d1800;
     font-size: 4rem;

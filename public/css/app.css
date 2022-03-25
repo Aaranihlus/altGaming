@@ -21495,10 +21495,22 @@ textarea.form-control-lg {
   font-family: thinfont;
   src: url("/../fonts/qanelassoft-thin.ttf");
 }
-#paypal-container > p {
-  color: white !important;
+@-webkit-keyframes animatedBackground {
+  from {
+    background-position: 50% 1%;
+  }
+  to {
+    background-position: 50% 100%;
+  }
 }
-
+@keyframes animatedBackground {
+  from {
+    background-position: 50% 1%;
+  }
+  to {
+    background-position: 50% 100%;
+  }
+}
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
