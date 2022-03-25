@@ -143,7 +143,7 @@ $('.disable-hero-button').on('click', function(){
 var currentHeroIndex = 0;
 var maxIndex = $('.hero-item').length - 1;
 
-heroTimer = setInterval(heroStepForward, 10000);
+heroTimer = setInterval(heroStepForward, 12000);
 
 $('#hero-right-button').on('click', function(){
   $('*[data-hero-index="'+currentHeroIndex+'"]').hide();
@@ -154,7 +154,7 @@ $('#hero-right-button').on('click', function(){
   $('*[data-hero-index="'+currentHeroIndex+'"]').show();
 
   clearInterval(heroTimer);
-  heroTimer = setInterval(heroStepForward, 10000);
+  heroTimer = setInterval(heroStepForward, 12000);
 });
 
 $('#hero-left-button').on('click', function(){
@@ -166,7 +166,7 @@ $('#hero-left-button').on('click', function(){
   $('*[data-hero-index="'+currentHeroIndex+'"]').show();
 
   clearInterval(heroTimer);
-  heroTimer = setInterval(heroStepForward, 10000);
+  heroTimer = setInterval(heroStepForward, 12000);
 });
 
 $('.hero-button').on('click', function(){
@@ -175,7 +175,7 @@ $('.hero-button').on('click', function(){
   $('*[data-hero-index="'+currentHeroIndex+'"]').show();
 
   clearInterval(heroTimer);
-  heroTimer = setInterval(heroStepForward, 10000);
+  heroTimer = setInterval(heroStepForward, 12000);
 });
 
 function heroStepForward(){
