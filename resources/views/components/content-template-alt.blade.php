@@ -9,7 +9,7 @@
       <div class="p-3 flex-y extra-rounded" style="justify-content: space-between; background: rgba(0, 0, 0, .8); height: 100%;">
 
         <div>
-          <h1 class="clip-text-2" style="color: white; text-shadow: 3px 3px #1d1800;">{{ $post->title }}</h1>
+          <h2 class="clip-text-2" style="color: white; text-shadow: 3px 3px #1d1800;">{{ $post->title }}</h2>
           <div class="flex-x" style="align-content: center; justify-content: flex-start; align-items: flex-start;">
             <div class="badge bg-warning"><a href="/{{ $post->type }}">{{ ucfirst($post->type) }}</a></div>
             <h6 style="margin-left: 8px;">{{ \Carbon\Carbon::parse( $post->created_at )->diffForHumans() }}</h6>
