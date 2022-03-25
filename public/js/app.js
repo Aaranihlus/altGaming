@@ -5387,6 +5387,7 @@ $('.disable-hero-button').on('click', function () {
 });
 var currentHeroIndex = 0;
 var maxIndex = $('.hero-item').length - 1;
+heroTimer = setInterval(heroStepForward, 10000);
 $('#hero-right-button').on('click', function () {
   $('*[data-hero-index="' + currentHeroIndex + '"]').hide();
   currentHeroIndex = currentHeroIndex + 1;
@@ -5396,27 +5397,40 @@ $('#hero-right-button').on('click', function () {
   }
 
   $('*[data-hero-index="' + currentHeroIndex + '"]').show();
+  clearInterval(heroTimer);
+  heroTimer = setInterval(heroStepForward, 10000);
 });
 $('#hero-left-button').on('click', function () {
   $('*[data-hero-index="' + currentHeroIndex + '"]').hide();
   currentHeroIndex = currentHeroIndex - 1;
 
   if (currentHeroIndex < 0) {
-    currentHeroIndex = maxIndex1;
+    currentHeroIndex = maxIndex;
   }
 
   $('*[data-hero-index="' + currentHeroIndex + '"]').show();
+  clearInterval(heroTimer);
+  heroTimer = setInterval(heroStepForward, 10000);
 });
 $('.hero-button').on('click', function () {
   $('*[data-hero-index="' + currentHeroIndex + '"]').hide();
   currentHeroIndex = $(this).data('index');
   $('*[data-hero-index="' + currentHeroIndex + '"]').show();
+  clearInterval(heroTimer);
+  heroTimer = setInterval(heroStepForward, 10000);
 });
-setInterval(function () {
+
+function heroStepForward() {
   $('*[data-hero-index="' + currentHeroIndex + '"]').hide();
   currentHeroIndex += 1;
+
+  if (currentHeroIndex > maxIndex) {
+    currentHeroIndex = 0;
+  }
+
   $('*[data-hero-index="' + currentHeroIndex + '"]').show();
-}, 10000);
+}
+
 $('#open-mobile-nav-button').on('click', function () {
   $('#mobile-nav-container').show();
 });
