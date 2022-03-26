@@ -6,7 +6,8 @@
       background-repeat: no-repeat;
       background-size: cover;">
 
-      <div class="p-3 flex-y extra-rounded" style="justify-content: space-between; background: rgba(0, 0, 0, .8); height: 100%;">
+      <div class="p-3 flex-y extra-rounded" style="justify-content: space-between; background: rgba(0, 0, 0, .7); height: 100%;
+      background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));">
 
         <div>
           <h2 class="clip-text-2" style="color: white; text-shadow: 3px 3px #1d1800;">{{ $post->title }}</h2>
