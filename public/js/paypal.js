@@ -31,6 +31,10 @@ paypal.Buttons({
 });
 
 
+console.log(paypal.HostedFields.isEligible());
+
+
+
 if (paypal.HostedFields.isEligible()) {
   let orderId;
 
