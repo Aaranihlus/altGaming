@@ -103,6 +103,7 @@ class DiscordController extends Controller {
 
         // Trying to create or update the user in the database.
         try {
+            dd($user);
             $user = $this->createOrUpdateUser($user, $accessToken->refresh_token);
         } catch (\Exception $e) {
             if (env('APP_DEBUG')) {
