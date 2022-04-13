@@ -34,7 +34,11 @@ class User extends Authenticatable
         'address_line_2',
         'town',
         'county',
-        'postcode'
+        'postcode',
+        'title_id',
+        'badge_id',
+        'twitch_channel',
+        'youtube_channel'
     ];
 
     /**

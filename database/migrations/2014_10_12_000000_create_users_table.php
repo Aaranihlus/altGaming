@@ -24,7 +24,6 @@ class CreateUsersTable extends Migration
             $table->string('locale');
             $table->boolean('mfa_enabled');
             $table->string('refresh_token')->nullable();
-
             $table->string('first_name')->nullable();
             $table->string('surname')->nullable();
             $table->string('address_line_1')->nullable();
