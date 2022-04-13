@@ -1,7 +1,7 @@
 <div class="col-3 mb-3">
   <div class="bg-alt-yellow extra-rounded p-2 flex-y" style="height: 475px;">
 
-    <div class="col">
+    <div class="col" style="flex-basis:30%;">
       <img src='{{ asset("storage/" . $item->images[0]->path) }}' alt="Thumbnail" class="img-fluid rounded" style="width: 100%;">
     </div>
 
