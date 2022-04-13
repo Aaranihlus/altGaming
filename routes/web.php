@@ -229,19 +229,11 @@ Route::get('/profile/edit', function () {
 });
 
 Route::post('/profile/update', function (Request $request) {
-
   $user = User::find(Auth::id());
-
-  $user->profile_visible = 0;
-  if($request->profile_visible == "on"){
-    $user->profile_visible = 1;
-  }
-
   $user->title_id = $request->title_id;
   $user->badge_id = $request->badge_id;
   $user->twitch_channel = $request->twitch_channel;
   $user->youtube_channel = $request->youtube_channel;
-
   $user->save();
   return redirect("/profile/edit");
 });
