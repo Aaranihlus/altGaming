@@ -101,7 +101,7 @@ class HeroBannerController extends Controller {
       $request->item_type,
       $request->item_id,
       $request->custom_text,
-      $path,
+      $path ?? "",
       $order
     ]);
 
