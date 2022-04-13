@@ -9,8 +9,9 @@ class Event extends Model {
   use HasFactory;
 
   protected $fillable = [
-    'title',
+    'name',
     'start_date',
+    'end_date',
     'location',
     'description',
     'type',
@@ -18,7 +19,8 @@ class Event extends Model {
     'alt_lan_number',
     'user_id',
     'thumbnail',
-    'achievement_id'
+    'achievement_id',
+    'active'
   ];
 
   public function user() {
@@ -31,6 +33,10 @@ class Event extends Model {
 
   public function orders() {
     return $this->hasManyThrough(ItemOrder::class, Item::class);
+  }
+
+  public function attendees() {
+    return $this->hasMany(EventUser::class);
   }
 
 

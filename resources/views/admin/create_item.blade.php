@@ -24,7 +24,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="price" class="form-label">Price</label>
+          <label for="price" class="form-label">Base Price</label>
           <input type="text" class="form-control" id="price" name="price">
         </div>
 
@@ -47,25 +47,7 @@
         </div>
 
 
-        <div class="mb-3">
-          <label class="form-label">Colour Options</label>
-          <input type="hidden" name="group[0]" value="Colour">
-
-          <div>
-            <label class="form-label">Option Name</label>
-            <input type="text" class="form-control my-2" name="option_name[0][0]">
-            <label class="form-label">Option Price</label>
-            <input type="text" class="form-control my-2" name="option_price[0][0]">
-          </div>
-
-          <div>
-            <label class="form-label">Option Name</label>
-            <input type="text" class="form-control my-2" name="option_name[0][1]">
-            <label class="form-label">Option Price</label>
-            <input type="text" class="form-control my-2" name="option_price[0][1]">
-          </div>
-
-          <button type="button" id="add-another-option-button" class="btn btn-warning">Add Option</button>
+        <div class="mb-3" id="option-groups-container">
         </div>
 
         <button type="submit" class="btn btn-warning">Create</button>

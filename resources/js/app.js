@@ -36,6 +36,21 @@ $('.delete-comment-button').on('click', function(){
 });
 
 
+
+$('.event-sign-up-button').on('click', function(){
+  axios.post('/event/register', {
+    id: $(this).data('id')
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(response);
+  });
+});
+
+
+
 $('.load-more-posts-button').on('click', function(){
 
   var offset = $(this).data('offset');
@@ -81,7 +96,7 @@ $('.hero-type-select').on('change', function(){
     })
     .then(function (response) {
       if ( response.data.items.length > 0 ) {
-        if($('.hero-type-select').val() == "item"){
+        if($('.hero-type-select').val() == "item" || $('.hero-type-select').val() == "event" || $('.hero-type-select').val() == "altlan" ){
           response.data.items.forEach(
             e => $('.hero-item-select').append(`<option value="`+e.id+`">`+e.name+`</option>`)
           );
@@ -98,51 +113,45 @@ $('.hero-type-select').on('change', function(){
   }
 });
 
-$('.new-hero-item').on('click', function(){
-  var currentItemCount = $('.hero-item').length + 1;
-  $('.hero-items-container').append(`
-    <div class="bg-alt-yellow flex-x extra-rounded p-4 mb-4 hero-item" style="align-items: center;">
-      <input type="hidden" name="hero_id[`+currentItemCount+`]" value="0">
-      <span>#</span>
-      <input type="number" name="order[`+currentItemCount+`]" value="`+currentItemCount+`">
-      <span>Type</span>
-      <input type="text" name="type[`+currentItemCount+`]" value="`+$('.hero-type-select').val()+`">
-      <span>ID</span>
-      <input type="text" name="id[`+currentItemCount+`]" value="`+$('.hero-item-select').val()+`">
-    </div>
-  `);
-});
-
 $('.enable-hero-button').on('click', function(){
-  axios.post('/admin/hero/enable', {
-
-  })
+  axios.post('/admin/hero/enable')
   .then(function (response) {
     $('#hero-banner-status').css('color', 'green').text("Enabled");
     $('.enable-hero-button').hide();
     $('.disable-hero-button').show();
-  })
-  .catch(function (error) {
-
   });
 });
 
 $('.disable-hero-button').on('click', function(){
-  axios.post('/admin/hero/disable', {
-
-  })
+  axios.post('/admin/hero/disable')
   .then(function (response) {
     $('#hero-banner-status').css('color', 'red').text("Disabled");
     $('.enable-hero-button').show();
     $('.disable-hero-button').hide();
-  })
-  .catch(function (error) {});
+  });
 });
+
+$('.delete-hero-button').on('click', function(e){
+  var elem = $(this);
+  axios.post('/admin/hero/delete', {
+    id: $(this).data('id')
+  })
+  .then(function (response) {
+    $(elem).parent().remove();
+    Eggy({
+      title: 'Success',
+      message: 'Hero Banner Item has been deleted',
+      type: 'success',
+      position: 'bottom-right',
+    });
+  });
+});
+
+
 
 
 var currentHeroIndex = 0;
 var maxIndex = $('.hero-item').length - 1;
-
 var heroTimer = setInterval(heroStepForward, 12000);
 
 $('#hero-right-button').on('click', function(){
@@ -152,7 +161,7 @@ $('#hero-right-button').on('click', function(){
     currentHeroIndex = 0;
   }
   $('*[data-hero-index="'+currentHeroIndex+'"]').show();
-
+  highlightActiveHeroButton();
   clearInterval(heroTimer);
   heroTimer = setInterval(heroStepForward, 12000);
 });
@@ -164,7 +173,7 @@ $('#hero-left-button').on('click', function(){
     currentHeroIndex = maxIndex;
   }
   $('*[data-hero-index="'+currentHeroIndex+'"]').show();
-
+  highlightActiveHeroButton();
   clearInterval(heroTimer);
   heroTimer = setInterval(heroStepForward, 12000);
 });
@@ -173,7 +182,7 @@ $('.hero-button').on('click', function(){
   $('*[data-hero-index="'+currentHeroIndex+'"]').hide();
   currentHeroIndex = $(this).data('index');
   $('*[data-hero-index="'+currentHeroIndex+'"]').show();
-
+  highlightActiveHeroButton();
   clearInterval(heroTimer);
   heroTimer = setInterval(heroStepForward, 12000);
 });
@@ -185,8 +194,54 @@ function heroStepForward(){
     currentHeroIndex = 0;
   }
   $('*[data-hero-index="'+currentHeroIndex+'"]').show();
+  highlightActiveHeroButton();
 }
 
+function highlightActiveHeroButton(){
+  $('.hero-button').removeClass('highlighted-hero-button');
+  $('.hero-button[data-index="'+currentHeroIndex+'"]').addClass('highlighted-hero-button');
+}
+
+
+
+
+
+
+var groupCount = $('.option-group-container').length;
+var optionCount = $('.option-container').length;
+
+$('#create-option-group-button').on('click', function(){
+
+  groupCount = $('.option-group-container').length;
+  var newGroupName = $('#new_group_name').val();
+
+  if(newGroupName != ""){
+    $('#option-groups-container').append(`
+      <div class="bg-alt-yellow mb-3 extra-rounded p-3 option-group-container">
+        <label class="form-label">`+ newGroupName +` Options</label>
+        <input type="hidden" name="group[`+groupCount+`]" value="`+newGroupName+`">
+        <div class="options-container"></div>
+        <button type="button" id="add-another-option-button" data-group="`+groupCount+`" class="btn btn-warning">Add Option</button>
+      </div>`);
+    $('#new_group_name').val("");
+  }
+});
+
+
+$('body').on('click', '#add-another-option-button', function(){
+
+  optionCount = $(this).parent().find('.option-container').length;
+  var index = $(this).data('group');
+
+  $(this).parent().find('.options-container').append(`
+    <div class="flex-x option-container mb-3" style="align-items: center;">
+      <label class="form-label">Name</label>
+      <input type="text" class="form-control mx-2" style="width: 160px;" name="option_name[`+index+`][`+optionCount+`]">
+      <label class="form-label mx-2">Price Modifier</label>
+      <input type="number" class="form-control mx-2" style="width: 160px;" name="option_price[`+index+`][`+optionCount+`]">
+    </div>
+  </div>`);
+});
 
 
 
@@ -305,20 +360,50 @@ $('.delete-image-button').on('click', function(){
 
 
 
+$('.item-quantity').on('change', function(){
+  console.log($(this).val());
+});
+
+
+$( ".item-option-select" ).on('change', function(){
+
+  var basePrice = parseInt($('#base_price').text());
+  var optionTotal = 0.00;
+
+  $( ".item-option-select" ).each(function( index ) {
+    if($(this).find(":selected").data('price-mod')){
+      optionTotal += parseInt($(this).find(":selected").data('price-mod'));
+    }
+  });
+
+  $('#item-price').text(basePrice + optionTotal)
+
+});
+
 
 $('.add-to-cart').on('click', function(){
+
+  var options = [];
+
+  $( ".item-option-select" ).each(function( index ) {
+    options.push( $(this).val() );
+  });
+
   axios.post('/cart/add', {
     id: $(this).data('id'),
-    quantity: $('#quantity').length > 0 ? $('#quantity').val() : 1
+    quantity: $('#quantity').val(),
+    options: options,
+    unit_price: $('#item-price').text(),
+    name: $('#item-name-header').text()
   })
   .then(function (response) {
     Eggy({
       title: 'Success',
-      message: response.data.item_name + " added to cart",
+      message: $('#item-name-header').text() + " added to cart",
       type: 'success',
       position: 'bottom-right',
     });
-    $('#cart_total_items').text(response.data.total_cart_items);
+    $('#cart_total_items').text(response.data.cart_quantity);
   })
   .catch(function (error) {
       console.log(response);
@@ -342,8 +427,8 @@ var elem = $(this);
         position: 'bottom-right',
       });
 
-      if(response.data.total_cart_items > 0){
-        $('#cart_total_items').text(response.data.total_cart_items);
+      if ( response.data.cart_total > 0 ) {
+        $('#cart-total').text(response.data.cart_total);
       } else {
         location.reload()
       }
@@ -453,6 +538,67 @@ $('.delete-button').on('click', function(){
       console.log(response);
   });
 });
+
+
+
+
+
+
+$('.create-game-button').on('click', function(){
+  axios.post('/admin/game/store', {
+    name: $('.game-name-input').val()
+  })
+  .then(function (response) {
+
+    $('#game-table-body').append(`
+      <tr>
+        <td><span>`+ $('.game-name-input').val() +`</span></td>
+        <td><button type="button" class="btn btn-warning mx-3 delete-game-button" data-id="`+ response.data.discord_id +`">Delete</button></td>
+      </tr>
+    `);
+
+    $('.game-name-input').val("");
+
+    Eggy({
+      title:  'Success',
+      message:  'Game has been created',
+      type:  'success',
+      position: 'bottom-right',
+    });
+  })
+  .catch(function (error) {
+      console.log(response);
+  });
+});
+
+
+$('body').on('click', '#add-another-option-button', function(){
+
+  var elem = $(this);
+
+  axios.post('/admin/game/delete', {
+    id: $(this).data('id')
+  })
+  .then(function (response) {
+
+    $(elem).parent().remove();
+
+    Eggy({
+      title:  'Success',
+      message:  'Game has been deleted',
+      type:  'success',
+      position: 'bottom-right',
+    });
+  })
+  .catch(function (error) {
+      console.log(response);
+  });
+});
+
+
+
+
+
 
 
 

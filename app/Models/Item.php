@@ -38,7 +38,11 @@ class Item extends Model {
   }
 
   public function groups() {
-    return $this->hasMany(ItemOptionGroup::class);
+    return $this->hasMany(OptionGroup::class);
+  }
+
+  public function options() {
+    return $this->hasManyThrough(Option::class, OptionGroup::class);
   }
 
 }

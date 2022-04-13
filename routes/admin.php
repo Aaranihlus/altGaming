@@ -14,6 +14,7 @@ use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\TitleController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\HeroBannerController;
+use App\Http\Controllers\GameController;
 use Illuminate\Http\Request;
 use App\Models\ItemImage;
 
@@ -49,6 +50,8 @@ Route::post('/admin/posts/update/{id}', [PostController::class, 'update'])->midd
 // Orders
 Route::get('/admin/orders', [AdminController::class, 'orders'])->middleware('admin');
 Route::get('/admin/order/view/{order:paypal_id}', [OrderController::class, 'view'])->middleware('admin');
+Route::get('/admin/order/invoice/{order:paypal_id}', [OrderController::class, 'invoice'])->middleware('admin');
+
 
 // Items
 Route::get('/admin/items', [AdminController::class, 'items'])->middleware('admin');
@@ -75,13 +78,19 @@ Route::get('/admin/badge/create', [BadgeController::class, 'create'])->middlewar
 Route::post('/admin/title/store', [TitleController::class, 'store'])->middleware('admin');
 Route::post('/admin/badge/store', [BadgeController::class, 'store'])->middleware('admin');
 
+//Hero
+Route::get('/admin/hero', [AdminController::class, 'hero'])->middleware('admin');
+Route::post('/admin/items_by_type', [HeroBannerController::class, 'items_by_type'])->middleware('admin');
+Route::post('/admin/hero/store', [HeroBannerController::class, 'store'])->middleware('admin');
+Route::post('/admin/hero/update_order', [HeroBannerController::class, 'update_order'])->middleware('admin');
+Route::post('/admin/hero/enable', [HeroBannerController::class, 'enable'])->middleware('admin');
+Route::post('/admin/hero/disable', [HeroBannerController::class, 'disable'])->middleware('admin');
+Route::post('/admin/hero/delete', [HeroBannerController::class, 'delete'])->middleware('admin');
 
-Route::get('/admin/hero', [AdminController::class, 'hero']);
-Route::post('/admin/items_by_type', [HeroBannerController::class, 'items_by_type']);
-Route::post('/admin/hero/store', [HeroBannerController::class, 'store']);
-Route::post('/admin/hero/enable', [HeroBannerController::class, 'enable']);
-Route::post('/admin/hero/disable', [HeroBannerController::class, 'disable']);
-
+// Games
+Route::get('/admin/games', [AdminController::class, 'games'])->middleware('admin');
+Route::post('/admin/game/store', [GameController::class, 'store'])->middleware('admin');
+Route::post('/admin/game/delete', [GameController::class, 'delete'])->middleware('admin');
 
 // Image Related
 Route::post('/admin/delete_image', function (Request $request) {

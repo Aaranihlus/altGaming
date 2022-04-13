@@ -27,7 +27,14 @@ class User extends Authenticatable
         'locale',
         'mfa_enabled',
         'refresh_token',
-        'slug'
+        'slug',
+        'first_name',
+        'surname',
+        'address_line_1',
+        'address_line_2',
+        'town',
+        'county',
+        'postcode'
     ];
 
     /**
@@ -84,6 +91,10 @@ class User extends Authenticatable
 
     public function orders() {
       return $this->hasMany(Order::class);
+    }
+
+    public function games() {
+      return $this->belongsTo(Game::class);
     }
 
 }

@@ -16,11 +16,11 @@ class CreateHeroBannerTable extends Migration
         Schema::create('hero_banner', function (Blueprint $table) {
             $table->id();
             $table->string("order");
-            $table->string("object_type");
-            $table->string("object_id");
-            $table->string("message")->nullable();
-            $table->string("image")->nullable();
-            $table->timestamps();
+            $table->string("object_type")->nullable();
+            $table->string("object_id")->nullable();
+            $table->string("object_name")->nullable();
+            $table->text("custom_text")->nullable();
+            $table->string("custom_image")->nullable();
         });
     }
 

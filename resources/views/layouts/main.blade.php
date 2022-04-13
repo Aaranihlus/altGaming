@@ -59,7 +59,7 @@ if ( $('#editor').length > 0 ) {
 }
 </script>
 
-@if(request()->is('cart'))
+@if(request()->is('checkout'))
   <script src="https://www.paypal.com/sdk/js?client-id={{ $client_id }}&components=buttons,hosted-fields&enable-funding=paylater" data-client-token="{{ $client_token }}"></script>
   <script type="text/javascript" src="{{ asset('js/paypal.js') }}"></script>
 @endif

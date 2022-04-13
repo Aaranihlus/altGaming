@@ -5,10 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\ItemImage;
+
+use App\Models\Option;
+use App\Models\OptionGroup;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
+use Intervention\Image\ImageManagerStatic;
 
 class ItemController extends Controller {
 
@@ -17,8 +23,6 @@ class ItemController extends Controller {
   }
 
   public function store( Request $request ) {
-
-    dd($request);
 
     $request->validate([
       'name' => ['required', 'string', 'max:255'],
@@ -36,21 +40,31 @@ class ItemController extends Controller {
 
     // Image Array
     foreach ( $request->file('image') as $img ) {
-      $path = $img->store('item_images');
+      $thumbnail = ImageManagerStatic::make($img)->encode('jpg', 35);
+      $path = 'item_images/'. \Str::random(32) .'.jpg';
+      Storage::put( $path, $thumbnail );
       $image = ItemImage::create([
           'item_id' => $item->id,
           'path' => $path
       ]);
     }
 
-    //Options Array
+    for ($i = 0; $i < count($request->group); $i++) {
 
+      $group = OptionGroup::create([
+          'name' => $request->group[$i],
+          'item_id' => $item->id
+      ]);
 
+      for ($k = 0; $k < count($request->option_name[$i]); $k++) {
+        $option = Option::create([
+            'option_group_id' => $group->id,
+            'price_modifier' => $request->option_price[$i][$k],
+            'name' => $request->option_name[$i][$k]
+        ]);
+      }
 
-    //Variations Array
-
-
-
+    }
 
     return redirect("/admin/items");
 

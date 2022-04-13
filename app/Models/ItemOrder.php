@@ -13,7 +13,8 @@ class ItemOrder extends Model {
     protected $fillable = [
         'item_id',
         'order_id',
-        'quantity'
+        'quantity',
+        'unit_price'
     ];
 
     public function item() {
@@ -22,6 +23,10 @@ class ItemOrder extends Model {
 
     public function order() {
       return $this->belongsTo(Order::class);
+    }
+
+    public function options() {
+      return $this->hasMany(ItemOrderOption::class);
     }
 
 }

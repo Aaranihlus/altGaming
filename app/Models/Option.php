@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ItemOption extends Model {
+class Option extends Model {
     use HasFactory;
 
     protected $fillable = [
-        'item_option_group_id',
-        'price',
+        'option_group_id',
+        'price_modifier',
         'name'
     ];
 
     public function group() {
-      return $this->belongsTo(ItemOptionGroup::class);
+      return $this->belongsTo(OptionGroup::class, 'option_group_id');
     }
 
 }

@@ -10,6 +10,10 @@ class HasContentCreatorRole {
 
   public function handle(Request $request, Closure $next) {
 
+    if ( app()->isLocal() ) {
+      return $next($request);
+    }
+
     if ( !Auth::user() ) {
       return redirect("/");
     }

@@ -5318,6 +5318,15 @@ $('.delete-comment-button').on('click', function () {
     console.log(response);
   });
 });
+$('.event-sign-up-button').on('click', function () {
+  axios.post('/event/register', {
+    id: $(this).data('id')
+  }).then(function (response) {
+    console.log(response);
+  })["catch"](function (error) {
+    console.log(response);
+  });
+});
 $('.load-more-posts-button').on('click', function () {
   var offset = $(this).data('offset');
   var type = null;
@@ -5352,7 +5361,7 @@ $('.hero-type-select').on('change', function () {
       type: $(this).val()
     }).then(function (response) {
       if (response.data.items.length > 0) {
-        if ($('.hero-type-select').val() == "item") {
+        if ($('.hero-type-select').val() == "item" || $('.hero-type-select').val() == "event" || $('.hero-type-select').val() == "altlan") {
           response.data.items.forEach(function (e) {
             return $('.hero-item-select').append("<option value=\"" + e.id + "\">" + e.name + "</option>");
           });
@@ -5367,23 +5376,33 @@ $('.hero-type-select').on('change', function () {
     });
   }
 });
-$('.new-hero-item').on('click', function () {
-  var currentItemCount = $('.hero-item').length + 1;
-  $('.hero-items-container').append("\n    <div class=\"bg-alt-yellow flex-x extra-rounded p-4 mb-4 hero-item\" style=\"align-items: center;\">\n      <input type=\"hidden\" name=\"hero_id[" + currentItemCount + "]\" value=\"0\">\n      <span>#</span>\n      <input type=\"number\" name=\"order[" + currentItemCount + "]\" value=\"" + currentItemCount + "\">\n      <span>Type</span>\n      <input type=\"text\" name=\"type[" + currentItemCount + "]\" value=\"" + $('.hero-type-select').val() + "\">\n      <span>ID</span>\n      <input type=\"text\" name=\"id[" + currentItemCount + "]\" value=\"" + $('.hero-item-select').val() + "\">\n    </div>\n  ");
-});
 $('.enable-hero-button').on('click', function () {
-  axios.post('/admin/hero/enable', {}).then(function (response) {
+  axios.post('/admin/hero/enable').then(function (response) {
     $('#hero-banner-status').css('color', 'green').text("Enabled");
     $('.enable-hero-button').hide();
     $('.disable-hero-button').show();
-  })["catch"](function (error) {});
+  });
 });
 $('.disable-hero-button').on('click', function () {
-  axios.post('/admin/hero/disable', {}).then(function (response) {
+  axios.post('/admin/hero/disable').then(function (response) {
     $('#hero-banner-status').css('color', 'red').text("Disabled");
     $('.enable-hero-button').show();
     $('.disable-hero-button').hide();
-  })["catch"](function (error) {});
+  });
+});
+$('.delete-hero-button').on('click', function (e) {
+  var elem = $(this);
+  axios.post('/admin/hero/delete', {
+    id: $(this).data('id')
+  }).then(function (response) {
+    $(elem).parent().remove();
+    (0,_s_r0_eggy_js__WEBPACK_IMPORTED_MODULE_3__.Eggy)({
+      title: 'Success',
+      message: 'Hero Banner Item has been deleted',
+      type: 'success',
+      position: 'bottom-right'
+    });
+  });
 });
 var currentHeroIndex = 0;
 var maxIndex = $('.hero-item').length - 1;
@@ -5397,6 +5416,7 @@ $('#hero-right-button').on('click', function () {
   }
 
   $('*[data-hero-index="' + currentHeroIndex + '"]').show();
+  highlightActiveHeroButton();
   clearInterval(heroTimer);
   heroTimer = setInterval(heroStepForward, 12000);
 });
@@ -5409,6 +5429,7 @@ $('#hero-left-button').on('click', function () {
   }
 
   $('*[data-hero-index="' + currentHeroIndex + '"]').show();
+  highlightActiveHeroButton();
   clearInterval(heroTimer);
   heroTimer = setInterval(heroStepForward, 12000);
 });
@@ -5416,6 +5437,7 @@ $('.hero-button').on('click', function () {
   $('*[data-hero-index="' + currentHeroIndex + '"]').hide();
   currentHeroIndex = $(this).data('index');
   $('*[data-hero-index="' + currentHeroIndex + '"]').show();
+  highlightActiveHeroButton();
   clearInterval(heroTimer);
   heroTimer = setInterval(heroStepForward, 12000);
 });
@@ -5429,8 +5451,30 @@ function heroStepForward() {
   }
 
   $('*[data-hero-index="' + currentHeroIndex + '"]').show();
+  highlightActiveHeroButton();
 }
 
+function highlightActiveHeroButton() {
+  $('.hero-button').removeClass('highlighted-hero-button');
+  $('.hero-button[data-index="' + currentHeroIndex + '"]').addClass('highlighted-hero-button');
+}
+
+var groupCount = $('.option-group-container').length;
+var optionCount = $('.option-container').length;
+$('#create-option-group-button').on('click', function () {
+  groupCount = $('.option-group-container').length;
+  var newGroupName = $('#new_group_name').val();
+
+  if (newGroupName != "") {
+    $('#option-groups-container').append("\n      <div class=\"bg-alt-yellow mb-3 extra-rounded p-3 option-group-container\">\n        <label class=\"form-label\">" + newGroupName + " Options</label>\n        <input type=\"hidden\" name=\"group[" + groupCount + "]\" value=\"" + newGroupName + "\">\n        <div class=\"options-container\"></div>\n        <button type=\"button\" id=\"add-another-option-button\" data-group=\"" + groupCount + "\" class=\"btn btn-warning\">Add Option</button>\n      </div>");
+    $('#new_group_name').val("");
+  }
+});
+$('body').on('click', '#add-another-option-button', function () {
+  optionCount = $(this).parent().find('.option-container').length;
+  var index = $(this).data('group');
+  $(this).parent().find('.options-container').append("\n    <div class=\"flex-x option-container mb-3\" style=\"align-items: center;\">\n      <label class=\"form-label\">Name</label>\n      <input type=\"text\" class=\"form-control mx-2\" style=\"width: 160px;\" name=\"option_name[" + index + "][" + optionCount + "]\">\n      <label class=\"form-label mx-2\">Price Modifier</label>\n      <input type=\"number\" class=\"form-control mx-2\" style=\"width: 160px;\" name=\"option_price[" + index + "][" + optionCount + "]\">\n    </div>\n  </div>");
+});
 $('#open-mobile-nav-button').on('click', function () {
   $('#mobile-nav-container').show();
 });
@@ -5514,18 +5558,38 @@ $('.delete-image-button').on('click', function () {
     console.log(response);
   });
 });
+$('.item-quantity').on('change', function () {
+  console.log($(this).val());
+});
+$(".item-option-select").on('change', function () {
+  var basePrice = parseInt($('#base_price').text());
+  var optionTotal = 0.00;
+  $(".item-option-select").each(function (index) {
+    if ($(this).find(":selected").data('price-mod')) {
+      optionTotal += parseInt($(this).find(":selected").data('price-mod'));
+    }
+  });
+  $('#item-price').text(basePrice + optionTotal);
+});
 $('.add-to-cart').on('click', function () {
+  var options = [];
+  $(".item-option-select").each(function (index) {
+    options.push($(this).val());
+  });
   axios.post('/cart/add', {
     id: $(this).data('id'),
-    quantity: $('#quantity').length > 0 ? $('#quantity').val() : 1
+    quantity: $('#quantity').val(),
+    options: options,
+    unit_price: $('#item-price').text(),
+    name: $('#item-name-header').text()
   }).then(function (response) {
     (0,_s_r0_eggy_js__WEBPACK_IMPORTED_MODULE_3__.Eggy)({
       title: 'Success',
-      message: response.data.item_name + " added to cart",
+      message: $('#item-name-header').text() + " added to cart",
       type: 'success',
       position: 'bottom-right'
     });
-    $('#cart_total_items').text(response.data.total_cart_items);
+    $('#cart_total_items').text(response.data.cart_quantity);
   })["catch"](function (error) {
     console.log(response);
   });
@@ -5543,8 +5607,8 @@ $('.delete-cart-item').on('click', function () {
       position: 'bottom-right'
     });
 
-    if (response.data.total_cart_items > 0) {
-      $('#cart_total_items').text(response.data.total_cart_items);
+    if (response.data.cart_total > 0) {
+      $('#cart-total').text(response.data.cart_total);
     } else {
       location.reload();
     }
@@ -5620,6 +5684,38 @@ $('.delete-button').on('click', function () {
     (0,_s_r0_eggy_js__WEBPACK_IMPORTED_MODULE_3__.Eggy)({
       title: 'Success',
       message: 'Post has been deleted',
+      type: 'success',
+      position: 'bottom-right'
+    });
+  })["catch"](function (error) {
+    console.log(response);
+  });
+});
+$('.create-game-button').on('click', function () {
+  axios.post('/admin/game/store', {
+    name: $('.game-name-input').val()
+  }).then(function (response) {
+    $('#game-table-body').append("\n      <tr>\n        <td><span>" + $('.game-name-input').val() + "</span></td>\n        <td><button type=\"button\" class=\"btn btn-warning mx-3 delete-game-button\" data-id=\"" + response.data.discord_id + "\">Delete</button></td>\n      </tr>\n    ");
+    $('.game-name-input').val("");
+    (0,_s_r0_eggy_js__WEBPACK_IMPORTED_MODULE_3__.Eggy)({
+      title: 'Success',
+      message: 'Game has been created',
+      type: 'success',
+      position: 'bottom-right'
+    });
+  })["catch"](function (error) {
+    console.log(response);
+  });
+});
+$('body').on('click', '#add-another-option-button', function () {
+  var elem = $(this);
+  axios.post('/admin/game/delete', {
+    id: $(this).data('id')
+  }).then(function (response) {
+    $(elem).parent().remove();
+    (0,_s_r0_eggy_js__WEBPACK_IMPORTED_MODULE_3__.Eggy)({
+      title: 'Success',
+      message: 'Game has been deleted',
       type: 'success',
       position: 'bottom-right'
     });

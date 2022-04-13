@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\File;
+use Intervention\Image\ImageManagerStatic;
 
 class PostController extends Controller {
 
@@ -17,16 +19,16 @@ class PostController extends Controller {
     return response()->json(['success' => true]);
   }
 
-  public function delete (Request $request) {
-    $post = Post::find($request->id);
-    $post->delete();
-    return response()->json(['success' => true]);
-  }
-
   public function hide (Request $request) {
     $post = Post::find($request->id);
     $post->published = 0;
     $post->save();
+    return response()->json(['success' => true]);
+  }
+
+  public function delete (Request $request) {
+    $post = Post::find($request->id);
+    $post->delete();
     return response()->json(['success' => true]);
   }
 
@@ -42,26 +44,22 @@ class PostController extends Controller {
 
   public function update ($id, Request $request) {
 
-    $slug = \Str::slug($request->title);
+    $request->validate([
+      'title' => ['required', 'string', 'max:255']
+    ]);
 
     $post = Post::find($id);
     $post->title = $request->title;
     $post->description = $request->description;
     $post->content = $request->content;
-    $post->slug = $slug;
+    $post->slug = \Str::slug($request->title);
     $post->youtube_link = $request->youtube_link;
-    $post->spotify_link = $request->spotify_link;
-    $post->apple_link = $request->apple_link;
-
-    /*$published = 0;
-    if ( $request->publish == "on" ) {
-      $published = 1;
-    }
-
-    $post->published = $published;*/
+    $post->published = $request->publish == "on" ? 1 : 0;
 
     if ( isset($request->new_thumbnail) ) {
-      $path = $request->file('new_thumbnail')->store('post_thumbnails');
+      $thumbnail = ImageManagerStatic::make($request->file('new_thumbnail'))->encode('jpg', 35);
+      $path = 'post_thumbnails/'. \Str::random(32) .'.jpg';
+      Storage::put( $path, $thumbnail );
       $post->thumbnail = $path;
     }
 
@@ -75,17 +73,12 @@ class PostController extends Controller {
   public function store( Request $request ) {
 
     $request->validate([
-        'title' => ['required', 'string', 'max:255']
+      'title' => ['required', 'string', 'max:255']
     ]);
 
-    $slug = \Str::slug($request->title);
-
-    $published = 0;
-    if ( $request->publish == "on" ) {
-      $published = 1;
-    }
-
-    $thumbnail_path = $request->file('thumbnail')->store('post_thumbnails');
+    $thumbnail = ImageManagerStatic::make($request->file('thumbnail'))->encode('jpg', 35);
+    $path = 'post_thumbnails/'. \Str::random(32) .'.jpg';
+    Storage::put( $path, $thumbnail );
 
     $audio_file_path = null;
     if ( isset($request->audio_file) ) {
@@ -98,12 +91,10 @@ class PostController extends Controller {
         'content' => $request->content,
         'type' => $request->type,
         'user_id' => Auth::id(),
-        'published' => $published,
-        'slug' => $slug,
-        'thumbnail' => $thumbnail_path,
-        'spotify_link' => $request->spotify_link,
+        'published' => $request->publish == "on" ? 1 : 0,
+        'slug' => \Str::slug($request->title),
+        'thumbnail' => $path,
         'youtube_link' => $request->youtube_link,
-        'apple_link' => $request->apple_link,
         'audio_file' => $audio_file_path
     ]);
 

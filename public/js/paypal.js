@@ -1,5 +1,16 @@
+var orderID;
+
 paypal.Buttons({
+
   createOrder: function(data, actions) {
+
+    axios.post('/order/create', {
+      total: $('#order_total').text()
+    })
+    .then(function (response) {
+      orderID = response.data.order_id;
+    });
+
     return actions.order.create({
       purchase_units: [{
         amount: {
@@ -12,18 +23,13 @@ paypal.Buttons({
   onApprove: function(data, actions) {
     // This function captures the funds from the transaction.
     return actions.order.capture().then(function(details) {
-
-      axios.post('/order/create', {
-        id: details.id,
-        amount: $('#order_total').val()
+      axios.post('/order/approve', {
+        paypal_id: details.id,
+        order_id: orderID
       })
       .then(function (response) {
-          window.location.href = "/checkout/success/" + details.id;
-      })
-      .catch(function (error) {
-          console.log(response);
+        window.location.href = "/checkout/success/" + response.data.id;
       });
-
     });
   }
 }).render("#paypal-container").catch((error) => {
@@ -31,12 +37,8 @@ paypal.Buttons({
 });
 
 
-console.log(paypal.HostedFields.isEligible());
-
-
 
 if (paypal.HostedFields.isEligible()) {
-  let orderId;
 
   document.querySelector("#paypal-card-container").style = 'display: block';
 
@@ -44,6 +46,14 @@ if (paypal.HostedFields.isEligible()) {
   paypal.HostedFields.render({
 
     createOrder: function(data, actions) {
+
+      axios.post('/order/create', {
+        total: $('#order_total').val()
+      })
+      .then(function (response) {
+        orderID = response.data.order_id;
+      });
+
       return actions.order.create({
         purchase_units: [{
           amount: {
@@ -52,20 +62,6 @@ if (paypal.HostedFields.isEligible()) {
         }]
       });
     },
-
-    /*createOrder: () => {
-      return fetch("/api/orders", {
-        method: 'post'
-        // use the "body" param to optionally pass additional order information like
-        // product ids or amount.
-      })
-      .then((res) => res.json())
-      .then((orderData) => {
-        orderId = orderData.id; // needed later to complete capture
-        return orderData.id
-      })
-    },*/
-
 
     styles: {
       '.valid': {
@@ -95,42 +91,25 @@ if (paypal.HostedFields.isEligible()) {
    document.querySelector("#card-form").addEventListener("submit", (event) => {
       event.preventDefault();
       cardFields.submit({
-          // Cardholder's first and last name
           cardholderName: document.getElementById("card-holder-name").value,
-          // Billing Address
           billingAddress: {
-            // Street address, line 1
-            streetAddress: document.getElementById(
-              "card-billing-address-street"
-            ).value,
-            // Street address, line 2 (Ex: Unit, Apartment, etc.)
-            extendedAddress: document.getElementById(
-              "card-billing-address-unit"
-            ).value,
-            // State
+            streetAddress: document.getElementById("card-billing-address-street").value,
+            extendedAddress: document.getElementById("card-billing-address-unit").value,
             region: document.getElementById("card-billing-address-state").value,
-            // City
-            locality: document.getElementById("card-billing-address-city")
-              .value,
-            // Postal Code
-            postalCode: document.getElementById("card-billing-address-zip")
-              .value,
-            // Country Code
-            countryCodeAlpha2: document.getElementById(
-              "card-billing-address-country"
-            ).value,
+            locality: document.getElementById("card-billing-address-city").value,
+            postalCode: document.getElementById("card-billing-address-zip").value,
+            countryCodeAlpha2: document.getElementById("card-billing-address-country").value,
           },
         })
         .then(() => {
 
-          fetch(`/api/orders/${orderId}/capture`, {
+          fetch(`/api/orders/${orderID}/capture`, {
             method: "post",
-
           })
 
-            .then((res) => res.json())
+          .then((res) => res.json())
 
-            .then((orderData) => {
+          .then((orderData) => {
 
               // Three cases to handle:
               //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
@@ -144,6 +123,7 @@ if (paypal.HostedFields.isEligible()) {
                 return actions.restart(); // Recoverable state, per:
                 // https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
               }
+
               if (errorDetail) {
                 var msg = "Sorry, your transaction could not be processed.";
                 if (errorDetail.description)
@@ -151,6 +131,7 @@ if (paypal.HostedFields.isEligible()) {
                 if (orderData.debug_id) msg += " (" + orderData.debug_id + ")";
                 return alert(msg); // Show a failure message
               }
+
               // Show a success message or redirect
               alert("Transaction completed!");
             });

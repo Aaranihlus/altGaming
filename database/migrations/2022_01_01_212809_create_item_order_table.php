@@ -18,6 +18,7 @@ class CreateItemOrderTable extends Migration
             $table->foreignId("order_id");
             $table->foreignId("item_id");
             $table->string("quantity");
+            $table->string("unit_price");
             $table->timestamps();
         });
     }

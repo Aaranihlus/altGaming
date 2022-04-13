@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdersTable extends Migration
+class CreateOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
-            $table->string('id')->unique();
-            $table->foreignId("user_id");
-            $table->string("paypal_id")->nullable();
-            $table->string("total");
-            $table->string("status");
+        Schema::create('options', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('option_group_id');
+            $table->string('name');
+            $table->string('price_modifier');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('options');
     }
 }

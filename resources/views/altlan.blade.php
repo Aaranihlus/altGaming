@@ -28,7 +28,7 @@ background-repeat: no-repeat; align-content: center; padding:0; margin:0;" id="b
     <hr style="height: 4px; width: 25%;">
 
     <div class="flex-x" style="width: 20%;">
-      <button style="width: 100%; height: 50px" type="submit" class="btn btn-warning mx-2"><a href="/shop/tickets">Get Tickets</a></button>
+      <button style="width: 100%; height: 50px" type="submit" class="btn btn-warning mx-2"><a href="/shop/tickets"><i class="fas fa-ticket-alt"></i> Get Tickets</a></button>
       <!--<button type="submit" class="btn btn-warning mx-2">More Info</button>-->
     </div>
 

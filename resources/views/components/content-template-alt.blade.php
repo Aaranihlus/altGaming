@@ -6,8 +6,8 @@
       background-repeat: no-repeat;
       background-size: cover;">
 
-      <div class="p-3 flex-y extra-rounded" style="justify-content: space-between; background: rgba(0, 0, 0, .7); height: 100%;
-      background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));">
+      <div class="p-3 flex-y extra-rounded" style="justify-content: space-between; height: 100%;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1));">
 
         <div>
           <h2 class="clip-text-2" style="color: white; text-shadow: 3px 3px #1d1800;">{{ $post->title }}</h2>
@@ -24,7 +24,7 @@
         <div class="flex-x" style="justify-content: space-between; align-items: flex-end;">
 
           <div style="display: flex;">
-            <img class="img-fluid rounded me-2" style="width: 75px;" src="https://cdn.discordapp.com/avatars/{{ $post->user->id }}/{{ $post->user->avatar }}.webp" alt="Profile Picture">
+            <img class="img-fluid rounded me-2" style="width: 64px;" src="https://cdn.discordapp.com/avatars/{{ $post->user->id }}/{{ $post->user->avatar }}.webp" alt="Profile Picture">
 
             <div>
               <h5><a href="/profile/{{ $post->user->slug }}">By {{ $post->user->username }}</a></h5>

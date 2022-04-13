@@ -26,13 +26,22 @@ class UserController extends Controller {
     return response()->json(['success' => true]);
   }
 
-  public function has_role ($user_id, $role_name) {
-    $user = User::find($user_id);
-    foreach($user->roles as $role){
-      if($role->name = $role_name)
-        return true;
-    }
-    return false;
+  public function update ( Request $request ) {
+    $user = User::find(Auth::id());
+    $user->first_name = $request->first_name;
+    $user->surname = $request->surname;
+    $user->address_line_1 = $request->address_line_1;
+    $user->address_line_2 = $request->address_line_2;
+    $user->county = $request->county;
+    $user->town = $request->town;
+    $user->postcode = $request->postcode;
+    $user->save();
+    return redirect("/account")->with('success', 'Account Details successfully updated!');
   }
+
+
+
+
+
 
 }

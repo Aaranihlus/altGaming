@@ -21545,6 +21545,14 @@ textarea.form-control-lg {
   flex-direction: row;
 }
 
+.center-x {
+  align-items: center;
+}
+
+.center-y {
+  justify-content: center;
+}
+
 .flex-y {
   display: flex;
   flex-direction: column;
@@ -21575,6 +21583,11 @@ body {
 
 .link-fade {
   opacity: 65%;
+}
+
+.highlighted-hero-button {
+  background-color: #91741d !important;
+  background: #91741d !important;
 }
 
 .shop-category {

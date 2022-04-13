@@ -11,11 +11,14 @@ use App\Models\Event;
 use App\Models\Title;
 use App\Models\Badge;
 use App\Models\Achievement;
+use App\Models\Game;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
+
+use App\Http\Controllers\HeroBannerController;
 
 use RestCord\DiscordClient;
 
@@ -29,11 +32,11 @@ class AdminController extends Controller {
     $discord = new DiscordClient(['token' => env('DISCORD_BOT_TOKEN')]);
 
     $discord->channel->createMessage([
-      'channel.id' => 946499469720035328,
+      'channel.id' => env('DISCORD_GUILD_ID'),
       'content' => "Test Message From HTTP Server, Yo!"
     ]);
 
-    dd($discord->guild->getGuild(['guild.id' => 607337690886701066]));
+    dd($discord->guild->getGuild(['guild.id' => env('DISCORD_GUILD_ID')]));
     return view('admin.discord');
   }
 
@@ -93,7 +96,7 @@ class AdminController extends Controller {
 
   public function hero () {
     return view('admin.hero', [
-      'hero_items' => \DB::select('select * from hero_banner', []),
+      'heroItems' => HeroBannerController::get_hero_items(),
       'heroEnabled' => Redis::get('hero_active') ?? false
     ]);
   }
@@ -113,6 +116,12 @@ class AdminController extends Controller {
   public function titles () {
     return view('admin.titles', [
       'titles' => Title::all()
+    ]);
+  }
+
+  public function games () {
+    return view('admin.games', [
+      'games' => Game::all()
     ]);
   }
 

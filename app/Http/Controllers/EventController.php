@@ -11,6 +11,7 @@ use App\Models\Title;
 use App\Models\Badge;
 use App\Models\Role;
 use App\Models\Event;
+use App\Models\EventUser;
 use App\Models\ItemImage;
 use App\Models\Order;
 use App\Models\ItemOrder;
@@ -36,6 +37,35 @@ class EventController extends Controller {
     ]);
   }
 
+  public function register (Request $request) {
+
+    $eventUser = EventUser::create([
+        'user_id' => Auth::id(),
+        'event_id' => $request->id
+    ]);
+
+    $event = Event::find($request->id);
+
+    return response()->json([
+      'success' => true,
+      'registeredCount' => count($event->attendees)
+    ]);
+
+  }
+
+
+  public function unregister (Request $request) {
+
+    $eventUser = EventUser::find($request->id);
+    $eventUser->delete();
+
+    return response()->json([
+      'success' => true
+    ]);
+
+  }
+
+
 
   public function update( $id, Request $request ) {
 
@@ -59,54 +89,50 @@ class EventController extends Controller {
 
   }
 
-
-
-
-
   public function store( Request $request ) {
 
     if ( $request->type == "altlan" ) {
 
+      Item::where('is_alt_ticket', 1)->update(['visible' => 0]);
+
+      Event::where('type', "altlan")->update([
+        'active' => 0
+      ]);
+
       $altLans = Event::where('type', 'altlan')->get();
-      $altLanCount = count($altLans);
-      $altLanCount = $altLanCount + 1;
+      $altLanCount = count($altLans) + 1;
 
       $path = $request->file('thumbnail')->store('event_thumbnails');
+
+      // Create Discord Role
+      $discord = new DiscordClient(['token' => env('DISCORD_BOT_TOKEN')]);
+
+      $discordRole = $discord->guild->createGuildRole([
+        'guild.id' => intval(env('DISCORD_GUILD_ID')),
+        'name' => "altLAN ". $altLanCount ." Attendee"
+      ]);
 
       $achievement = Achievement::create([
           'name' => "altLAN #" . $altLanCount . " Attendee",
           'description' => "Awarded for attending altLAN #" . $altLanCount,
           'image' => 'item_images/placeholder-big.png',
-          'item_id' => null
+          'item_id' => null,
+          'discord_role_id' => $discordRole->id
       ]);
 
       $event = Event::create([
-          'title' => "altLAN #" . $altLanCount,
+          'name' => "altLAN #" . $altLanCount,
           'start_date' => $request->start_date,
-          'location' => "Test",
+          'end_date' => $request->end_date,
+          'location' => $request->location,
           'description' => $request->description,
           'slug' => \Str::slug("altLAN #" . $altLanCount),
           'user_id' => Auth::id(),
           'type' => $request->type,
           'alt_lan_number' => $altLanCount,
           'thumbnail' => $path,
-          'achievement_id' => $achievement->id
-      ]);
-
-      Item::where('is_alt_ticket', 1)->update(['visible' => 0]);
-
-      Event::where('type', "altlan")->update([
-        'active' => 0,
-        'highlighted' => 0
-      ]);
-
-      // Create Discord Role
-      $discord = new DiscordClient(['token' => env('DISCORD_BOT_TOKEN')]);
-
-      $discordRole = $discord->guild->createGuildRole([
-        'guild.id' => 607337690886701066,
-        'name' => "altLAN ". $altLanCount ." Attendee"
-        //'name' => "altLAN #" . $altLanCount . " Attendee"
+          'achievement_id' => $achievement->id,
+          'active' => 1
       ]);
 
       $standardTicket = Item::create([
@@ -118,7 +144,8 @@ class EventController extends Controller {
           'event_id' => $event->id,
           'visible' => 1,
           'achievement_id' => null,
-          'discord_role_id' => $discordRole->id
+          'discord_role_id' => $discordRole->id,
+          'type' => "ticket"
       ]);
 
       $standardTicketImage = ItemImage::create([
@@ -135,7 +162,8 @@ class EventController extends Controller {
           'event_id' => $event->id,
           'visible' => 1,
           'achievement_id' => null,
-          'discord_role_id' => $discordRole->id
+          'discord_role_id' => $discordRole->id,
+          'type' => "ticket"
       ]);
 
       $ByocTicketImage = ItemImage::create([
@@ -145,7 +173,7 @@ class EventController extends Controller {
 
     }
 
-    return redirect("/admin/events");
+    return redirect("/admin/events")->with('success', 'Event successfully created');
   }
 
 

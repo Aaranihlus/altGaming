@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('slug');
             $table->string('username');
             $table->string('discriminator');
             $table->string('email')->unique();
@@ -23,6 +24,15 @@ class CreateUsersTable extends Migration
             $table->string('locale');
             $table->boolean('mfa_enabled');
             $table->string('refresh_token')->nullable();
+
+            $table->string('first_name')->nullable();
+            $table->string('surname')->nullable();
+            $table->string('address_line_1')->nullable();
+            $table->string('address_line_2')->nullable();
+            $table->string('town')->nullable();
+            $table->string('county')->nullable();
+            $table->string('postcode')->nullable();
+
             $table->timestamps();
         });
     }

@@ -8,7 +8,6 @@
 
     <h6 style="text-align: center;">{{ \Carbon\Carbon::parse( $post->created_at )->diffForHumans() }}</h6>
 
-
     @if($post->type == "podcast")
       <div class="flex-y" style="align-items: center;">
         <p style="text-align: center;">
@@ -57,7 +56,7 @@
       </div>
     </div>
 
-    <div class="flex-y" style="margin-bottom: 2vh;">
+    {{-- <div class="flex-y" style="margin-bottom: 2vh;">
       <hr>
       <br>
       <h2>Comments</h2>
@@ -91,8 +90,7 @@
         <button type="button" class="btn btn-warning post-comment-button" data-post-id="{{ $post->id }}">Comment</button>
       </div>
       @endif
-    </div>
-
+    </div>--}}
 
   </div>
 

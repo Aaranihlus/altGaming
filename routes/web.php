@@ -16,6 +16,9 @@ use App\Models\Achievement;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\HeroBannerController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\EventController;
 
 use Illuminate\Support\Facades\Redis;
 use RestCord\DiscordClient;
@@ -27,41 +30,29 @@ use Barryvdh\DomPDF\Facade\Pdf;
 require __DIR__.'/admin.php';
 require __DIR__.'/auth.php';
 
-//General pages
+// HOME
 Route::get('/', function () {
-
-  $heroItems = [];
-  $heroEnabled = false;
-
-  if(Redis::get('hero_active')){
-    $heroEnabled = true;
-    foreach ( \DB::select('select * from hero_banner') as $hero ) {
-      if ( $hero->object_type == "event" ) {
-        $heroItems[] = Event::where('id', $hero->object_id)->get()->first();
-      } elseif( $hero->object_type == "post" ) {
-        $heroItems[] = Post::where('id', $hero->object_id)->get()->first();
-      } elseif( $hero->object_type == "item" ) {
-        $heroItems[] = Item::with('images')->where('id', $hero->object_id)->get()->first();
-      }
-    }
-  }
-
   return view('home', [
     'posts' => Post::latest()->limit(9)->get(),
-    'heroEnabled' => $heroEnabled,
-    'heroItems' => $heroItems
+    'heroEnabled' => Redis::get('hero_active'),
+    'heroItems' => HeroBannerController::get_hero_items()
   ]);
 });
 
+// ALT LAN
+Route::get('/altlan', function () {
+    return view('altlan');
+});
+
+// RSS FEED
 Route::get('/feed', function () {
-  $podcasts = Post::where('type', 'podcast')->get();
-  //echo Storage::size($podcasts[0]->audio_file);
+  $podcasts = Post::where('type', 'podcast')->latest()->get();
   return response()->view('feed', compact('podcasts'))->header('Content-Type', 'application/xml');
 });
 
 Route::get('/events', function () {
   return view('events', [
-    'events' => Event::all()
+    'events' => Event::latest()->limit(6)->get()
   ]);
 });
 
@@ -106,7 +97,7 @@ Route::post('/loadposts', function (Request $request) {
   if ( !empty($posts) ) {
     $postHtml = "";
     foreach ( $posts as $post ) {
-      $postHtml .= View::make("components.content-template-ajax")->with("post", $post)->render();
+      $postHtml .= View::make("components.content-template-alt")->with("post", $post)->render();
     }
   }
 
@@ -119,15 +110,24 @@ Route::post('/loadposts', function (Request $request) {
 });
 
 
+
+
+Route::post('/event/register', [EventController::class, 'register'])->middleware('auth');
+
+
+
 Route::post('/comment/store', [CommentController::class, 'store'])->middleware('auth');
 Route::post('/comment/delete', [CommentController::class, 'delete'])->middleware('auth');
 
 
-Route::post('/cart/add', [CartController::class, 'add'])->middleware('auth');
-Route::post('/cart/remove', [CartController::class, 'remove'])->middleware('auth');
+Route::post('/cart/add', [CartController::class, 'add']);
+Route::post('/cart/remove', [CartController::class, 'remove']);
+Route::get('/cart/clear', [CartController::class, 'clear']);
+Route::get('/cart', [CartController::class, 'show']);
 
 
-Route::get('/cart', function (Request $request) {
+
+Route::get('/checkout', function (Request $request) {
 
   $client = new Client();
 
@@ -173,42 +173,11 @@ Route::get('/cart', function (Request $request) {
     }
   }
 
-  return view('cart', [
+  return view('checkout', [
     'cart' => $cart,
     'cart_total' => $cart_total,
     'client_token' => $client_token,
     'client_id' => env('PAYPAL_CLIENT_ID')
-  ]);
-
-});
-
-Route::get('/checkout', function () {
-
-  $cart = [];
-  $cart_total = 0.00;
-
-  if(session()->has('cart')){
-    foreach ( session()->get('cart') as $c ) {
-      if ( isset($c['id']) ) {
-        $item = Item::where('id', $c['id'])->get()->first();
-        $item->quantity = $c['quantity'];
-        $cart[] = $item;
-        $cart_total += $item['price'] * $c['quantity'];
-      }
-    }
-  }
-
-  /*$stripe = new \Stripe\StripeClient('sk_test_51KDtUjBV7pNfWMJyt7HVoEKZEigukYjvzy77DVmJIyyqSUHsQ9sqag616thKxNj9Vp9as7pT1ZbrC4XxVA9rNqx100gtI5qSJz');
-
-  $intent = $stripe->paymentIntents->create([
-    'amount' => 9999,
-    'currency' => 'gbp',
-    'automatic_payment_methods' => ['enabled' => true]
-  ]);*/
-
-  return view('checkout', [
-    //'client_secret' => $intent->client_secret
-    'cart_total' => $cart_total
   ]);
 
 });
@@ -219,62 +188,13 @@ Route::get('/checkout', function () {
 
 Route::post('/order/create', [OrderController::class, 'create'])->middleware('auth');
 Route::post('/order/approve', [OrderController::class, 'approve'])->middleware('auth');
+Route::get('/account/order/invoice/{order:paypal_id}', [OrderController::class, 'invoice'])->middleware('auth');
+Route::get('/account/order/{order:paypal_id}', [OrderController::class, 'view'])->middleware('auth');
 
 
-Route::post('/order/create', function(Request $request) {
 
-  if ( !isset($request->id) OR empty($request->id) OR empty(Auth::id()) ) {
-    return redirect("/");
-  }
 
-  $user = User::find(Auth::id());
 
-  $order = Order::create([
-    'user_id' => Auth::id(),
-    'paypal_id' => $request->id,
-    'amount' => $request->amount
-  ]);
-
-  foreach ( session()->get('cart') as $item ) {
-
-    ItemOrder::create([
-      'order_id' => $order->id,
-      'item_id' => $item['id'],
-      'quantity' => $item['quantity']
-    ]);
-
-    $item = Item::find($item['id']);
-
-    if ( !empty($item) ) {
-
-      if ( $item->event->achievement_id != null AND !$user->achievements->contains('id', $item->event->achievement_id) ) {
-        $achievement = AchievementUser::create([
-          'user_id' => Auth::id(),
-          'achievement_id' => $item->event->achievement_id
-        ]);
-      }
-
-      if ( $item->discord_role_id != null ) {
-        $discord = new DiscordClient(['token' => env('DISCORD_BOT_TOKEN')]);
-        $discord->guild->addGuildMemberRole([
-          'guild.id' => 607337690886701066,
-          'user.id' => intval($user->id),
-          'role.id' => intval($item->discord_role_id)
-        ]);
-      }
-
-    }
-
-  }
-
-  $request->session()->forget('cart');
-
-  //$pdf = PDF::loadView('pdf.invoice', $data);
-  //return $pdf->download('invoice.pdf');
-
-  return response()->json(['success' => true]);
-
-});
 
 
 
@@ -339,44 +259,7 @@ Route::get('/account', function () {
 
 });
 
-Route::get('/account/order/{order:paypal_id}', function (Order $order) {
-
-  if ( !Auth::id() OR Auth::id() != $order->user_id )
-    return redirect("/");
-
-  return view('order', [
-    'order' => $order
-  ]);
-
-});
-
-Route::get('/account/invoice/{order_id}', function ( $order_id ) {
-
-  $order = Order::with('items', 'user')->where('paypal_id', $order_id)->get()->first();
-
-  if ( !Auth::id() OR Auth::id() != $order->user_id ) {
-    return redirect("/");
-  }
-
-  $data = [];
-  $data['paypal_id'] = $order->paypal_id;
-  $data['order_items'] = [];
-  foreach ( $order->items as $k => $v ) {
-    $data['order_items'][] = [
-      'quantity' => $v->quantity,
-      'price' => $v->item->price,
-      'name' => $v->item->name
-    ];
-  }
-
-  $data['order_total'] = $order->amount;
-
-  $pdf = PDF::loadView( 'invoice', $data );
-  return $pdf->stream( 'invoice_'.$order->paypal_id.'.pdf' );
-});
-
-
-
+Route::post('/account/update', [UserController::class, 'update'])->middleware('auth');
 
 
 Route::get('/discord/get_profile', function (Request $request) {
@@ -406,6 +289,7 @@ Route::get('/profile/{user:slug}', function (User $user) {
 });
 
 
+// Shop Pages
 Route::get('/shop/{type}', function ($type) {
 
   if ( $type == "tickets" ) {
@@ -423,7 +307,7 @@ Route::get('/shop/{type}', function ($type) {
   }
 
   return view('shop', [
-    'items' => Item::with('images')->get(),
+    'items' => Item::with('images')->latest()->get(),
     'filter' => $type
   ]);
 
@@ -434,12 +318,4 @@ Route::get('/shop/view/{item:slug}', function (Item $item) {
   return view('item', [
     'item' => $item
   ]);
-});
-
-// Shop Pages
-
-
-// Altlan pages
-Route::get('/altlan', function () {
-    return view('altlan');
 });

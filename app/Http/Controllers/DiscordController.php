@@ -103,7 +103,7 @@ class DiscordController extends Controller {
 
         // Trying to create or update the user in the database.
         try {
-            $user = $this->createOrUpdateUser($user, $accessToken->refresh_token);
+          $user = $this->createOrUpdateUser($user, $accessToken->refresh_token);
         } catch (\Exception $e) {
             if (env('APP_DEBUG')) {
                 return response()->json([
@@ -118,7 +118,7 @@ class DiscordController extends Controller {
 
         // Authenticating the user if the user is not logged in.
         if (!Auth::check()) {
-            Auth::login($user);
+          Auth::login($user);
         }
 
         // Redirecting the user to the intended page or to the home page.
@@ -161,9 +161,8 @@ class DiscordController extends Controller {
     private function createOrUpdateUser(object $user, string $refresh_token): User {
 
         return User::updateOrCreate(
-            [
-                'id' => $user->id,
-            ],
+            [ 'id' => $user->id ],
+
             [
                 'username' => $user->username,
                 'slug' => \Str::slug($user->username),
@@ -176,5 +175,7 @@ class DiscordController extends Controller {
                 'refresh_token' => $refresh_token
             ]
         );
+
+
     }
 }

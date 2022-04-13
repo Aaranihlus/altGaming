@@ -38,7 +38,7 @@
 
   <div>
     <h1 class="text-2xl font-bold mb-2">Achievements</h1>
-    @if(!empty($user->achievements))
+    @if(count($user->achievements) > 0)
       <div style="width: 100%; overflow-x: auto; white-space: nowrap;">
         @foreach($user->achievements as $achievement)
           <div class="mr-3" style="display: inline-block; text-align: center; margin-bottom: 4px;">

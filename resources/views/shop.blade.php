@@ -28,23 +28,12 @@
     </div>
 
     <div class="row">
-
       @foreach( $items as $item )
         @if( $item->visible == 1 )
-          <div class="col-4 mb-3">
-            <x-item-template
-            id="{{ $item->id }}"
-            name="{{ $item->name }}"
-            price="{{ $item->price }}"
-            slug="{{ $item->slug }}"
-            alt-ticket="{{ $item->is_alt_ticket }}"
-            thumbnail='{{ asset("storage/" . $item->images[0]->path) }}'>
-          </x-item-template>
-        </div>
-      @endif
-    @endforeach
-
-  </div>
+          <x-item-template :item="$item"></x-item-template>
+        @endif
+      @endforeach
+    </div>
 
 </div>
 

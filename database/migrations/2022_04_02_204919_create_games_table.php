@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateItemOptionGroupsTable extends Migration
+class CreateGamesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateItemOptionGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('item_option_groups', function (Blueprint $table) {
+        Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('item_id');
-            $table->string('name');
+            $table->string("discord_id");
+            $table->string("name");
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateItemOptionGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_variations');
+        Schema::dropIfExists('games');
     }
 }

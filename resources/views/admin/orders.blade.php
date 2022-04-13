@@ -26,7 +26,10 @@
                 <td><span>{{ $order->paypal_id }}</span></td>
                 <td><span>£{{ $order->amount }}</span></td>
                 <td><span>{{ $order->created_at }}</span></td>
-                <td><button type="button" class="btn btn-warning"><a class="link-dark" href="/admin/order/view/{{ $order->paypal_id }}">View</a></button></td>
+                <td>
+                  <button type="button" class="btn btn-warning"><a class="link-dark" href="/admin/order/view/{{ $order->paypal_id }}">View</a></button>
+                  <button type="button" class="btn btn-warning"><a class="link-dark" target="_blank" href="/admin/order/invoice/{{ $order->paypal_id }}">Invoice</a></button>
+                </td>
             </tr>
             @endforeach
           </tbody>
