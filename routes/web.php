@@ -120,10 +120,27 @@ Route::post('/comment/store', [CommentController::class, 'store'])->middleware('
 Route::post('/comment/delete', [CommentController::class, 'delete'])->middleware('auth');
 
 
-Route::post('/cart/add', [CartController::class, 'add']);
-Route::post('/cart/remove', [CartController::class, 'remove']);
-Route::get('/cart/clear', [CartController::class, 'clear']);
-Route::get('/cart', [CartController::class, 'show']);
+Route::post('/cart/add', [CartController::class, 'add'])->middleware('auth');
+Route::post('/cart/remove', [CartController::class, 'remove'])->middleware('auth');
+Route::get('/cart/clear', [CartController::class, 'clear'])->middleware('auth');
+Route::get('/cart', [CartController::class, 'show'])->middleware('auth');
+
+
+
+
+
+
+
+Route::post('/order/create', [OrderController::class, 'create'])->middleware('auth');
+Route::post('/order/approve', [OrderController::class, 'approve'])->middleware('auth');
+Route::get('/account/order/invoice/{order:paypal_id}', [OrderController::class, 'invoice'])->middleware('auth');
+Route::get('/account/order/{order:paypal_id}', [OrderController::class, 'view'])->middleware('auth');
+
+
+
+
+
+
 
 
 
@@ -185,21 +202,6 @@ Route::get('/checkout', function (Request $request) {
 
 
 
-
-Route::post('/order/create', [OrderController::class, 'create'])->middleware('auth');
-Route::post('/order/approve', [OrderController::class, 'approve'])->middleware('auth');
-Route::get('/account/order/invoice/{order:paypal_id}', [OrderController::class, 'invoice'])->middleware('auth');
-Route::get('/account/order/{order:paypal_id}', [OrderController::class, 'view'])->middleware('auth');
-
-
-
-
-
-
-
-
-
-
 Route::get('/checkout/success/{paypal_id}', function ( $paypal_id ) {
 
   $order = DB::table('orders')->where('paypal_id', $paypal_id)->first();
@@ -256,11 +258,18 @@ Route::post('/account/update', [UserController::class, 'update'])->middleware('a
 
 Route::get('/discord/get_profile', function (Request $request) {
 
-  $user = User::where('id', $request->user_id);
+  $user = User::find('id', $request->user_id);
+
+  if(!empty($user->id)){
+    return response()->json([
+      'success' => true,
+      'user' => $user
+    ]);
+  }
 
   return response()->json([
-    'success' => true,
-    'user' => $user
+    'success' => false,
+    'message' => "User not found"
   ]);
 
 });

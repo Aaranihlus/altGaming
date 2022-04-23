@@ -21536,6 +21536,10 @@ textarea.form-control-lg {
   border-color: yellow;
 }
 
+.max-width {
+  width: 100%;
+}
+
 .content-template {
   height: 100%;
 }

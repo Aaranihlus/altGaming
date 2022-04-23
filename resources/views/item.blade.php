@@ -8,11 +8,7 @@
 
       <div class="col-5 flex-y">
         @foreach( $item->images as $k => $i )
-          @if ($k == 0 )
-            <img class="extra-rounded img-fluid my-2 shop-item-image" style="width: 100%;" id="image-0" src='{{asset("storage/$i->path")}}'>
-          @else
-            <img class="extra-rounded img-fluid my-2 shop-item-image" style="width: 100%; display: none;" id="image-{{ $k }}" src='{{asset("storage/$i->path")}}'>
-          @endif
+          <img class="extra-rounded img-fluid my-2 shop-item-image max-width" @if($k != 0) style="display: none;" @endif id="image-{{ $k }}" src='{{asset("storage/$i->path")}}'>
         @endforeach
 
         @if (count($item->images) > 1)
@@ -24,7 +20,7 @@
             <div class="row">
               @foreach( $item->images as $k => $i )
                 <div class="col-lg-4">
-                  <img class="rounded img-fluid my-2 show-image-button @if($k == 0) highlighted @endif" style="width: 100%;" data-index="{{ $k }}" src='{{asset("storage/$i->path")}}'>
+                  <img class="rounded img-fluid my-2 show-image-button max-width @if($k == 0) highlighted @endif" data-index="{{ $k }}" src='{{asset("storage/$i->path")}}'>
                 </div>
               @endforeach
             </div>

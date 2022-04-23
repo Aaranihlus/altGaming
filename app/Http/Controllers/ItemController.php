@@ -89,15 +89,14 @@ class ItemController extends Controller {
     $item->slug = $slug;
     $item->save();
 
-    foreach ( $request->file('image') as $img ) {
-
-      $path = $img->store('item_images');
-
-      $image = ItemImage::create([
-          'item_id' => $item->id,
-          'path' => $path
-      ]);
-
+    if ( isset( $request->file('image') ) {
+      foreach ( $request->file('image') as $img ) {
+        $path = $img->store('item_images');
+        $image = ItemImage::create([
+            'item_id' => $item->id,
+            'path' => $path
+        ]);
+      }
     }
 
     return redirect("/admin/items");
