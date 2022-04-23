@@ -89,7 +89,7 @@ class ItemController extends Controller {
     $item->slug = $slug;
     $item->save();
 
-    if ( isset( $request->file('image') ) {
+    if ( isset( $request->file('image') ) ) {
       foreach ( $request->file('image') as $img ) {
         $path = $img->store('item_images');
         $image = ItemImage::create([
