@@ -15,6 +15,9 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\ItemOrder;
 use App\Models\ItemOrderOption;
+use App\Models\EventUser;
+
+use App\Http\Controllers\CartController;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -37,25 +40,30 @@ class OrderController extends Controller {
 
   public function create (Request $request) {
 
-    if(empty(Auth::id())){
+    if ( empty(Auth::id()) ) {
       return redirect("/");
     }
 
     $user = User::find(Auth::id());
+    $cartInfo = CartController::info();
+
+    $newOrderID = "";
+    for ( $i = 0; $i < 19; $i++ ) {
+      $min = ($i == 0) ? 1:0;
+      $newOrderID .= mt_rand($min,9);
+    }
 
     $order = Order::create([
+      'id' => $newOrderID,
       'user_id' => Auth::id(),
-      'total' => $request->total,
+      'total' => $cartInfo['cartTotal'],
       'status' => "Order Created"
     ]);
 
-    $order->id = \Str::random(20);
-    $order->save();
-
-    foreach ( session()->get('cart') as $item ) {
+    foreach ( $cartInfo['cartItems'] as $item ) {
 
       $itemOrder = ItemOrder::create([
-        'order_id' => $order->id,
+        'order_id' => $newOrderID,
         'item_id' => $item['id'],
         'quantity' => $item['quantity'],
         'unit_price' => $item['unit_price']
@@ -64,7 +72,7 @@ class OrderController extends Controller {
       foreach($item['options'] as $option){
         ItemOrderOption::create([
           'item_order_id' => $itemOrder->id,
-          'option_id' => $option
+          'option_id' => $option->id
         ]);
       }
 
@@ -72,7 +80,7 @@ class OrderController extends Controller {
 
     return response()->json([
       'success' => true,
-      'order_id' => $order->id
+      'order_id' => $newOrderID
     ]);
 
   }
@@ -84,13 +92,22 @@ class OrderController extends Controller {
     $order->paypal_id = $request->paypal_id;
     $order->save();
 
-    if ( !empty($item) ) {
+    /*foreach ( !empty($order->items as $item) ) {
 
-      if ( $item->event->achievement_id != null AND !$user->achievements->contains('id', $item->event->achievement_id) ) {
-        $achievement = AchievementUser::create([
+      if(isset($item->event)){
+
+        if ( $item->event->achievement_id != null AND !$user->achievements->contains('id', $item->event->achievement_id) ) {
+          $achievement = AchievementUser::create([
+            'user_id' => Auth::id(),
+            'achievement_id' => $item->event->achievement_id
+          ]);
+        }
+
+        $eventUser = EventUser::create([
           'user_id' => Auth::id(),
-          'achievement_id' => $item->event->achievement_id
+          'event_id' => $item->event->id
         ]);
+
       }
 
       if ( $item->discord_role_id != null ) {
@@ -102,34 +119,49 @@ class OrderController extends Controller {
         ]);
       }
 
-    }
+    }*/
 
-    $request->session()->forget('cart');
+    session()->forget('cart');
 
   }
 
 
   public function invoice (Order $order) {
 
-    /*if ( !Auth::id() OR Auth::id() != $order->user_id ) {
+    if ( !Auth::id() OR Auth::id() != $order->user_id ) {
       return redirect("/");
-    }*/
-
-    $data = [];
-    $data['paypal_id'] = $order->paypal_id;
-    $data['order_items'] = [];
-    foreach ( $order->items as $k => $v ) {
-      $data['order_items'][] = [
-        'quantity' => $v->quantity,
-        'price' => $v->item->price,
-        'name' => $v->item->name
-      ];
     }
 
-    $data['order_total'] = $order->amount;
+    $data = [];
 
-    $pdf = PDF::loadView( 'invoice', $data );
-    return $pdf->stream( 'invoice_'.$order->paypal_id.'.pdf' );
+    $data['id'] = $order->id;
+    $data['user'] = $order->user->toArray();
+    $data['paypal_id'] = $order->paypal_id;
+    $data['order_total'] = $order->total;
+    $data['order_date'] = $order->created_at;
+    $data['order_items'] = [];
+
+    foreach ( $order->items as $k => $v ) {
+
+      $data['order_items'][$k] = [
+        'quantity' => $v->quantity,
+        'price' => $v->unit_price,
+        'name' => $v->item->name,
+        'options' => []
+      ];
+
+      foreach ( $v->options as $option ) {
+        $data['order_items'][$k]['options'][] = [
+          'name' => $option->option->name,
+          'group' => $option->option->group->name
+        ];
+      }
+
+    }
+
+    //dd($data);
+    PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+    return PDF::loadView('invoice', $data)->stream('invoice_'.$order->id.'.pdf');
   }
 
 }

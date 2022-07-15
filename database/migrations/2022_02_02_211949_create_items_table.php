@@ -24,7 +24,7 @@ class CreateItemsTable extends Migration
             $table->foreignId('event_id')->nullable();
             $table->foreignId('achievement_id')->nullable();
             $table->string('discord_role_id')->nullable();
-            $table->string('type');
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

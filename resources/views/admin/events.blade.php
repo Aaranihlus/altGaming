@@ -16,26 +16,23 @@
           <thead>
             <tr>
               <th scope="col">Event</th>
-              <th>Highlighted</th>
               <th>Location</th>
-              <th>Start Date</th>
-              <th>Date Created</th>
+              <th>Start</th>
+              <th>End</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             @foreach($events as $event)
             <tr>
-                <td><span>{{ $event->title }}</span></td>
-                <td><span class="highlight-status">{{ $event->highlighted == 1 ? "Yes" : "No" }}</span></td>
+                <td><span>{{ $event->name }}</span></td>
                 <td><span>{{ $event->location }}</span></td>
-                <td><span>{{ $event->start_date }}</span></td>
-                <td><span>{{ $event->created_at }}</span></td>
+                <td><span>{{ \Carbon\Carbon::parse( $event->start_date )->isoFormat('Do MMMM YYYY hh:m A') }}</span></td>
+                <td><span>{{ \Carbon\Carbon::parse( $event->end_date )->isoFormat('Do MMMM YYYY hh:m A') }}</span></td>
                 <td>
                   <button class="btn btn-warning" type="button"><a href="/admin/event/edit/{{ $event->id }}">Edit</a></button>
-                  <button class="btn btn-warning highlight-event-button" type="button" data-id="{{$event->id}}">Highlight</button>
                   @if($event->type == "altlan")
-                    <button class="btn btn-warning" type="button"><a href="/admin/event/tickets/{{ $event->id }}">View Tickets Sold</a></button>
+                    <button class="btn btn-warning" type="button"><a href="/admin/event/tickets/{{ $event->id }}">Tickets Sold</a></button>
                   @endif
                 </td>
             </tr>

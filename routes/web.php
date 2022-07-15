@@ -41,7 +41,10 @@ Route::get('/', function () {
 
 // ALT LAN
 Route::get('/altlan', function () {
-    return view('altlan');
+    $altlan = Event::where("alt_lan_number", "!=", null)->latest()->get()->last();
+    return view('altlan', [
+      'altlan' => $altlan
+    ]);
 });
 
 // RSS FEED
@@ -52,7 +55,7 @@ Route::get('/feed', function () {
 
 Route::get('/events', function () {
   return view('events', [
-    'events' => Event::latest()->limit(6)->get()
+    'events' => Event::where('active', 1)->orderBy('id', 'DESC')->limit(6)->get()
   ]);
 });
 
@@ -133,8 +136,8 @@ Route::get('/cart', [CartController::class, 'show'])->middleware('auth');
 
 Route::post('/order/create', [OrderController::class, 'create'])->middleware('auth');
 Route::post('/order/approve', [OrderController::class, 'approve'])->middleware('auth');
-Route::get('/account/order/invoice/{order:paypal_id}', [OrderController::class, 'invoice'])->middleware('auth');
-Route::get('/account/order/{order:paypal_id}', [OrderController::class, 'view'])->middleware('auth');
+Route::get('/account/order/invoice/{order:id}', [OrderController::class, 'invoice'])->middleware('auth');
+Route::get('/account/order/{order:id}', [OrderController::class, 'view'])->middleware('auth');
 
 
 

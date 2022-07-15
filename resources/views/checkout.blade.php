@@ -9,11 +9,10 @@
       @if ( !empty($cart) )
         <div class="col-lg-6 col-xl-6 col-sm-12 col-md-12 col-xs-12 bg-alt-yellow extra-rounded p-3" style="display: flex; flex-direction: column; flex-wrap: nowrap; align-content: center; justify-content: center; align-items: center; text-align: center;">
           <input type="hidden" id="order_total" value="{{ $cart_total }}">
-          <h3>Order Total: £<span id="cart-total">{{ number_format($cart_total, 2) }}</span></h3>
           <!--<button type="button" class="btn btn-warning my-2" style="height: 30%;" id="show-checkout">Checkout Now</button>
           <i style="display: none;" id="loading-spinner" class="fa-2x fas fa-spinner fa-spin"></i>-->
 
-          <div id="paypal-container"></div>
+          <div id="paypal-container" style="width: 100%; border-radius: 6px;"></div>
 
           <div id="paypal-card-container" class="card_container" style="display: none;">
             <br>
@@ -56,9 +55,8 @@
         </div>
 
         <div class="col-lg-6 col-xl-6 col-sm-12 col-md-12 col-xs-12">
-          <h1>Your cart</h1>
           @foreach( $cart as $k => $c )
-            <div class="bg-alt-yellow p-2 extra-rounded my-2" style="width: 100%;display: flex;align-content: center;align-items: center;justify-content: space-between;">
+            <div class="bg-alt-yellow p-2 extra-rounded" style="width: 100%; display: flex; align-content: center; align-items: center; justify-content: space-between; margin-bottom: 8px;">
               <div style="display: flex; align-items: center;">
                 <img class="img-fluid rounded" style="width: 7vw;" src="{{ asset("storage/" . $c->images[0]->path) }}">
                 <h5 class="mx-3">{{ $c->name }}</h5>
@@ -70,6 +68,7 @@
               </div>
             </div>
           @endforeach
+          <h3>Order Total: £<span id="cart-total">{{ number_format($cart_total, 2) }}</span></h3>
         </div>
       @else
         <div class="flex-y" style="align-items: center;">

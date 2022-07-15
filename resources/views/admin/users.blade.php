@@ -15,12 +15,12 @@
           <thead>
             <tr>
               <th scope="col">Username</th>
-              <th>Registration Date</th>
+              <!--<th>Registration Date</th>-->
               <th>Roles</th>
-              <th>Give/Revoke Roles</th>
-              <th>Give/Revoke Achievement</th>
-              <th>Give/Revoke Titles</th>
-              <th>Give/Revoke Badges</th>
+              <th>Give Role</th>
+              <th>Give Achievement</th>
+              <th>Give Title</th>
+              <th>Give Badge</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -28,7 +28,7 @@
             @foreach($users as $user)
             <tr>
                 <th scope="row"><span>{{$user->username}}</span></th>
-                <td><span>{{ \Carbon\Carbon::parse( $user->created_at )->toDayDateTimeString() }}</span></td>
+                <!--<td><span>{{ \Carbon\Carbon::parse( $user->created_at )->toDayDateTimeString() }}</span></td>-->
 
                 <td>
                   @foreach($user->roles as $role)
@@ -39,7 +39,7 @@
                 <td>
                   <div class="flex-x">
                     <div class="flex-x">
-                      <select class="form-select role-select" style="width: 25%; margin-right: 3px;">
+                      <select class="form-select role-select" style="margin-right: 3px;">
                         <option></option>
                         @foreach($roles as $role)
                           @if(!$user->roles->contains('id', $role->id))
@@ -49,7 +49,8 @@
                       </select>
                       <button type="button" class="btn btn-warning grant-role-button ml-2" data-id="{{ $user->id }}">Grant</button>
                     </div>
-                    <div class="flex-x">
+
+                    <!--<div class="flex-x">
                       <select class="form-select role-select" style="width: 25%; margin-right: 3px;">
                         <option></option>
                         @foreach($user->roles as $role)
@@ -57,14 +58,15 @@
                         @endforeach
                       </select>
                       <button type="button" class="btn btn-warning revoke-role-button ml-2" data-id="{{ $user->id }}">Revoke</button>
-                    </div>
+                    </div>-->
                   </div>
+
                 </td>
 
                 <td>
                   <div class="flex-x">
                     <div class="flex-x">
-                      <select class="form-select achievement-select" style="width: 25%; margin-right: 3px;">
+                      <select class="form-select achievement-select" style="margin-right: 3px;">
                         <option></option>
                         @foreach($achievements as $achievement)
                           <option value="{{ $achievement->id }}">{{ $achievement->name }}</option>
@@ -72,7 +74,8 @@
                       </select>
                       <button type="button" class="btn btn-warning grant-achievement-button ml-2" data-id="{{ $user->id }}">Grant</button>
                     </div>
-                    <div class="flex-x">
+
+                    <!--<div class="flex-x">
                       <select class="form-select achievement-select" style="width: 25%; margin-right: 3px;">
                         <option></option>
                         @foreach($user->achievements as $achievement)
@@ -80,14 +83,15 @@
                         @endforeach
                       </select>
                       <button type="button" class="btn btn-warning revoke-achievement-button ml-2" data-id="{{ $user->id }}">Revoke</button>
-                    </div>
+                    </div>-->
+
                   </div>
                 </td>
 
                 <td>
                   <div class="flex-x">
                     <div class="flex-x">
-                      <select class="form-select title-select" style="width: 25%; margin-right: 3px;">
+                      <select class="form-select title-select" style="margin-right: 3px;">
                         <option></option>
                         @foreach($titles as $title)
                           <option value="{{ $title->id }}">{{ $title->name }}</option>
@@ -95,7 +99,8 @@
                       </select>
                       <button type="button" class="btn btn-warning grant-title-button ml-2" data-id="{{ $user->id }}">Grant</button>
                     </div>
-                    <div class="flex-x">
+
+                    <!--<div class="flex-x">
                       <select class="form-select title-select" style="width: 25%; margin-right: 3px;">
                         <option></option>
                         @foreach($user->titles as $title)
@@ -103,14 +108,15 @@
                         @endforeach
                       </select>
                       <button type="button" class="btn btn-warning revoke-title-button ml-2" data-id="{{ $user->id }}">Revoke</button>
-                    </div>
+                    </div>-->
+
                   </div>
                 </td>
 
                 <td>
                   <div class="flex-x">
                     <div class="flex-x">
-                      <select class="form-select badge-select" style="width: 25%; margin-right: 3px;">
+                      <select class="form-select badge-select" style="margin-right: 3px;">
                         <option></option>
                         @foreach($badges as $badge)
                           <option value="{{ $badge->id }}">{{ $badge->name }}</option>
@@ -118,7 +124,8 @@
                       </select>
                       <button type="button" class="btn btn-warning grant-title-button ml-2" data-id="{{ $user->id }}">Grant</button>
                     </div>
-                    <div class="flex-x">
+
+                    <!--<div class="flex-x">
                       <select class="form-select badge-select" style="width: 25%; margin-right: 3px;">
                         <option></option>
                         @foreach($user->badges as $badge)
@@ -126,7 +133,8 @@
                         @endforeach
                       </select>
                       <button type="button" class="btn btn-warning revoke-title-button ml-2" data-id="{{ $user->id }}">Revoke</button>
-                    </div>
+                    </div>-->
+
                   </div>
                 </td>
 

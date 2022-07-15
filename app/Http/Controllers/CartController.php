@@ -70,7 +70,7 @@ class CartController extends Controller {
         'id' => $request->id,
         'quantity' => $request->quantity,
         'options' => $request->options,
-        'unit_price' => intval($request->unit_price),
+        'unit_price' => floatval($request->unit_price),
         'name' => $request->name
       ]);
     }

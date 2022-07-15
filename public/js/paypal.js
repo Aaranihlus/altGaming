@@ -14,7 +14,7 @@ paypal.Buttons({
     return actions.order.create({
       purchase_units: [{
         amount: {
-          value: $('#order_total').val()
+          value: $('#order_total').text()
         }
       }]
     });
@@ -48,7 +48,7 @@ if (paypal.HostedFields.isEligible()) {
     createOrder: function(data, actions) {
 
       axios.post('/order/create', {
-        total: $('#order_total').val()
+        total: $('#order_total').text()
       })
       .then(function (response) {
         orderID = response.data.order_id;
@@ -57,7 +57,7 @@ if (paypal.HostedFields.isEligible()) {
       return actions.order.create({
         purchase_units: [{
           amount: {
-            value: $('#order_total').val()
+            value: $('#order_total').text()
           }
         }]
       });

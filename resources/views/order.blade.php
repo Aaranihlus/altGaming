@@ -6,8 +6,11 @@
 
     <div class="row">
 
-      <div class="col-lg-8">
-        <h1>Order #{{ $order->paypal_id }}</h1>
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 col-xl-12">
+        <h3>Order #{{ $order->id }}</h3>
+        <h4>Status: {{ $order->status }}</h4>
+        <p>Paypal Transaction ID: {{ $order->paypal_id}}</p>
+        <p>Order Date: {{ $order->created_at }}</p>
 
         @foreach( $order->items as $k => $v )
           <div class="bg-alt-yellow p-2 extra-rounded my-2 flex-x center-x" style="width: 100%; display: flex; align-content: center; justify-content: space-between;">
@@ -29,7 +32,7 @@
           </div>
         @endforeach
 
-        <h1>Total: £{{ $order->total }}</h1>
+        <h3>Order Total: £{{ $order->total }}</h3>
 
       </div>
 

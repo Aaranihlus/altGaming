@@ -49,8 +49,8 @@ Route::post('/admin/posts/update/{id}', [PostController::class, 'update'])->midd
 
 // Orders
 Route::get('/admin/orders', [AdminController::class, 'orders'])->middleware('admin');
-Route::get('/admin/order/view/{order:paypal_id}', [OrderController::class, 'view'])->middleware('admin');
-Route::get('/admin/order/invoice/{order:paypal_id}', [OrderController::class, 'invoice'])->middleware('admin');
+Route::get('/admin/order/view/{order:id}', [OrderController::class, 'view'])->middleware('admin');
+Route::get('/admin/order/invoice/{order:id}', [OrderController::class, 'invoice'])->middleware('admin');
 
 
 // Items

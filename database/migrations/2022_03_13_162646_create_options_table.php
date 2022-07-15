@@ -17,7 +17,7 @@ class CreateOptionsTable extends Migration
             $table->id();
             $table->foreignId('option_group_id');
             $table->string('name');
-            $table->string('price_modifier');
+            $table->string('price_modifier')->nullable();
             $table->timestamps();
         });
     }

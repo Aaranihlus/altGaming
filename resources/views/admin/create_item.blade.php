@@ -28,11 +28,17 @@
           <input type="text" class="form-control" id="price" name="price">
         </div>
 
+        <hr>
+
         <div class="mb-3">
           <label for="image_input" class="form-label">Item Images</label>
           <input type="file" class="form-control image-input my-2" name="image[0]">
+
+          <br>
           <button type="button" id="add-another-image-button" class="btn btn-warning">Add Another</button>
         </div>
+
+        <hr>
 
         <div class="mb-3">
           <label class="form-label">Create Option Groups</label>

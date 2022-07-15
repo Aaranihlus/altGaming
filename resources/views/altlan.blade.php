@@ -13,13 +13,13 @@ background-repeat: no-repeat; align-content: center; padding:0; margin:0;" id="b
 
     <h1 style="color: white;">
       <div class="altlan" style="text-align: center; font-size: 2.5em;">
-        <span class="alt" style="color: white; font-family: thinfont;">alt<span style="font-weight: bold; color: white; font-family: boldfont;">LAN #9</span></span>
+        <span class="alt" style="color: white; font-family: thinfont;">alt<span style="font-weight: bold; color: white; font-family: boldfont;">LAN #{{ $altlan->alt_lan_number }}</span></span>
       </div>
     </h1>
 
     <h1 style="color: white;">
       <div class="altlan" style="text-align: center; font-size: 2.5em;">
-        <span class="alt" style="font-weight: bold; color: white; font-family: boldfont;">APR <span style="font-weight: bold; color: white; font-family: boldfont;">2022</span></span>
+        <span class="alt" style="font-weight: bold; color: white; font-family: boldfont;">{{ \Carbon\Carbon::parse( $altlan->start_date )->isoFormat('MMMM') }} <span style="font-weight: bold; color: white; font-family: boldfont;">{{ \Carbon\Carbon::parse( $altlan->start_date )->isoFormat('YYYY') }}</span></span>
       </div>
     </h1>
 
@@ -43,12 +43,12 @@ background-repeat: no-repeat; align-content: center; padding:0; margin:0;" id="b
       <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
         <h3>Key details</h3>
         <ul class="group headlines">
-          <li><span class="date_date">15‑17</span>
-            <span class="date_month">April</span>
-            <span class="date_year">2022</span>
+          <li><span class="date_date">{{ \Carbon\Carbon::parse( $altlan->start_date )->isoFormat('DD') }}-{{ \Carbon\Carbon::parse( $altlan->end_date )->isoFormat('DD') }}</span>
+            <span class="date_month">{{ \Carbon\Carbon::parse( $altlan->start_date )->isoFormat('MMMM') }}</span>
+            <span class="date_year">{{ \Carbon\Carbon::parse( $altlan->start_date )->isoFormat('YYYY') }}</span>
             <div class="small">(<a href="http://www.google.com/calendar/render?action=TEMPLATE&amp;text=altLAN%209&amp;dates=20220415/20220417&amp;details=&amp;location=Boundless+Outdoors%2C+Worcestershire+DY9+9UU&amp;trp=false&amp;sprop=&amp;sprop=name:" target="_blank" rel="nofollow">Add to calendar</a>)</div>
           </li>
-          <li>At <a href="https://goo.gl/maps/4HFYSU2X5ovCK86G8" title="" target="_blank">Boundless Outdoors, Worcestershire DY9 9UU</a></li>
+          <li>At <a href="https://goo.gl/maps/4HFYSU2X5ovCK86G8" title="" target="_blank">{{ $altlan->location }}</a></li>
           <li>Stage events</li>
           <li>Friendly competitions and&nbsp;group&nbsp;games</li>
           <li>Saturday Night Quiz</li>
@@ -305,27 +305,6 @@ background-repeat: no-repeat; align-content: center; padding:0; margin:0;" id="b
   <p style="text-align: center; color: white;">©2022 altGaming Ltd.</p>
 </div>
 
-
-
-<!--<div class="bottom-nav" style="  background: blue;
-  text-align: center;
-  position: fixed;
-  bottom: 50px;
-  right: 0;
-  width: 100vw;
-  border: 1px solid #73AD21;">
-  <button id="button0">Home</button>
-  <button id="button1">Key Details</button>
-  <button id="button2">Gallery</button>
-  <button id="button3">What is altLAN?</button>
-  <button id="button4">Checklist</button>
-  <button id="button5">FAQs</button>
-  <button id="button6">Join (or follow) us</button>
-  <button id="button7">Terms</button>
-  <button id="button8">Privacy</button>
-</div>-->
-
-
 <style>
   body {
     margin: 0px;
@@ -334,36 +313,5 @@ background-repeat: no-repeat; align-content: center; padding:0; margin:0;" id="b
     overflow-x: hidden;
   }
 </style>
-
-<script>
-var button0 = document.getElementById("button0");
-var button1 = document.getElementById("button1");
-var button2 = document.getElementById("button2");
-var button3 = document.getElementById("button3");
-var button4 = document.getElementById("button4");
-var button5 = document.getElementById("button5");
-var button6 = document.getElementById("button6");
-var button7 = document.getElementById("button7");
-var button8 = document.getElementById("button8");
-
-button0.onclick = function(){
-  scrollTo("box0");
-};
-
-button1.onclick = function(){
-  scrollTo("box1");
-};
-
-button2.onclick = function(){
-  scrollTo("box2");
-};
-
-function scrollTo(id){
-  var element = document.getElementById(id);
-  element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
-}
-
-
-</script>
 
 @endsection

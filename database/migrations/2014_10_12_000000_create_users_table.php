@@ -31,7 +31,10 @@ class CreateUsersTable extends Migration
             $table->string('town')->nullable();
             $table->string('county')->nullable();
             $table->string('postcode')->nullable();
-
+            $table->string('title_id')->nullable();
+            $table->string('badge_id')->nullable();
+            $table->string('twitch_channel')->nullable();
+            $table->string('youtube_channel')->nullable();
             $table->timestamps();
         });
     }

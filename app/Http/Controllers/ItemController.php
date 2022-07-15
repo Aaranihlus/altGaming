@@ -35,7 +35,8 @@ class ItemController extends Controller {
         'name' => $request->name,
         'description' => $request->description,
         'price' => $request->price,
-        'slug' => $slug
+        'slug' => $slug,
+        'type' => "merch"
     ]);
 
     // Image Array
@@ -97,6 +98,20 @@ class ItemController extends Controller {
         $image = ItemImage::create([
             'item_id' => $item->id,
             'path' => $path
+        ]);
+      }
+    }
+
+    for ($i = 0; $i < count($request->group); $i++) {
+      $group = OptionGroup::create([
+          'name' => $request->group[$i],
+          'item_id' => $item->id
+      ]);
+      for ($k = 0; $k < count($request->option_name[$i]); $k++) {
+        $option = Option::create([
+            'option_group_id' => $group->id,
+            'price_modifier' => $request->option_price[$i][$k],
+            'name' => $request->option_name[$i][$k]
         ]);
       }
     }

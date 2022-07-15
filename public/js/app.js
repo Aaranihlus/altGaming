@@ -5562,11 +5562,11 @@ $('.item-quantity').on('change', function () {
   console.log($(this).val());
 });
 $(".item-option-select").on('change', function () {
-  var basePrice = parseInt($('#base_price').text());
+  var basePrice = parseFloat($('#base_price').text());
   var optionTotal = 0.00;
   $(".item-option-select").each(function (index) {
     if ($(this).find(":selected").data('price-mod')) {
-      optionTotal += parseInt($(this).find(":selected").data('price-mod'));
+      optionTotal += parseFloat($(this).find(":selected").data('price-mod'));
     }
   });
   $('#item-price').text(basePrice + optionTotal);

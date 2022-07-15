@@ -9,9 +9,11 @@ class Order extends Model {
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'user_id',
         'paypal_id',
-        'amount'
+        'total',
+        'status'
     ];
 
     public function items() {
